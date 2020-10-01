@@ -7,7 +7,7 @@ const randomPuppy = require('random-puppy');
 
 const ytdl = require("ytdl-core");
 
-const token = 'NzA4MTQ1MjA4MDAwMjQ5OTM3.XrTF7w.jrazgW34PlkftWOGY1rFkgBXHPQ';
+const token = require("./token");
 
 const PREFIX = '!'
 
