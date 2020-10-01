@@ -1,0 +1,39 @@
+Clown Game Commands:
+
+!clown @someone : target someone to be clowned the next time they send a message.
+
+!shield : Use this to save yourself from being clowned. Be careful not to waste it,
+          it will only work if you're the current target.
+
+***************************************ALPHABOT COMMANDS***************************************
+
+*Utility Commands*
+
+- !clear <number>: Clears a number of messages from the current channel.
+- !give <anything you want>: Basically an image search. Gives you a different result each time.
+- !img <anything you want>: Same as !give, but it always gives you the first result.
+
+*Special Image Search Commands*
+
+- !beagle: To get a beagle.
+- !bc: To get a border collie.
+- !cursed: To get a random cursed image. Use at your own risk.
+- !god: Makes your day instantly better.
+- !skeleton: To get a random skeleton.
+- !truck: To get a random truck. Big trucks only.
+
+*Reddit Commands: These take a random post from a subreddit.* 
+
+- !anime: r/anime_irl
+- !aww: r/aww
+- !design: r/shittydesigns
+- !food: r/foodporn
+- !puppy: r/puppy
+- !stock: r/cursedstockimages
+
+*Misc. Commands*
+- !donut: Gives Shinobu a snack!
+- !fact: Tells the truth.
+- !whelp: sometime things happen yknow 
+
+*************************************************************************************************
