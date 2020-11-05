@@ -83,11 +83,15 @@ bot.on('message', msg => {
 
     var args_t = msg.content.split(" ");
 
+   // erases messages from a user with a word in it
+   
+    /*
     if(msg.author.id === '128290356969078784')
     {
         if(msg.content.includes("valorant") || msg.content.includes("val"))
             msg.channel.bulkDelete(1);
     }
+   */
     
     if(!msg.content.startsWith(PREFIX))
     {
