@@ -469,9 +469,9 @@ bot.on('message', msg => {
             var attachString = "attachment://";
             attachString = attachString.concat(fileString);
 
-            const pokeEmbed = new Discord.RichEmbed()
+            const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle('__***ABRA***__')
-                 .attachFile(['../pokeimages/abra.png'])
+                 .attachFiles(['../pokeimages/abra.png'])
                  .setImage('attachment://abra.png')
             
             msg.channel.send(pokeEmbed);
