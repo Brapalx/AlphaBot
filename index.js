@@ -33,6 +33,8 @@ bot.on('ready', () => {
 
 bot.on('messageReactionAdd', (reaction, user) => {
 
+    if(message.author.id === client.user.id) return;
+
     let message = reaction.message, emoji = reaction.emoji;
 
     if (emoji.name == '🏆') {
@@ -482,6 +484,8 @@ bot.on('message', msg => {
             break;
 
         case 'pokevs':
+
+            msg.channel.send("__***REACT WITH 🏆 TO DECLARE A WINNER!***__");
 
             var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString = "./pokeimages/" + fileString;
