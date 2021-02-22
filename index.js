@@ -526,8 +526,10 @@ bot.on('message', msg => {
 
             const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle(editedString)
-                 .addField("Wins:", pokewins.toString())
-                 .addField("More info:", "[Click here](" + linkString + ")")
+                 .addFields(
+                     { name: "Wins:", value: pokewins.toString(), inline: true},
+                     { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
+                 )
                  .attachFiles([dirString])
                  .setImage(attachString)
             
@@ -558,8 +560,10 @@ bot.on('message', msg => {
 
             const pokeEmbed2 = new Discord.MessageEmbed()
                  .setTitle(editedString2)
-                 .addField("Wins:", pokewins2.toString())
-                 .addField("More info:", "[Click here](" + linkString2 + ")")
+                 .addFields(
+                    { name: "Wins:", value: pokewins2.toString(), inline: true},
+                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
+                )
                  .attachFiles([dirString2])
                  .setImage(attachString2)
 
