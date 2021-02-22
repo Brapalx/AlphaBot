@@ -473,7 +473,7 @@ bot.on('message', msg => {
 
             const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle(editedString)
-                 .addField("More info", "[Click here](" + linkString + ")")
+                 .addField("More info:", "[Click here](" + linkString + ")")
                  .attachFiles([dirString])
                  .setImage(attachString)
                  
@@ -481,6 +481,8 @@ bot.on('message', msg => {
             msg.channel.send(pokeEmbed).then( sent => {
                 sent.react('❤️');
             });
+
+            msg.channel.send("**VS**");
 
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
@@ -496,7 +498,7 @@ bot.on('message', msg => {
 
             const pokeEmbed2 = new Discord.MessageEmbed()
                  .setTitle(editedString2)
-                 .addField("More info", "[Click here](" + linkString2 + ")")
+                 .addField("More info:", "[Click here](" + linkString2 + ")")
                  .attachFiles([dirString2])
                  .setImage(attachString2)
                  
