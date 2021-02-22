@@ -2,7 +2,7 @@ __***QUAGSIRE***__ 1
 __***SCEPTILE***__ 1
 __***DRACOZOLT***__ 1
 __***INKAY***__ 1
-__***OSHAWOTT***__ 1
+__***OSHAWOTT***__ 2
 __***MILOTIC***__ 1
 __***HIPPOPOTAS***__ 1
 __***AGGRON***__ 1
