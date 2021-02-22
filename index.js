@@ -517,7 +517,7 @@ bot.on('message', msg => {
             var pokewins = 0;
 
             pokeArray.forEach(pokemon => {
-                if (pokemon.name === editedString2)
+                if (pokemon.name === editedString)
                 {
                     pokewins = pokemon.wins;
                 }
