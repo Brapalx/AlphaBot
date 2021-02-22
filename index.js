@@ -547,7 +547,7 @@ bot.on('message', msg => {
 
         
 
-            message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: false });
+            msg.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: false });
 
 
 
