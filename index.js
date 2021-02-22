@@ -483,6 +483,8 @@ bot.on('message', msg => {
                  .setImage(attachString)
                  
 
+            msg.send(pokeEmbed);
+
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
             var asterisk = "__***";
@@ -501,23 +503,22 @@ bot.on('message', msg => {
                  .attachFiles([dirString2])
                  .setImage(attachString2)
                  
+            msg.send(pokeEmbed2);
             
-
+            const filter = reaction => {
+                  return reaction.emoji.name === '🅰️' || reaction.emoji.name === '🅱️';
+            }
+                 
             
             msg.channel.send("vote a or b").then (sent3 => {
                 sent3.react('🅰️')
                 sent3.react('🅱️')
-            });
-
-            const filter = reaction => {
-                return reaction.emoji.name === '🅰️' || reaction.emoji.name === '🅱️';
-            }
-
-            msg.awaitReactions(filter, { max: 4, time: 10000, errors: ['time'] })
+                sent3.awaitReactions(filter, { max: 4, time: 10000, errors: ['time'] })
 	            .then(collected => console.log(collected.size))
 	            .catch(collected => {
 		            console.log(`After 10s, only ${collected.size} reacted.`);
-	        });
+	            })
+            });
 
 
             break;
