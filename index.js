@@ -469,11 +469,11 @@ bot.on('message', msg => {
             attachString = attachString.concat(fileString);
 
             var linkString = "https://bulbapedia.bulbagarden.net/wiki/";
-            linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
+            linkString = linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
 
             const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle(editedString)
-                 .addField("title", "Main text here, so you can put a hyperlink here [like so.](" + linkString + ")")
+                 .addField("More info", "[Click here](" + linkString + ")")
                  .attachFiles([dirString])
                  .setImage(attachString)
                  
@@ -491,8 +491,12 @@ bot.on('message', msg => {
             var attachString2 = "attachment://";
             attachString2 = attachString2.concat(fileString2);
 
+            var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
+            linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
+
             const pokeEmbed2 = new Discord.MessageEmbed()
                  .setTitle(editedString2)
+                 .addField("More info", "[Click here](" + linkString2 + ")")
                  .attachFiles([dirString2])
                  .setImage(attachString2)
                  
@@ -502,7 +506,7 @@ bot.on('message', msg => {
             });
 
 
-            https://bulbapedia.bulbagarden.net/wiki/Marshadow_(Pok%C3%A9mon)
+            //https://bulbapedia.bulbagarden.net/wiki/Marshadow_(Pok%C3%A9mon)
 
             break;
     }
