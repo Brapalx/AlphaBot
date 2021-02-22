@@ -33,9 +33,9 @@ bot.on('ready', () => {
 
 bot.on('messageReactionAdd', (reaction, user) => {
 
-    if(message.author.id === client.user.id) return;
-
     let message = reaction.message, emoji = reaction.emoji;
+
+    if(message.author.id === client.user.id) return;
 
     if (emoji.name == '🏆') {
         // We don't have the member, but only the user...
