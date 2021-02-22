@@ -483,7 +483,7 @@ bot.on('message', msg => {
                  .setImage(attachString)
                  
 
-            msg.channel.send(pokeEmbed);
+           // msg.channel.send(pokeEmbed);
 
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
@@ -503,7 +503,7 @@ bot.on('message', msg => {
                  .attachFiles([dirString2])
                  .setImage(attachString2)
                  
-            msg.channel.send(pokeEmbed2);
+            //msg.channel.send(pokeEmbed2);
             
             
                  
