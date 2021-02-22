@@ -687,7 +687,10 @@ function updateWinners(winner){
 
         if (pokemon.name === winner)
         {
-            pokemon.wins = pokemon.wins + 1;
+
+            var tempnum = parseInt(pokemon.wins) + 1;
+
+            pokemon.wins = tempnum.toString();
             found = true;
         }
     })
