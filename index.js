@@ -464,19 +464,36 @@ bot.on('message', msg => {
             var asterisk = "__***";
             var editedString = asterisk.concat((fileString.slice(0, -4)).toUpperCase(),"***__");
 
-            msg.channel.send(editedString);
-
             var attachString = "attachment://";
             attachString = attachString.concat(fileString);
 
             const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle(editedString)
-                 .attachFiles([dirString, 'pokeimages/abra.png'])
-                 .setImage('attachment://abra.png')
+                 .attachFiles([dirString])
                  .setImage(attachString)
                  
             
-            msg.channel.send(pokeEmbed);
+            msg.channel.send(pokeEmbed).then( sent => {
+                sent.react('❤️');
+            });
+
+            var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
+            var dirString2 = "./pokeimages/" + fileString2;
+            var asterisk = "__***";
+            var editedString2 = asterisk.concat((fileString2.slice(0, -4)).toUpperCase(),"***__");
+
+            var attachString2 = "attachment://";
+            attachString2 = attachString2.concat(fileString2);
+
+            const pokeEmbed = new Discord.MessageEmbed()
+                 .setTitle(editedString2)
+                 .attachFiles([dirString2])
+                 .setImage(attachString2)
+                 
+            
+            msg.channel.send(pokeEmbed).then( sent => {
+                sent.react('❤️');
+            });
 
             break;
     }
