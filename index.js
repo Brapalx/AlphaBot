@@ -462,13 +462,18 @@ bot.on('message', msg => {
             var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString = "./pokeimages/" + fileString;
             var asterisk = "__***";
-            var editedString = asterisk.concat((fileString.slice(0, -4)).toUpperCase(),"***__");
+            var trimString = fileString.slice(0, -4);
+            var editedString = asterisk.concat(trimString.toUpperCase(),"***__");
 
             var attachString = "attachment://";
             attachString = attachString.concat(fileString);
 
+            var linkString = "https://bulbapedia.bulbagarden.net/wiki/";
+            linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
+
             const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle(editedString)
+                 .addField("", "Main text here, so you can put a hyperlink here [like so.](" + linkString + ")")
                  .attachFiles([dirString])
                  .setImage(attachString)
                  
@@ -480,7 +485,8 @@ bot.on('message', msg => {
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
             var asterisk = "__***";
-            var editedString2 = asterisk.concat((fileString2.slice(0, -4)).toUpperCase(),"***__");
+            var trimString2 = fileString2.slice(0, -4);
+            var editedString2 = asterisk.concat(trimString2.toUpperCase(),"***__");
 
             var attachString2 = "attachment://";
             attachString2 = attachString2.concat(fileString2);
@@ -494,6 +500,9 @@ bot.on('message', msg => {
             msg.channel.send(pokeEmbed2).then( sent => {
                 sent.react('❤️');
             });
+
+
+            https://bulbapedia.bulbagarden.net/wiki/Marshadow_(Pok%C3%A9mon)
 
             break;
     }
