@@ -19,6 +19,8 @@ var fs = require('fs');
 var files = fs.readdirSync('./roulette/');
 var files2 = fs.readdirSync('./f_roulette/');
 
+var poke_files = fs.readdirSync('./pokeimages/');
+
 var clownID;
 var clownerID;
 var clownNext = false;
@@ -439,7 +441,18 @@ bot.on('message', msg => {
             var randomAttachment2 = new Discord.MessageAttachment(dirString);
             msg.channel.send(randomAttachment2);
             break;
-            
+        
+        case 'test1':
+            var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
+            var dirString = "./pokeimages/" + fileString;
+            var randomAttachment3 = new Discord.MessageAttachment(dirString);
+            msg.channel.send(randomAttachment3).then( sent => {
+                sent.react('❤️');
+            });
+
+            msg.channel.send((fileString.slice(0, -4)).toUpperCase());
+
+            break;
     }
 });
 
