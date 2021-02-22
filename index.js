@@ -43,7 +43,15 @@ bot.on('messageReactionAdd', (reaction, user) => {
         try
         {
             var name = message.embeds[0].title;
-            message.channel.send(name + " WINS!");
+
+
+            message.channel.bulkDelete(3);
+
+            message.channel.send(name + "  WINS!");
+
+            message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: true });
+
+
 
         }
         catch (err)
@@ -534,6 +542,14 @@ bot.on('message', msg => {
                 sent2.react('❤️')
                 sent2.react('🏆')
             });
+
+            // close perms?
+
+        
+
+            message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: false });
+
+
 
             break;
     }
