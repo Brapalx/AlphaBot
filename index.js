@@ -456,8 +456,31 @@ bot.on('message', msg => {
             msg.channel.send(editedString);
 
             break;
+
+        case 'test2':
+
+            var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
+            var dirString = "./pokeimages/" + fileString;
+            var asterisk = "__***";
+            var editedString = asterisk.concat((fileString.slice(0, -4)).toUpperCase(),"***__");
+
+            msg.channel.send(editedString);
+
+            var attachString = "attachment://";
+            attachString = attachString.concat(fileString);
+
+            const pokeEmbed = new Discord.MessageEmbed()
+                 .setTitle(editedString)
+                 .attachFile(dirString)
+                 .setImage(attachString)
+            
+            msg.channel.send(pokeEmbed);
+
+            break;
     }
 });
+
+
 
 const helpEmbed = new Discord.MessageEmbed()
     .setTitle('ALPHABOT COMMANDS')
