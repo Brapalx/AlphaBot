@@ -450,7 +450,8 @@ bot.on('message', msg => {
                 sent.react('❤️');
             });
 
-            var editedString = string.concat("***",(fileString.slice(0, -4)).toUpperCase(),"***");
+            var asterisk = "***";
+            var editedString = asterisk.concat((fileString.slice(0, -4)).toUpperCase(),"***");
 
             msg.channel.send(editedString);
 
