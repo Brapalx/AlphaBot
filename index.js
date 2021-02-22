@@ -473,7 +473,7 @@ bot.on('message', msg => {
 
             const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle(editedString)
-                 .addField("", "Main text here, so you can put a hyperlink here [like so.](" + linkString + ")")
+                 .addField("title", "Main text here, so you can put a hyperlink here [like so.](" + linkString + ")")
                  .attachFiles([dirString])
                  .setImage(attachString)
                  
