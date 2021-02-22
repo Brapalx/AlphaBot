@@ -457,7 +457,7 @@ bot.on('message', msg => {
 
             break;
 
-        case 'test2':
+        case 'pokevs':
 
             var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString = "./pokeimages/" + fileString;
@@ -482,8 +482,6 @@ bot.on('message', msg => {
                 sent.react('❤️');
             });
 
-            msg.channel.send("**VS**");
-
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
             var asterisk = "__***";
@@ -506,9 +504,6 @@ bot.on('message', msg => {
             msg.channel.send(pokeEmbed2).then( sent => {
                 sent.react('❤️');
             });
-
-
-            //https://bulbapedia.bulbagarden.net/wiki/Marshadow_(Pok%C3%A9mon)
 
             break;
     }
