@@ -485,7 +485,7 @@ bot.on('message', msg => {
 
         case 'pokevs':
 
-            msg.channel.send("__***REACT WITH 🏆 TO DECLARE A WINNER!***__");
+            msg.channel.send("__***REACT WITH  🏆  TO DECLARE A WINNER!***__");
 
             var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString = "./pokeimages/" + fileString;
