@@ -505,20 +505,65 @@ bot.on('message', msg => {
                  
             msg.channel.send(pokeEmbed2);
             
-            const filter = reaction => {
-                  return reaction.emoji.name === '🅰️' || reaction.emoji.name === '🅱️';
-            }
+            
                  
             
             msg.channel.send("vote a or b").then (sent3 => {
                 sent3.react('🅰️')
                 sent3.react('🅱️')
-                sent3.awaitReactions(filter, { max: 4, time: 10000, errors: ['time'] })
-	            .then(collected => console.log(collected.size))
-	            .catch(collected => {
-		            console.log(`After 10s, only ${collected.size} reacted.`);
-	            })
-            });
+
+                const filter = (reaction, user) => {
+                    return (reaction.emoji.name === '🅰️' || reaction.emoji.name === '🅱️') && !user.bot;
+                };
+
+                const options = {
+                    time: 10000
+                }
+
+
+                return sent3.awaitReactions(filter, options);
+            })
+            .then(collected => {
+                // Convert the collection to an array
+                let collectedArray = collected.array()
+                // Map the collection down to ONLY get the emoji names of the reactions
+                let collectedReactions = collectedArray.map(item => item._emoji.name)
+                let reactionCounts = {}
+        
+                // Loop through the reactions and build an object that contains the counts for each reaction
+                // It will look something like this:
+                // {
+                //   1️⃣: 1
+                //   2️⃣: 0
+                //   3️⃣: 3
+                //   4️⃣: 10
+                // }
+                collectedReactions.forEach(reaction => {
+                  if (reactionCounts[reaction]) {
+                    reactionCounts[reaction]++
+                  } else {
+                    reactionCounts[reaction] = 1
+                  }
+                })
+        
+                // Using those results, rebuild the description from earlier with the vote counts
+                let surveyResults = ""
+                survey.answers.forEach((question, index) => {
+                  let voteCount = 0
+                  if (reactionCounts[reactions[index]]) {
+                    voteCount = reactionCounts[reactions[index]]
+                  }
+                  let voteCountContent = `(${voteCount} vote${voteCount !== 1 ? 's' : ''})`
+                  surveyResults += `${reactions[index]}: ${question} ${voteCountContent}\n`;
+                })
+        
+                // Create the embed and send it to the channel
+                let surveyResultsEmbed = new Discord.MessageEmbed()
+                  .setTitle(`Results for '${survey.question}' (${collectedArray.length} total votes)`)
+                  .setDescription(surveyResults)
+        
+                msg.channel.send(surveyResultsEmbed);
+              })
 
 
             break;
