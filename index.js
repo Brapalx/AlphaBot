@@ -514,8 +514,19 @@ bot.on('message', msg => {
             var linkString = "https://bulbapedia.bulbagarden.net/wiki/";
             linkString = linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
 
+            var pokewins = 0;
+
+            pokeArray.forEach(pokemon => {
+                if (pokemon.name === editedString2)
+                {
+                    pokewins = pokemon.wins;
+                }
+            })
+
+
             const pokeEmbed = new Discord.MessageEmbed()
                  .setTitle(editedString)
+                 .addField("Wins:", pokewins.toString())
                  .addField("More info:", "[Click here](" + linkString + ")")
                  .attachFiles([dirString])
                  .setImage(attachString)
@@ -536,8 +547,18 @@ bot.on('message', msg => {
             var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
             linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
 
+            var pokewins2 = 0;
+
+            pokeArray.forEach(pokemon => {
+                if (pokemon.name === editedString2)
+                {
+                    pokewins2 = pokemon.wins;
+                }
+            })
+
             const pokeEmbed2 = new Discord.MessageEmbed()
                  .setTitle(editedString2)
+                 .addField("Wins:", pokewins2.toString())
                  .addField("More info:", "[Click here](" + linkString2 + ")")
                  .attachFiles([dirString2])
                  .setImage(attachString2)
