@@ -31,37 +31,6 @@ bot.on('ready', () => {
 })
 
 
-bot.on('messageReactionAdd', (reaction, user) => {
-
-    let message = reaction.message, emoji = reaction.emoji;
-
-    if(user.id === bot.user.id) return;
-
-    if (emoji.name == '🏆') {
-        // We don't have the member, but only the user...
-        // Thanks to the previous part, we know how to fetch it
-        try
-        {
-            var name = message.embeds[0].title;
-
-
-            message.channel.bulkDelete(3);
-
-            message.channel.send(name + "  WINS!");
-
-            message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: true });
-
-
-
-        }
-        catch (err)
-        {
-            return;
-        }
-
-    }
-
-});
 
 
 
@@ -513,11 +482,6 @@ bot.on('message', msg => {
                  .attachFiles([dirString])
                  .setImage(attachString)
                  
-            
-            msg.channel.send(pokeEmbed).then( sent => {
-                sent.react('❤️')
-                sent.react('🏆')
-            });
 
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
@@ -538,17 +502,22 @@ bot.on('message', msg => {
                  .setImage(attachString2)
                  
             
-            msg.channel.send(pokeEmbed2).then( sent2 => {
-                sent2.react('❤️')
-                sent2.react('🏆')
+
+            
+            msg.channel.send("vote a or b").then (sent3 => {
+                sent3.react('🅰️')
+                sent3.react('🅱️')
             });
 
-            // close perms?
+            const filter = reaction => {
+                return reaction.emoji.name === '🅰️' || reaction.emoji.name === '🅱️';
+            }
 
-        
-
-            msg.channel.overwritePermissions(msg.guild.defaultRole, { SEND_MESSAGES: false });
-
+            msg.awaitReactions(filter, { max: 4, time: 10000, errors: ['time'] })
+	            .then(collected => console.log(collected.size))
+	            .catch(collected => {
+		            console.log(`After 10s, only ${collected.size} reacted.`);
+	        });
 
 
             break;
