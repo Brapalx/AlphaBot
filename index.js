@@ -31,6 +31,30 @@ bot.on('ready', () => {
 })
 
 
+bot.on('messageReactionAdd', (reaction, user) => {
+
+    let message = reaction.message, emoji = reaction.emoji;
+
+    if (emoji.name == '🏆') {
+        // We don't have the member, but only the user...
+        // Thanks to the previous part, we know how to fetch it
+        try
+        {
+            var name = message.embeds[0].title;
+            message.channel.send(name + " WINS!");
+
+        }
+        catch (err)
+        {
+            return;
+        }
+
+    }
+
+});
+
+
+
 bot.on('message', msg => {
 
     console.log(msg.author.id);
@@ -480,6 +504,7 @@ bot.on('message', msg => {
             
             msg.channel.send(pokeEmbed).then( sent => {
                 sent.react('❤️');
+                sent.react('🏆');
             });
 
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
@@ -503,6 +528,7 @@ bot.on('message', msg => {
             
             msg.channel.send(pokeEmbed2).then( sent => {
                 sent.react('❤️');
+                sent.react('🏆');
             });
 
             break;
