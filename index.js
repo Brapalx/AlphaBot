@@ -7,7 +7,7 @@ const randomPuppy = require('random-puppy');
 
 const ytdl = require("ytdl-core");
 
-const token = require("./token");
+const token = require("./token.js");
 
 const PREFIX = '!'
 
@@ -25,9 +25,36 @@ var clownID;
 var clownerID;
 var clownNext = false;
 
+var pokeArray = []
+
+
 bot.on('ready', () => {
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
+
+
+    fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
+    if (err) {
+          console.error(err)
+          return
+        }
+
+        let stringArray = data.split(/\r?\n/);
+
+        var tempObject;
+        var tempArray;
+
+        stringArray.forEach( str => {
+
+            tempArray = str.split(' ');
+
+            tempObject = {name: tempArray[0], wins: tempArray[1]};
+
+            pokeArray.push(tempObject)
+
+        })
+    })
+
 })
 
 
@@ -462,9 +489,20 @@ bot.on('message', msg => {
 
         case 'pokevs':
 
-            msg.channel.send("__***REACT WITH  🏆  TO DECLARE A WINNER!***__");
+            msg.channel.send(" 👊  __***POKEMON BATTLE***__  👊 ");
 
-            var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
+            var fileString = "";
+            var fileString2 = "";
+            
+            do {
+
+            fileString = poke_files[Math.floor(Math.random() * poke_files.length)];
+
+            fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)];
+            }
+            while (fileString != fileString2)
+
+
             var dirString = "./pokeimages/" + fileString;
             var asterisk = "__***";
             var trimString = fileString.slice(0, -4);
@@ -481,9 +519,10 @@ bot.on('message', msg => {
                  .addField("More info:", "[Click here](" + linkString + ")")
                  .attachFiles([dirString])
                  .setImage(attachString)
-                 
+            
+            var pokeA = editedString;
 
-           // msg.channel.send(pokeEmbed);
+           msg.channel.send(pokeEmbed);
 
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
@@ -502,13 +541,18 @@ bot.on('message', msg => {
                  .addField("More info:", "[Click here](" + linkString2 + ")")
                  .attachFiles([dirString2])
                  .setImage(attachString2)
+
+            var pokeB = editedString2;
+            
+            msg.channel.send(pokeEmbed2);
+            
+            const pokeEmbed3 = new Discord.MessageEmbed()
+                .setTitle("CAST YOUR VOTES __***HERE***__")
+                .setDescription(`🅰️:  ${pokeA}\n 🅱️:  ${pokeB}`)
+
                  
-            //msg.channel.send(pokeEmbed2);
             
-            
-                 
-            
-            msg.channel.send("vote a or b").then (sent3 => {
+                msg.channel.send(pokeEmbed3).then (sent3 => {
                 sent3.react('🅰️')
                 sent3.react('🅱️')
 
@@ -517,7 +561,8 @@ bot.on('message', msg => {
                 };
 
                 const options = {
-                    time: 10000
+                    max: 20,
+                    time: 20000
                 }
 
 
@@ -526,49 +571,138 @@ bot.on('message', msg => {
             .then(collected => {
                 // Convert the collection to an array
                 let collectedArray = collected.array()
-                // Map the collection down to ONLY get the emoji names of the reactions
-                let collectedReactions = collectedArray.map(item => item._emoji.name)
-                let reactionCounts = {}
-        
-                // Loop through the reactions and build an object that contains the counts for each reaction
-                // It will look something like this:
-                // {
-                //   1️⃣: 1
-                //   2️⃣: 0
-                //   3️⃣: 3
-                //   4️⃣: 10
-                // }
-                collectedReactions.forEach(reaction => {
-                  if (reactionCounts[reaction]) {
-                    reactionCounts[reaction]++
-                  } else {
-                    reactionCounts[reaction] = 1
-                  }
+
+
+                let numA = 0;
+                let numB = 0;
+
+                collectedArray.forEach(reaction => {
+
+                    if (reaction.emoji.name == '🅰️')
+                    {
+                        numA = reaction.count - 1;
+                    }
+
+                    if (reaction.emoji.name == '🅱️')
+                    {
+                        numB = reaction.count - 1;
+                    }
                 })
 
+                let winnerName = "";
+
+                if( numA > numB)
+                {
+                    winnerName = pokeA;
+                }
+                else if (numB > numA)
+                {
+                    winnerName = pokeB;
+                }
+
+                let surveyResultsEmbed;
+
+                if (numB == numA)
+                {
+                    surveyResultsEmbed = new Discord.MessageEmbed()
+                    .setTitle("IT'S A __***TIE***__")
+            
+                }
+                else
+                {
+                    surveyResultsEmbed = new Discord.MessageEmbed()
+                    .setTitle(`${winnerName} WINS!`)
+
+                    updateWinners(winnerName);
+                }
         
-                // Create the embed and send it to the channel
-                let surveyResultsEmbed = new Discord.MessageEmbed()
-                  .setTitle(`Results: A - '${reactionCounts[0]}' , B - '${reactionCounts[1]}'`)
-                  .setDescription("fill")
         
                 msg.channel.send(surveyResultsEmbed);
               })
 
 
             break;
+
+        case 'poketop':
+
+              pokeArray.sort((a,b) => parseInt(b.wins) - parseInt(a.wins)); 
+
+              var concString = "";
+              var tString = "";
+              var i = 1;
+
+              var j;
+
+              for (j = 0; j < 20; j++)
+              {
+
+                if(!pokeArray[j])
+                {
+                    break;
+                }
+
+                tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].wins + "\n";
+                concString = concString.concat(tString);
+                i = i + 1;
+              }
+
+              const pokeWLembed = new Discord.MessageEmbed()
+                .setTitle(" ⭐  __***POKEMON BATTLE WINNER RANKINGS***__  ⭐ ")
+                .setDescription(concString);
+
+              msg.channel.send(pokeWLembed);
+
+
+
+            break;
     }
 });
 
+function updateWinners(winner){
+
+    var found = false;
+
+    pokeArray.forEach( pokemon => {
+
+        if (pokemon.name === winner)
+        {
+            pokemon.wins = pokemon.wins + 1;
+            found = true;
+        }
+    })
+
+    if (!found)
+    {
+        var tempPokemon = {name: winner, wins: 1};
+        pokeArray.push(tempPokemon);
+    }
+
+    var concatString = "";
+    var tempString = "";
+
+    pokeArray.forEach( pokemon => {
+
+        tempString = pokemon.name + " " + pokemon.wins + "\n";
+
+        concatString = concatString.concat(tempString);
+    })
+
+    concatString = concatString.slice(0, -1);
+
+    fs.writeFile('pokewinners.txt', concatString, function (err) {
+        if (err) return console.log(err);
+    })
+}
 
 
 const helpEmbed = new Discord.MessageEmbed()
-    .setTitle('ALPHABOT COMMANDS')
+    .setTitle('🐶  __***ALPHABOT COMMANDS***__  🐶')
     .addField('**Utility Commands**','- **!clear** <number>: Clears a number of messages from the current channel.\n- **!give** <anything you want>: Basically an image search. Gives you a different result each time.\n- **!img** <anything you want>: Same as !give, but it always gives you the first result.')
     .addField('**Special Image Search Commands**','- **!beagle**: To get a beagle.\n- **!bc**: To get a border collie.\n- **!cursed**: To get a random cursed image. Use at your own risk.\n- **!god**: Makes your day instantly better.\n- **!skeleton**: To get a random skeleton.\n- **!truck**: To get a random truck. Big trucks only.')
     .addField('**Reddit Commands: These take a random post from a subreddit.**', '- **!anime**: r/anime_irl\n- **!aww**: r/aww\n- **!design**: r/shittydesigns\n- **!food**: r/foodporn\n- **!puppy**: r/puppy\n- **!stock**: r/cursedstockimages')
     .addField('**Misc. Commands**','- **!donut**: Gives Shinobu a snack!\n- **!fact**: Tells the truth.\n- **!w**: rolls a random waifu.\n-**!whelp**: sometime things happen yknow')
-    .addField('**Clown Game Commands**','- **!clown @someone** : target someone to be clowned the next time they send a message.\n - **!shield** : Use this to save yourself from being clowned. Be careful not to waste it,it will only work if you are the current target.');
+    .addField('**Clown Game Commands**','- **!clown @someone** : Target someone to be clowned the next time they send a message.\n - **!shield** : Use this to save yourself from being clowned. Be careful not to waste it,it will only work if you are the current target.')
+    .addField('**Pokemon Commands**','- **!pokevs** : Sends out a poll between two pokemon. Only one will remain.\n - **!poketop** : Shows the list of pokemon who have won the most battles.');
 
 function help(message){
     message.author.send(helpEmbed);
