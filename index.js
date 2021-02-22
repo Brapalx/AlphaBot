@@ -450,7 +450,7 @@ bot.on('message', msg => {
                 sent.react('❤️');
             });
 
-            msg.channel.send((fileString.slice(0, -4)).toUpperCase());
+            msg.channel.send(string.concat("***",(fileString.slice(0, -4)).toUpperCase()),"***");
 
             break;
     }
