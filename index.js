@@ -49,7 +49,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
 
             message.channel.send(name + "  WINS!");
 
-            message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: true });
+            message.channel.overwritePermissions(msg.guild.defaultRole, { SEND_MESSAGES: true });
 
 
 
