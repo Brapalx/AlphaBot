@@ -35,7 +35,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
 
     let message = reaction.message, emoji = reaction.emoji;
 
-    if(message.author.id === bot.user.id) return;
+    if(user.id === bot.user.id) return;
 
     if (emoji.name == '🏆') {
         // We don't have the member, but only the user...
@@ -508,6 +508,7 @@ bot.on('message', msg => {
             
             msg.channel.send(pokeEmbed).then( sent => {
                 sent.react('❤️')
+                sent.react('🏆')
             });
 
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
@@ -531,6 +532,7 @@ bot.on('message', msg => {
             
             msg.channel.send(pokeEmbed2).then( sent2 => {
                 sent2.react('❤️')
+                sent2.react('🏆')
             });
 
             break;
