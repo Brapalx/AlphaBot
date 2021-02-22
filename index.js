@@ -485,13 +485,13 @@ bot.on('message', msg => {
             var attachString2 = "attachment://";
             attachString2 = attachString2.concat(fileString2);
 
-            const pokeEmbed = new Discord.MessageEmbed()
+            const pokeEmbed2 = new Discord.MessageEmbed()
                  .setTitle(editedString2)
                  .attachFiles([dirString2])
                  .setImage(attachString2)
                  
             
-            msg.channel.send(pokeEmbed).then( sent => {
+            msg.channel.send(pokeEmbed2).then( sent => {
                 sent.react('❤️');
             });
 
