@@ -545,22 +545,12 @@ bot.on('message', msg => {
                     reactionCounts[reaction] = 1
                   }
                 })
-        
-                // Using those results, rebuild the description from earlier with the vote counts
-                let surveyResults = ""
-                survey.answers.forEach((question, index) => {
-                  let voteCount = 0
-                  if (reactionCounts[reactions[index]]) {
-                    voteCount = reactionCounts[reactions[index]]
-                  }
-                  let voteCountContent = `(${voteCount} vote${voteCount !== 1 ? 's' : ''})`
-                  surveyResults += `${reactions[index]}: ${question} ${voteCountContent}\n`;
-                })
+
         
                 // Create the embed and send it to the channel
                 let surveyResultsEmbed = new Discord.MessageEmbed()
-                  .setTitle(`Results for '${survey.question}' (${collectedArray.length} total votes)`)
-                  .setDescription(surveyResults)
+                  .setTitle(`Results: A - '${reactionCounts[0]}' , B - '${reactionCounts[1]}'`)
+                  .setDescription("fill")
         
                 msg.channel.send(surveyResultsEmbed);
               })
