@@ -690,7 +690,7 @@ bot.on('message', msg => {
               }
 
               const pokeWLembed = new Discord.MessageEmbed()
-                .setTitle(" ⭐  __***POKEMON BATTLE WINNER RANKINGS***__  ⭐ ")
+                .setTitle(" 🥵  __***POKEMON BATTLE WINNER RANKINGS***__  🥵 ")
                 .setDescription(concString);
 
               msg.channel.send(pokeWLembed);
@@ -876,7 +876,7 @@ const helpEmbed = new Discord.MessageEmbed()
     .addField('**Reddit Commands: These take a random post from a subreddit.**', '- **!anime**: r/anime_irl\n- **!aww**: r/aww\n- **!design**: r/shittydesigns\n- **!food**: r/foodporn\n- **!puppy**: r/puppy\n- **!stock**: r/cursedstockimages')
     .addField('**Misc. Commands**','- **!donut**: Gives Shinobu a snack!\n- **!fact**: Tells the truth.\n- **!w**: rolls a random waifu.\n-**!whelp**: sometime things happen yknow')
     .addField('**Clown Game Commands**','- **!clown @someone** : Target someone to be clowned the next time they send a message.\n - **!shield** : Use this to save yourself from being clowned. Be careful not to waste it,it will only work if you are the current target.')
-    .addField('**Pokemon Commands**','- **!pokevs** : Sends out a poll between two pokemon. Only one will remain.\n - **!poketop** : Shows the list of pokemon who have won the most battles. \n - **!pokedex <pokemon>** : Shows the battle stats of a pokemon. A pokemon must have fought at least  __***ONE***__  battle for it to show up!');
+    .addField('**Pokemon Commands**','- **!pokevs** : Sends out a poll between two pokemon. Only one will remain.\n - **!poketop** : Shows the list of pokemon who have won the most battles.\n - **!pokebot** : Shows the list of pokemon who have lost the most battles.\n - **!pokedex <pokemon>** : Shows the battle stats of a pokemon. A pokemon must have fought at least  __***ONE***__  battle for it to show up!');
 
 function help(message){
     message.author.send(helpEmbed);
