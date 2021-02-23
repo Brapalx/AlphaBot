@@ -1,15 +1,16 @@
-__***QUAGSIRE***__ 1
-__***SCEPTILE***__ 1
-__***DRACOZOLT***__ 1
-__***INKAY***__ 1
-__***OSHAWOTT***__ 2
-__***MILOTIC***__ 1
-__***HIPPOPOTAS***__ 1
-__***AGGRON***__ 1
-__***NOCTOWL***__ 1
-__***CLEFAIRY***__ 1
-__***ELECTIVIRE***__ 1
-__***ABSOL***__ 1
-__***GOODRA***__ 1
-__***PILOSWINE***__ 1
-__***REGIROCK***__ 1
+__***DROWZEE***__ 2 1
+__***LEDIAN***__ 1 0
+__***ZEBSTRIKA***__ 1 0
+__***DRAGAPULT***__ 1 0
+__***CASTFORM***__ 1 0
+__***DRIFLOON***__ 1 0
+__***KRICKETUNE***__ 0 1
+__***THROH***__ 0 1
+__***ELECTIVIRE***__ 0 1
+__***PHEROMOSA***__ 0 1
+__***SHELMET***__ 0 1
+__***HOOPA***__ 0 1
+__***FURRET***__ 1 0
+__***SPEWPA***__ 0 1
+__***LAMPENT***__ 1 0
+__***GOLURK***__ 0 1

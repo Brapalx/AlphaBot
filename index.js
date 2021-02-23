@@ -48,7 +48,7 @@ bot.on('ready', () => {
 
             tempArray = str.split(' ');
 
-            tempObject = {name: tempArray[0], wins: tempArray[1]};
+            tempObject = {name: tempArray[0], wins: tempArray[1], losses: tempArray[2]};
 
             pokeArray.push(tempObject)
 
@@ -515,11 +515,13 @@ bot.on('message', msg => {
             linkString = linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
 
             var pokewins = 0;
+            var pokelosses = 0;
 
             pokeArray.forEach(pokemon => {
                 if (pokemon.name === editedString)
                 {
                     pokewins = pokemon.wins;
+                    pokelosses = pokemon.losses;
                 }
             })
 
@@ -528,6 +530,7 @@ bot.on('message', msg => {
                  .setTitle(editedString)
                  .addFields(
                      { name: "Wins:", value: pokewins.toString(), inline: true},
+                     { name: "Losses:", value: pokelosses.toString(), inline: true},
                      { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
                  )
                  .attachFiles([dirString])
@@ -550,11 +553,13 @@ bot.on('message', msg => {
             linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
 
             var pokewins2 = 0;
+            var pokelosses2 = 0;
 
             pokeArray.forEach(pokemon => {
                 if (pokemon.name === editedString2)
                 {
                     pokewins2 = pokemon.wins;
+                    pokelosses2 = pokemon.losses;
                 }
             })
 
@@ -562,6 +567,7 @@ bot.on('message', msg => {
                  .setTitle(editedString2)
                  .addFields(
                     { name: "Wins:", value: pokewins2.toString(), inline: true},
+                    { name: "Losses:", value: pokelosses2.toString(), inline: true},
                     { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
                 )
                  .attachFiles([dirString2])
@@ -615,14 +621,17 @@ bot.on('message', msg => {
                 })
 
                 let winnerName = "";
+                let loserName = "";
 
                 if( numA > numB)
                 {
                     winnerName = pokeA;
+                    loserName = pokeB;
                 }
                 else if (numB > numA)
                 {
                     winnerName = pokeB;
+                    loserName = pokeA;
                 }
 
                 let surveyResultsEmbed;
@@ -633,12 +642,18 @@ bot.on('message', msg => {
                     .setTitle("IT'S A __***TIE***__")
             
                 }
+                else if ((numA + numB) == 1)
+                {
+                    surveyResultsEmbed = new Discord.MessageEmbed()
+                    .setTitle("NOT ENOUGH VOTES!")
+                }
                 else
                 {
                     surveyResultsEmbed = new Discord.MessageEmbed()
                     .setTitle(`${winnerName} WINS!`)
 
                     updateWinners(winnerName);
+                    updateLosers(loserName);
                 }
         
         
@@ -666,9 +681,12 @@ bot.on('message', msg => {
                     break;
                 }
 
-                tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].wins + "\n";
-                concString = concString.concat(tString);
-                i = i + 1;
+                if(pokeArray[j].wins > 0)
+                {
+                    tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].wins + "\n";
+                    concString = concString.concat(tString);
+                    i = i + 1;
+                }
               }
 
               const pokeWLembed = new Discord.MessageEmbed()
@@ -677,8 +695,97 @@ bot.on('message', msg => {
 
               msg.channel.send(pokeWLembed);
 
+            break;
 
 
+        case 'pokebot':
+
+                pokeArray.sort((a,b) => parseInt(b.losses) - parseInt(a.losses)); 
+  
+                var concString = "";
+                var tString = "";
+                var i = 1;
+  
+                var j;
+  
+                for (j = 0; j < 20; j++)
+                {
+  
+                  if(!pokeArray[j])
+                  {
+                      break;
+                  }
+  
+                  if(pokeArray[j].losses > 0)
+                  {
+                      tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].losses + "\n";
+                      concString = concString.concat(tString);
+                      i = i + 1;
+                  }
+                }
+  
+                const pokeLembed = new Discord.MessageEmbed()
+                  .setTitle(" 🤢  __***POKEMON BATTLE LOSER RANKINGS***__  🤢 ")
+                  .setDescription(concString);
+  
+                msg.channel.send(pokeLembed);
+  
+              break;
+
+        case 'pokedex':
+            if(!args[1]) return msg.reply('Not a valid pokemon.');
+    
+            var luName = "__***" + args[1].toUpperCase() + "***__";
+
+            let pokedexEmbed;
+
+                
+
+
+            var found = false;
+
+            pokeArray.forEach( pokemon => {
+
+            if (pokemon.name === luName)
+            {
+
+                var fileString2 = args[1].toLowerCase();
+                var dirString2 = "./pokeimages/" + fileString2 + ".png";
+        
+                var attachString2 = "attachment://";
+                attachString2 = attachString2.concat(fileString2 + ".png");
+
+                var trimString2 = fileString2;
+
+
+                var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
+                linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
+
+
+
+                pokedexEmbed = new Discord.MessageEmbed()
+                 .setTitle(pokemon.name)
+                 .addFields(
+                    { name: "Wins:", value: pokemon.wins.toString(), inline: true},
+                    { name: "Losses:", value: pokemon.losses.toString(), inline: true},
+                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
+                 )
+                 .attachFiles([dirString2])
+                 .setImage(attachString2)
+
+                msg.channel.send(pokedexEmbed);
+
+                found = true;
+            }
+            })
+
+            if (!found)
+            {
+                pokedexEmbed = new Discord.MessageEmbed()
+                .setTitle("POKEMON  __***NOT***__  FOUND IN THE BATTLE RECORDS")
+                msg.channel.send(pokedexEmbed);
+            }
+            
             break;
     }
 });
@@ -701,7 +808,7 @@ function updateWinners(winner){
 
     if (!found)
     {
-        var tempPokemon = {name: winner, wins: 1};
+        var tempPokemon = {name: winner, wins: 1, losses: 0};
         pokeArray.push(tempPokemon);
     }
 
@@ -710,7 +817,7 @@ function updateWinners(winner){
 
     pokeArray.forEach( pokemon => {
 
-        tempString = pokemon.name + " " + pokemon.wins + "\n";
+        tempString = pokemon.name + " " + pokemon.wins + " " + pokemon.losses + "\n";
 
         concatString = concatString.concat(tempString);
     })
@@ -722,6 +829,45 @@ function updateWinners(winner){
     })
 }
 
+
+function updateLosers(loser){
+
+    var found = false;
+
+    pokeArray.forEach( pokemon => {
+
+        if (pokemon.name === loser)
+        {
+
+            var tempnum = parseInt(pokemon.losses) + 1;
+
+            pokemon.losses = tempnum.toString();
+            found = true;
+        }
+    })
+
+    if (!found)
+    {
+        var tempPokemon = {name: loser, wins: 0, losses: 1};
+        pokeArray.push(tempPokemon);
+    }
+
+    var concatString = "";
+    var tempString = "";
+
+    pokeArray.forEach( pokemon => {
+
+        tempString = pokemon.name + " " + pokemon.wins + " " + pokemon.losses + "\n";
+
+        concatString = concatString.concat(tempString);
+    })
+
+    concatString = concatString.slice(0, -1);
+
+    fs.writeFile('pokewinners.txt', concatString, function (err) {
+        if (err) return console.log(err);
+    })
+}
 
 const helpEmbed = new Discord.MessageEmbed()
     .setTitle('🐶  __***ALPHABOT COMMANDS***__  🐶')
