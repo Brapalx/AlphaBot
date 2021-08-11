@@ -487,6 +487,14 @@ bot.on('message', msg => {
 
             break;
 
+        case 'coin':
+            var value = Math.random() * (100);
+            msg.channel.send(value);
+
+
+
+            break;
+
         case 'pokevs':
 
             msg.channel.send(" 👊  __***POKEMON BATTLE***__  👊 ");
