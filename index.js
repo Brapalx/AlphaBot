@@ -489,9 +489,15 @@ bot.on('message', msg => {
 
         case 'coin':
             var value = Math.random() * (100);
-            msg.channel.send(value);
-            console.log("aaaa");
 
+            if (value < 50)
+            {
+                msg.channel.send("Tails!");
+            }
+            else
+            {
+                msg.channel.send("Heads!");
+            }
 
             break;
 
