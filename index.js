@@ -978,7 +978,7 @@ function image2(message, word, firstImage){
     if(!word)
         return message.channel.send("Please enter an image name.");
 
-    const image_results = await google.scrape(word, 1);
+    const image_results = google.scrape(word, 1);
     message.channel.send(image_results[0].url);
 
 }
