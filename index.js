@@ -490,7 +490,7 @@ bot.on('message', msg => {
         case 'coin':
             var value = Math.random() * (100);
             msg.channel.send(value);
-
+            console.log("aaaa");
 
 
             break;
