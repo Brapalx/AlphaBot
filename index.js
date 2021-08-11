@@ -207,19 +207,19 @@ bot.on('message', msg => {
             break;
 
         case 'beagle':
-            image(msg, "beagle", false);
+            image2rand(msg, "beagle");
             break;
 
         case 'bc':
-            image(msg, "border collie", false);
+            image2rand(msg, "border collie");
             break;
 
         case 'cursed':
-            image(msg, "cursed image", false);
+            image2rand(msg, "cursed image");
             break;
 
         case 'skeleton':
-            image(msg, "skeleton video game", false);
+            image2rand(msg, "skeleton video game");
             break;
 
         case 'give':
@@ -235,11 +235,11 @@ bot.on('message', msg => {
                     res = res.concat(" ");
                 }
 
-                image(msg, res);
+                image2rand(msg, res);
                 console.log(res);
             }
             else
-                image(msg, args[1]);
+                image2rand(msg, args[1]);
 
             break;
 
@@ -254,7 +254,7 @@ bot.on('message', msg => {
             break;
 
         case 'truck':
-            image(msg, "truck", false);
+            image2rand(msg, "truck");
             break;
 
         case 'testimage':
@@ -262,7 +262,7 @@ bot.on('message', msg => {
             break;
 
         case 'god':
-            image(msg, "adam sandler", false);
+            image2rand(msg, "adam sandler");
             break;
 
         case 'puppy':
@@ -312,11 +312,11 @@ bot.on('message', msg => {
                     res = res.concat(" ");
                 }
 
-                image(msg, res, true);
+                image2(msg, res);
                 console.log(res);
             }
             else
-                image(msg, args[1], true);
+                image2(msg, args[1]);
 
             break;
         
@@ -974,15 +974,30 @@ function image(message, word, firstImage){
     });
 }
 
-function image2(message, word, firstImage){
+function image2(message, word){
  
     if(!word)
         return message.channel.send("Please enter an image name.");
 
     (async () => {
-        const results = await google.scrape('banana', 1);
+        const results = await google.scrape(word, 1);
         console.log('results', results);
         message.channel.send(results[0].url);
+    })();
+
+}
+
+function image2rand(message, word){
+ 
+    if(!word)
+        return message.channel.send("Please enter an image name.");
+
+    (async () => {
+        const results = await google.scrape(word, 50);
+        
+        var rand = Math.floor(Math.random() * 50)
+
+        message.channel.send(results[rand].url);
     })();
 
 }
