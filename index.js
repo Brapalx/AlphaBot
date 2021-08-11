@@ -27,6 +27,12 @@ var clownNext = false;
 
 var pokeArray = []
 
+const google = new Scraper({
+    puppeteer: {
+        headless: true
+    }
+})
+
 
 bot.on('ready', () => {
     console.log('This bot is online');
@@ -248,6 +254,10 @@ bot.on('message', msg => {
 
         case 'truck':
             image(msg, "truck", false);
+            break;
+
+        case 'testimage':
+            image2(msg, "dog", false);
             break;
 
         case 'god':
@@ -961,6 +971,16 @@ function image(message, word, firstImage){
         else
             message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
     });
+}
+
+function image2(message, word, firstImage){
+ 
+    if(!word)
+        return message.channel.send("Please enter an image name.");
+
+    const image_results = await google.scrape(word, 1);
+    message.channel.send(image_results[0].url);
+
 }
 
 function pup(message){
