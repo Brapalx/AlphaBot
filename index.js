@@ -979,8 +979,10 @@ function image2(message, word, firstImage){
     if(!word)
         return message.channel.send("Please enter an image name.");
 
-    const image_results = google.scrape(word, 1);
-    message.channel.send(image_results[0].url);
+    (async () => {
+        const results = await google.scrape('banana', 200);
+        console.log('results', results);
+    })();
 
 }
 
