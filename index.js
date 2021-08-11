@@ -3,6 +3,7 @@ const bot = new Discord.Client();
 
 const cheerio = require('cheerio');
 const request = require('request');
+var Scraper = require('images-scraper');
 const randomPuppy = require('random-puppy');
 
 const ytdl = require("ytdl-core");
