@@ -3,6 +3,7 @@ const bot = new Discord.Client();
 
 const cheerio = require('cheerio');
 const request = require('request');
+var Scraper = require('images-scraper');
 const randomPuppy = require('random-puppy');
 
 const ytdl = require("ytdl-core");
@@ -26,6 +27,12 @@ var clownerID;
 var clownNext = false;
 
 var pokeArray = []
+
+const google = new Scraper({
+    puppeteer: {
+        headless: true
+    }
+})
 
 
 bot.on('ready', () => {
@@ -198,19 +205,19 @@ bot.on('message', msg => {
             break;
 
         case 'beagle':
-            image(msg, "beagle", false);
+            image2rand(msg, "beagle");
             break;
 
         case 'bc':
-            image(msg, "border collie", false);
+            image2rand(msg, "border collie");
             break;
 
         case 'cursed':
-            image(msg, "cursed image", false);
+            image2rand(msg, "cursed image");
             break;
 
         case 'skeleton':
-            image(msg, "skeleton video game", false);
+            image2rand(msg, "skeleton video game");
             break;
 
         case 'give':
@@ -226,11 +233,11 @@ bot.on('message', msg => {
                     res = res.concat(" ");
                 }
 
-                image(msg, res);
+                image2rand(msg, res);
                 console.log(res);
             }
             else
-                image(msg, args[1]);
+                image2rand(msg, args[1]);
 
             break;
 
@@ -245,11 +252,15 @@ bot.on('message', msg => {
             break;
 
         case 'truck':
-            image(msg, "truck", false);
+            image2rand(msg, "truck");
+            break;
+
+        case 'testimage':
+            image2(msg, "dog", false);
             break;
 
         case 'god':
-            image(msg, "adam sandler", false);
+            image2rand(msg, "adam sandler");
             break;
 
         case 'puppy':
@@ -299,11 +310,11 @@ bot.on('message', msg => {
                     res = res.concat(" ");
                 }
 
-                image(msg, res, true);
+                image2(msg, res);
                 console.log(res);
             }
             else
-                image(msg, args[1], true);
+                image2(msg, args[1]);
 
             break;
         
@@ -482,6 +493,20 @@ bot.on('message', msg => {
             var editedString = asterisk.concat((fileString.slice(0, -4)).toUpperCase(),"***__");
 
             msg.channel.send(editedString);
+
+            break;
+
+        case 'coin':
+            var value = Math.random() * (100);
+
+            if (value < 50)
+            {
+                msg.channel.send("Tails!");
+            }
+            else
+            {
+                msg.channel.send("Heads!");
+            }
 
             break;
 
@@ -945,6 +970,34 @@ function image(message, word, firstImage){
         else
             message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
     });
+}
+
+function image2(message, word){
+ 
+    if(!word)
+        return message.channel.send("Please enter an image name.");
+
+    (async () => {
+        const results = await google.scrape(word, 1);
+        console.log('results', results);
+        message.channel.send(results[0].url);
+    })();
+
+}
+
+function image2rand(message, word){
+ 
+    if(!word)
+        return message.channel.send("Please enter an image name.");
+
+    (async () => {
+        const results = await google.scrape(word, 50);
+        
+        var rand = Math.floor(Math.random() * 50)
+
+        message.channel.send(results[rand].url);
+    })();
+
 }
 
 function pup(message){
