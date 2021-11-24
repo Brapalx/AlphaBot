@@ -784,8 +784,11 @@ bot.on('message', msg => {
                 
 
                 let imgIndexStart = htmldata.indexOf("<div id='z'");
-                //let imgIndexEnd = htmldata.indexOf("'></img");
-                imgString = htmldata.substring(imgIndexStart, imgIndexStart + 20);
+                imgString = htmldata.substring(imgIndexStart + 12, htmldata.size);
+
+                let imgIndexEnd = htmldata.indexOf("<br");
+
+                imgString = imgString.substring(0, imgIndexEnd);
                 //imgString = imgString.replace(/\s+/g, '');
                 //console.log(imgIndexStart);
                 //console.log(imgIndexEnd);
