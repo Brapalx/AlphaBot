@@ -761,6 +761,12 @@ bot.on('message', msg => {
             request('https://tater.info/nft/viewtater.php?uuid=rand', function (error, response, body) {
                 htmldata=body;
                 console.log(htmldata);
+
+                let imgIndexStart = htmldata.indexOf("<img src= '");
+                let imgIndexEnd = htmldata.indexOf("'></img");
+                let imgString = htmldata.substring(imgIndexStart, imgIndexEnd);
+                console.log(imgString);
+
             });
             
             const imageUrl = "https://tater.info/nft/maketater.php?uuid=88d4ee760e5bd3889e23afda";
