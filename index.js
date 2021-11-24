@@ -781,15 +781,15 @@ bot.on('message', msg => {
             var imgString=""
             request('https://www.factretriever.com/', function (error, response, body) {
                 htmldata=body;
-                console.log(htmldata);
+                
 
                 let imgIndexStart = htmldata.indexOf("sliderText");
                 //let imgIndexEnd = htmldata.indexOf("'></img");
-                imgString = htmldata.substring(imgIndexStart, htmldata.size);
+                imgString = htmldata.substring(imgIndexStart, imgIndexStart + 15);
                 //imgString = imgString.replace(/\s+/g, '');
                 //console.log(imgIndexStart);
                 //console.log(imgIndexEnd);
-                //console.log(imgString);
+                console.log(imgString);
 
                 
 
