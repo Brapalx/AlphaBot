@@ -755,6 +755,15 @@ bot.on('message', msg => {
   
               break;
 
+        case 'tater':
+            
+            const imageUrl = "https://tater.info/nft/maketater.php?uuid=88d4ee760e5bd3889e23afda";
+
+            const embed = new Discord.RichEmbed().setImage(imageUrl);
+            msg.channel.send(embed);
+
+            break;
+
         case 'pokedex':
             if(!args[1]) return msg.reply('Not a valid pokemon.');
     
