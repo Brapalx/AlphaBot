@@ -247,10 +247,6 @@ bot.on('message', msg => {
             msg.reply('You gave Shinobu a donut!',attachment);
             break;
 
-        case 'fact':
-            fact(msg);
-            break;
-
         case 'truck':
             image2rand(msg, "truck");
             break;
