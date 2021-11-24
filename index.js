@@ -771,12 +771,12 @@ bot.on('message', msg => {
                 console.log(imgIndexEnd);
                 console.log(imgString);
 
+                let imageUrl = "https://tater.info/nft/" + imgString;
+
+                msg.channel.send(imageUrl);
+
             });
             
-            let imageUrl = "https://tater.info/nft/" + imgString;
-
-            msg.channel.send(imageUrl);
-
             break;
 
         case 'pokedex':
