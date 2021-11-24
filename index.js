@@ -764,7 +764,7 @@ bot.on('message', msg => {
 
                 let imgIndexStart = htmldata.indexOf("<img src=");
                 let imgIndexEnd = htmldata.indexOf("'></img");
-                let imgString = htmldata.substring(imgIndexStart + 9, imgIndexEnd);
+                let imgString = htmldata.substring(imgIndexStart + 10, imgIndexEnd);
                 imgString = imgString.replace(/\s+/g, '');
                 console.log(imgIndexStart);
                 console.log(imgIndexEnd);
@@ -772,7 +772,7 @@ bot.on('message', msg => {
 
             });
             
-            const imageUrl = "https://tater.info/nft/maketater.php?uuid=88d4ee760e5bd3889e23afda";
+            let imageUrl = "https://tater.info/nft/" + imgString;
 
             msg.channel.send(imageUrl);
 
