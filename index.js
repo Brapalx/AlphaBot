@@ -779,6 +779,31 @@ bot.on('message', msg => {
             
             break;
 
+        case 'fact':
+
+            var htmldata="";
+            var imgString=""
+            request('https://www.factretriever.com/', function (error, response, body) {
+                htmldata=body;
+                console.log(htmldata);
+
+                //let imgIndexStart = htmldata.indexOf("<img src=");
+                //let imgIndexEnd = htmldata.indexOf("'></img");
+               // imgString = htmldata.substring(imgIndexStart + 10, imgIndexEnd);
+                //imgString = imgString.replace(/\s+/g, '');
+                //console.log(imgIndexStart);
+                //console.log(imgIndexEnd);
+                //console.log(imgString);
+
+                
+
+                //msg.channel.send(imageUrl);
+
+            });
+
+
+            break;
+
         case 'pokedex':
             if(!args[1]) return msg.reply('Not a valid pokemon.');
     
