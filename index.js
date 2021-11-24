@@ -762,7 +762,7 @@ bot.on('message', msg => {
                 htmldata=body;
                 console.log(htmldata);
 
-                let imgIndexStart = htmldata.indexOf("<img src= '");
+                let imgIndexStart = htmldata.indexOf("<img src=");
                 let imgIndexEnd = htmldata.indexOf("'></img");
                 let imgString = htmldata.substring(imgIndexStart, imgIndexEnd);
                 console.log(imgIndexStart);
