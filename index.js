@@ -783,9 +783,9 @@ bot.on('message', msg => {
                 htmldata=body;
                 console.log(htmldata);
 
-                //let imgIndexStart = htmldata.indexOf("<img src=");
+                let imgIndexStart = htmldata.indexOf("sliderText");
                 //let imgIndexEnd = htmldata.indexOf("'></img");
-               // imgString = htmldata.substring(imgIndexStart + 10, imgIndexEnd);
+                imgString = htmldata.substring(imgIndexStart, htmldata.size);
                 //imgString = imgString.replace(/\s+/g, '');
                 //console.log(imgIndexStart);
                 //console.log(imgIndexEnd);
