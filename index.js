@@ -169,8 +169,6 @@ bot.on('message', msg => {
             if(args_t[0].includes("rara") || args_t[0].includes("RARA"))
                 msg.channel.send('ARARARARARARA')
 
-            if(args_t[0].includes("haha"))
-                msg.channel.send('hahahaha so funny omg')
             
         }
 
