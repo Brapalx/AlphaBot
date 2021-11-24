@@ -765,6 +765,8 @@ bot.on('message', msg => {
                 let imgIndexStart = htmldata.indexOf("<img src= '");
                 let imgIndexEnd = htmldata.indexOf("'></img");
                 let imgString = htmldata.substring(imgIndexStart, imgIndexEnd);
+                console.log(imgIndexStart);
+                console.log(imgIndexEnd);
                 console.log(imgString);
 
             });
