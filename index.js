@@ -767,9 +767,9 @@ bot.on('message', msg => {
                 let imgIndexEnd = htmldata.indexOf("'></img");
                 imgString = htmldata.substring(imgIndexStart + 10, imgIndexEnd);
                 imgString = imgString.replace(/\s+/g, '');
-                console.log(imgIndexStart);
-                console.log(imgIndexEnd);
-                console.log(imgString);
+                //console.log(imgIndexStart);
+                //console.log(imgIndexEnd);
+                //console.log(imgString);
 
                 let imageUrl = "https://tater.info/nft/" + imgString;
 
