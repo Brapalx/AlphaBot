@@ -792,11 +792,10 @@ bot.on('message', msg => {
                 //imgString = imgString.replace(/\s+/g, '');
                 //console.log(imgIndexStart);
                 //console.log(imgIndexEnd);
-                console.log(imgString);
 
                 
 
-                //msg.channel.send(imageUrl);
+                msg.channel.send(imgString);
 
             });
 
