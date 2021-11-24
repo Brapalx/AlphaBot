@@ -756,6 +756,12 @@ bot.on('message', msg => {
               break;
 
         case 'tater':
+
+            var htmldata="";
+            request('https://tater.info/nft/viewtater.php?uuid=rand', function (error, response, body) {
+                htmldata=body;
+                console.log(htmldata);
+            });
             
             const imageUrl = "https://tater.info/nft/maketater.php?uuid=88d4ee760e5bd3889e23afda";
 
