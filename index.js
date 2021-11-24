@@ -779,13 +779,13 @@ bot.on('message', msg => {
 
             var htmldata="";
             var imgString=""
-            request('https://www.factretriever.com/', function (error, response, body) {
+            request('http://randomfactgenerator.net/', function (error, response, body) {
                 htmldata=body;
                 
 
-                let imgIndexStart = htmldata.indexOf("sliderText");
+                let imgIndexStart = htmldata.indexOf("<div id='z'");
                 //let imgIndexEnd = htmldata.indexOf("'></img");
-                imgString = htmldata.substring(imgIndexStart, imgIndexStart + 15);
+                imgString = htmldata.substring(imgIndexStart, imgIndexStart + 20);
                 //imgString = imgString.replace(/\s+/g, '');
                 //console.log(imgIndexStart);
                 //console.log(imgIndexEnd);
