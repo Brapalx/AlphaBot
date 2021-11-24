@@ -918,7 +918,7 @@ function updateLosers(loser){
 
 const helpEmbed = new Discord.MessageEmbed()
     .setTitle('🐶  __***ALPHABOT COMMANDS***__  🐶')
-    .addField('**Utility Commands**','- **!clear** <number>: Clears a number of messages from the current channel.\n- **!give** <anything you want>: Basically an image search. Gives you a different result each time.\n- **!img** <anything you want>: Same as !give, but it always gives you the first result.')
+    .addField('**Utility Commands**','- **!clear** <number>: Clears a number of messages from the current channel.\n- **!give** <anything you want>: Basically an image search. Gives you a different result each time.\n- **!img** <anything you want>: Same as !give, but it always gives you the first result.\n- **!tater**: Gives you a random **NFT** (Neat Frickin Tater (tm)).')
     .addField('**Special Image Search Commands**','- **!beagle**: To get a beagle.\n- **!bc**: To get a border collie.\n- **!cursed**: To get a random cursed image. Use at your own risk.\n- **!god**: Makes your day instantly better.\n- **!skeleton**: To get a random skeleton.\n- **!truck**: To get a random truck. Big trucks only.')
     .addField('**Reddit Commands: These take a random post from a subreddit.**', '- **!anime**: r/anime_irl\n- **!aww**: r/aww\n- **!design**: r/shittydesigns\n- **!food**: r/foodporn\n- **!puppy**: r/puppy\n- **!stock**: r/cursedstockimages')
     .addField('**Misc. Commands**','- **!donut**: Gives Shinobu a snack!\n- **!fact**: Tells the truth.\n- **!w**: rolls a random waifu.\n-**!whelp**: sometime things happen yknow')
