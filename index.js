@@ -759,8 +759,7 @@ bot.on('message', msg => {
             
             const imageUrl = "https://tater.info/nft/maketater.php?uuid=88d4ee760e5bd3889e23afda";
 
-            const embed = new Discord.RichEmbed().setImage(imageUrl);
-            msg.channel.send(embed);
+            msg.channel.send(imageUrl);
 
             break;
 
