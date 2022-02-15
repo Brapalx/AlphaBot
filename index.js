@@ -33,7 +33,7 @@ var pokeArray = []
 var wordArray = []
 var sessionActive = false;
 var guessesLeft = 6;
-var currentWord = "none";
+var currentWord = "nones";
 
 const google = new Scraper({
     puppeteer: {
@@ -347,12 +347,25 @@ bot.on('message', msg => {
         case 'guess':
 
             if(!args[1]) return msg.reply('Please define a second argument.');
+
+            var guess = args[1];
             
-            var result = [...args[1]].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
-            console.log(result);
+            var count = [...word].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
+            console.log(count);
 
-            console.log(result["a"]);
+            var outString = "";
 
+            for (let i = 0; i < guess.length; ++i)
+            {
+                if (guess[i] == currentWord[i])
+                    outString += "🟩";
+                else if(currentWord.includes(guess[i]))
+                    outString += "🟨";
+                    else
+                    outString += "⬛";
+            }
+
+            msg.channel.send(outString);
             break;
 
         case 'w':
