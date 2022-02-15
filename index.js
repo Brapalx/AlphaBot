@@ -41,6 +41,10 @@ const google = new Scraper({
     }
 })
 
+function setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substring(0,index) + chr + str.substring(index+1);
+}
 
 bot.on('ready', () => {
     console.log('This bot is online');
@@ -387,7 +391,7 @@ bot.on('message', msg => {
                 {
                     if (guess[i] == currentWord[i])
                     {
-                        outString[i] = "🟩";
+                        outString = setCharAt(outString, i, '🟩')
                         count[guess[i]] = count[guess[i]] - 1;
                     }
                 }
@@ -399,7 +403,7 @@ bot.on('message', msg => {
                 {
                     if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
                     {
-                        outString[i] = "🟨";
+                        outString = setCharAt(outString, i, '🟨');
                         count[guess[i]] = count[guess[i]] - 1;
                     }
                 }
