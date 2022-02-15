@@ -351,7 +351,7 @@ bot.on('message', msg => {
 
             console.log(word);
 
-            currentWord = word;
+            currentWord = word.toLowerCase();
             sessionActive = true;
             guessesLeft = 6;
 
@@ -371,7 +371,23 @@ bot.on('message', msg => {
             
 
 
-            var guess = args[1];
+            var guess = args[1].toLowerCase();
+
+            var found = false;
+
+            for (let i = 0; i < wordArray.length; i++)
+            {
+                if (wordArray[i].toLowerCase() == guess)
+                    found = true;
+            }
+
+            if (found == false)
+            {
+                msg.channel.send("Not a valid word, bob.");
+                break;
+            }
+
+
 
             if (guess.length != 5)
             {
