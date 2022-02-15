@@ -384,13 +384,14 @@ bot.on('message', msg => {
             console.log(count);
 
             var outString = "⬛⬛⬛⬛⬛";
+            var checkArray = [0, 0, 0, 0, 0];
 
             for (let i = 0; i < guess.length; ++i)
             {
                 console.log(guess[i]);
                 console.log(currentWord[i]);
 
-                if (outString[i] == '⬛')
+                if (checkArray[i] == 0)
                 {
                     console.log("hit");
 
@@ -399,6 +400,7 @@ bot.on('message', msg => {
                         console.log("on");
                         outString = setCharAt(outString, i, '🟩')
                         count[guess[i]] = count[guess[i]] - 1;
+                        checkArray[i] = 1;
                     }
                 }
 
@@ -413,7 +415,7 @@ bot.on('message', msg => {
                 console.log(guess[i]);
                 console.log(currentWord[i]);
 
-                if (outString[i] == '⬛')
+                if (checkArray[i] == 0)
                 {
                     console.log("hit");
 
@@ -424,6 +426,7 @@ bot.on('message', msg => {
 
                         outString = setCharAt(outString, i, '🟨');
                         count[guess[i]] = count[guess[i]] - 1;
+                        checkArray[i] = 1;
                     }
                 }
 
