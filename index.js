@@ -335,34 +335,79 @@ bot.on('message', msg => {
 
             break;
         
-        case 'word':
+        case 'wordle':
+
+            if (sessionActive)
+            {
+                msg.channel.send("Wordle session already active!");
+                break;
+            }
+
             var word = wordArray[Math.floor(Math.random() * wordArray.length)];
 
             console.log(word);
-            console.log(wordArray.length);
 
-            msg.channel.send(word);
+            currentWord = word;
+            sessionActive = true;
+            guessesLeft = 6;
+
+            msg.channel.send("Wordle session started! Use !guess to play!");
             break;
 
         case 'guess':
 
             if(!args[1]) return msg.reply('Please define a second argument.');
 
+
             var guess = args[1];
+            
+            var count = [...word].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
+            console.log(count);
 
             var outString = "";
 
             for (let i = 0; i < guess.length; ++i)
             {
                 if (guess[i] == currentWord[i])
+                {
                     outString += "🟩";
-                else if(currentWord.includes(guess[i]))
+                }
+                else if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
+                {
                     outString += "🟨";
-                    else
+                    count[guess[i]] = count[guess[i]] - 1;
+                }
+                else
                     outString += "⬛";
             }
 
+            guessesLeft -= 1;
+
+
+
+
             msg.channel.send(outString);
+
+            if (guessesLeft <= 0)
+            {
+                msg.channel.send("You lost! You're a fucking loser!");
+                break;
+            }
+
+            if (outString == "🟩🟩🟩🟩🟩")
+            {
+                msg.channel.send("You win! That one was too easy, huh.");
+
+                sessionActive = false;
+
+                break;
+            }
+
+
+            var guessString = "You have " + guessesLeft.toString() + " guess(es) left!";
+
+            msg.channel.send(guessString);
+
             break;
 
         case 'w':
