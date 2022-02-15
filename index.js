@@ -27,6 +27,7 @@ var clownerID;
 var clownNext = false;
 
 var pokeArray = []
+var wordArray = []
 
 const google = new Scraper({
     puppeteer: {
@@ -61,6 +62,24 @@ bot.on('ready', () => {
 
         })
     })
+
+    fs.readFile('words.txt', 'utf8' , (err, data) => {
+        if (err) {
+              console.error(err)
+              return
+            }
+    
+            let stringArray = data.split(/\r?\n/);
+    
+            var tempObject;
+            var tempArray;
+    
+            stringArray.forEach( str => {
+    
+                wordArray.push(str);
+    
+            })
+        })
 
 })
 
@@ -314,147 +333,10 @@ bot.on('message', msg => {
 
             break;
         
-        case 'play':
-
-            function play(connection, message){
-                var server = servers[message.guild.id];
-
-                server.dispatcher = connection.play(ytdl(server.queue[0], {filter: "audioonly"}));
-                server.queue.shift();
-
-                server.dispatcher.on("end", function(){
-                    if(server.queue[0]){
-                        play(connection, message);
-                    } else {
-                        connection.disconnect();
-                    }
-                });
-
-            }
-
-            if(!args[1]){
-                msg.channel.send("You need to provide a link!");
-                return;
-            }
-
-            if(!msg.member.voice.channel){
-                msg.channel.send("You must be in a channel to play this, you fool.");
-                return;
-            }
-
-            if(!servers[msg.guild.id]) servers[msg.guild.id] = {
-                queue: []
-            }
-
-            var server = servers[msg.guild.id];
-
-            server.queue.push(args[1]);
-
-            if(!msg.guild.voice) msg.member.voice.channel.join().then(function(connection){
-                play(connection, msg);
-            })
-        break;
-
-        case 'ape':
-            function play(connection, message){
-                var server = servers[message.guild.id];
-
-                server.dispatcher = connection.play(ytdl(server.queue[0], {filter: "audioonly"}));
-                server.queue.shift();
-
-                server.dispatcher.on("end", function(){
-                    if(server.queue[0]){
-                        play(connection, message);
-                    } else {
-                        connection.disconnect();
-                    }
-                });
-
-            }
-
-          
-
-            if(!msg.member.voice.channel){
-                msg.channel.send("You must be in a channel to play this, you fool.");
-                return;
-            }
-
-            if(!servers[msg.guild.id]) servers[msg.guild.id] = {
-                queue: []
-            }
-
-            var server = servers[msg.guild.id];
-
-            server.queue.push('https://www.youtube.com/watch?v=D7aHOsxFP4w');
-
-            if(!msg.guild.voice) msg.member.voice.channel.join().then(function(connection){
-                play(connection, msg);
-            })
-        break;
-
-        case 'ape2':
-            function play(connection, message){
-                var server = servers[message.guild.id];
-
-                server.dispatcher = connection.play(ytdl(server.queue[0], {filter: "audioonly"}));
-                server.queue.shift();
-
-                server.dispatcher.on("end", function(){
-                    if(server.queue[0]){
-                        play(connection, message);
-                    } else {
-                        connection.disconnect();
-                    }
-                });
-
-            }
-
-            if(msg.mentions.members.size == 0)
-            {
-                message.reply("This user isn't valid! Looks like you're the clown smh.");
-                return;
-            }
-
-            if(!msg.mentions.members.first().voice.channel){
-                msg.channel.send("The target must be in a channel to play this, you fool.");
-                return;
-            }
-
-            if(!servers[msg.guild.id]) servers[msg.guild.id] = {
-                queue: []
-            }
-
-            var server = servers[msg.guild.id];
-
-            server.queue.push('https://www.youtube.com/watch?v=D7aHOsxFP4w');
-
-            if(!msg.guild.voice) msg.mentions.members.first().voice.channel.join().then(function(connection){
-                play(connection, msg);
-            })
-        break;
-
-        case 'skip':
-            var server = servers[msg.guild.id];
-            if (server.dispatcher) {
-                server.dispatcher.end();
-                msg.channel.send("Skipped!");
-            }
-        break;
-
-        case 'stop':
-            var server = servers[msg.guild.id];
-            if(msg.guild.voice){
-                for(var i = server.queue.length - 1; i >= 0; i--){
-                    server.queue.splice(i, 1);
-                }
-
-                server.dispatcher.end();
-                msg.channel.send("Ending the queue!");
-                console.log('stopped the queue');
-            }
-
-            if(msg.guild.voice.connection) msg.guild.voice.connection.disconnect();
-        break;
+        case 'word':
+            var word = wordArray[Math.random() * wordArray.length];
+            msg.channel.send(word);
+            break;
 
         case 'w':
             var fileString = files[Math.floor(Math.random() * files.length)]
