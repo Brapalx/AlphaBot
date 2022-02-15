@@ -64,24 +64,20 @@ bot.on('ready', () => {
     })
 
     fs.readFile('words.txt', 'utf8' , (err, data) => {
-        if (err) {
-              console.error(err)
-              return
-            }
+    if (err) {
+        console.error(err)
+        return
+        }
     
-            let stringArray = data.split(/\r?\n/);
+        let stringArray = data.split(/\r?\n/);
     
-            var tempObject;
-            var tempArray;
-    
-            stringArray.forEach( str => {
+        stringArray.forEach( str => {
     
                 wordArray.push(str);
     
-            })
         })
-
-})
+    })
+});
 
 
 
