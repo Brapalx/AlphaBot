@@ -402,8 +402,6 @@ bot.on('message', msg => {
                         count[guess[i]] = count[guess[i]] - 1;
                     }
                 }
-
-                msg.channel.send(outString);
             }
 
             console.log(outString);
@@ -423,13 +421,11 @@ bot.on('message', msg => {
 
                         console.log("on");
 
-                        outString = setCharAt(outString, i, '🟨');
                         count[guess[i]] = count[guess[i]] - 1;
                         checkArray[i] = 1;
                     }
                 }
 
-                msg.channel.send(outString);
             }
 
             for (let i = 0; i < guess.length; i++)
