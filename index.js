@@ -351,7 +351,7 @@ bot.on('message', msg => {
             var result = [...args[1]].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
             console.log(result);
 
-            console.log(result.indexOf('a'));
+            console.log(result["a"]);
 
             break;
 
