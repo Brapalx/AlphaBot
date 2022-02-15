@@ -383,7 +383,7 @@ bot.on('message', msg => {
 
             for (let i = 0; i < guess.length; ++i)
             {
-                if (outString[i] = '⬛')
+                if (outString[i] == '⬛')
                 {
                     if (guess[i] == currentWord[i])
                     {
@@ -395,7 +395,7 @@ bot.on('message', msg => {
 
             for (let i = 0; i < guess.length; ++i)
             {
-                if (outString[i] = '⬛')
+                if (outString[i] == '⬛')
                 {
                     if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
                     {
