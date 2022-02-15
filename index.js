@@ -330,12 +330,12 @@ bot.on('message', msg => {
             break;
         
         case 'word':
-            var word = wordArray[Math.random() * wordArray.length];
+            var word = wordArray[Math.floor(Math.random() * wordArray.length)];
 
             console.log(word);
             console.log(wordArray.length);
 
-            //msg.channel.send(word);
+            msg.channel.send(word);
             break;
 
         case 'w':
