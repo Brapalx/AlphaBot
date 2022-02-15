@@ -450,6 +450,7 @@ bot.on('message', msg => {
             if (guessesLeft <= 0)
             {
                 msg.channel.send("You lost! You're a fucking loser!");
+                sessionActive = false;
                 break;
             }
 
