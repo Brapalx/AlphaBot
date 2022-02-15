@@ -397,6 +397,8 @@ bot.on('message', msg => {
                 }
             }
 
+            console.log(outString);
+
             for (let i = 0; i < guess.length; ++i)
             {
                 if (outString.charAt(i) == '⬛')
