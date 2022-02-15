@@ -349,9 +349,6 @@ bot.on('message', msg => {
             if(!args[1]) return msg.reply('Please define a second argument.');
 
             var guess = args[1];
-            
-            var count = [...word].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
-            console.log(count);
 
             var outString = "";
 
