@@ -399,6 +399,8 @@ bot.on('message', msg => {
                         count[guess[i]] = count[guess[i]] - 1;
                     }
                 }
+
+                msg.channel.send(outString);
             }
 
             console.log(outString);
@@ -420,6 +422,8 @@ bot.on('message', msg => {
                         count[guess[i]] = count[guess[i]] - 1;
                     }
                 }
+
+                msg.channel.send(outString);
             }
 
 
