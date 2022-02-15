@@ -376,7 +376,7 @@ bot.on('message', msg => {
             }
 
             
-            var count = [...word].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
+            var count = [...guess].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
             console.log(count);
 
             var outString = "";
