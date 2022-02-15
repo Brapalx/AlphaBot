@@ -392,9 +392,11 @@ bot.on('message', msg => {
 
                 if (outString[i] == '⬛')
                 {
+                    console.log("hit");
+
                     if (guess[i] == currentWord[i])
                     {
-                        console.log("hit on");
+                        console.log("on");
                         outString = setCharAt(outString, i, '🟩')
                         count[guess[i]] = count[guess[i]] - 1;
                     }
@@ -413,10 +415,12 @@ bot.on('message', msg => {
 
                 if (outString[i] == '⬛')
                 {
+                    console.log("hit");
+
                     if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
                     {
 
-                        console.log("hit on");
+                        console.log("on");
 
                         outString = setCharAt(outString, i, '🟨');
                         count[guess[i]] = count[guess[i]] - 1;
