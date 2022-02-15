@@ -407,6 +407,10 @@ bot.on('message', msg => {
                 {
                     if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
                     {
+
+                        console.log("hit on");
+                        console.log(guess[i]);
+
                         outString = setCharAt(outString, i, '🟨');
                         count[guess[i]] = count[guess[i]] - 1;
                     }
