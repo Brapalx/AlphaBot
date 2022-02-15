@@ -390,7 +390,7 @@ bot.on('message', msg => {
                 console.log(guess[i]);
                 console.log(currentWord[i]);
 
-                if (outString.charAt(i) == '⬛')
+                if (outString[i] == '⬛')
                 {
                     if (guess[i] == currentWord[i])
                     {
@@ -411,7 +411,7 @@ bot.on('message', msg => {
                 console.log(guess[i]);
                 console.log(currentWord[i]);
 
-                if (outString.charAt(i) == '⬛')
+                if (outString[i] == '⬛')
                 {
                     if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
                     {
