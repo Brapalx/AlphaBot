@@ -339,7 +339,7 @@ bot.on('message', msg => {
 
             if (sessionActive)
             {
-                msg.channel.send("Wordle session already active!");
+                msg.channel.send("Wordle session already active! Use !guess <word> to play!");
                 break;
             }
 
@@ -351,15 +351,30 @@ bot.on('message', msg => {
             sessionActive = true;
             guessesLeft = 6;
 
-            msg.channel.send("Wordle session started! Use !guess to play!");
+            msg.channel.send("Wordle session started! Use !guess <word> to play!");
             break;
 
         case 'guess':
 
             if(!args[1]) return msg.reply('Please define a second argument.');
 
+            if (sessionActive == false)
+            {
+                msg.channel.send("Wordle session not active! Use !wordle to play!");
+                break;
+            }
+
+            
+
 
             var guess = args[1];
+
+            if (guess.length != 5)
+            {
+                msg.channel.send("Wordle words are five characters long, dipshit.");
+                break;
+            }
+
             
             var count = [...word].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
             console.log(count);
