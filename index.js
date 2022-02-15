@@ -383,10 +383,10 @@ bot.on('message', msg => {
             var count = [...currentWord].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
             console.log(count);
 
-            var outString = "⬛⬛⬛⬛⬛";
+            var outString = "";
             var checkArray = [0, 0, 0, 0, 0];
 
-            for (let i = 0; i < guess.length; ++i)
+            for (let i = 0; i < guess.length; i++)
             {
                 console.log(guess[i]);
                 console.log(currentWord[i]);
@@ -398,9 +398,8 @@ bot.on('message', msg => {
                     if (guess[i] == currentWord[i])
                     {
                         console.log("on");
-                        outString = setCharAt(outString, i, '🟩')
+                        checkArray[i] = 2;
                         count[guess[i]] = count[guess[i]] - 1;
-                        checkArray[i] = 1;
                     }
                 }
 
@@ -409,7 +408,7 @@ bot.on('message', msg => {
 
             console.log(outString);
 
-            for (let i = 0; i < guess.length; ++i)
+            for (let i = 0; i < guess.length; i++)
             {
 
                 console.log(guess[i]);
@@ -433,6 +432,15 @@ bot.on('message', msg => {
                 msg.channel.send(outString);
             }
 
+            for (let i = 0; i < guess.length; i++)
+            {
+                if (checkArray[i] == 2)
+                    outString += '🟩';
+                else if (checkArray[i] == 1)
+                    outString += '🟨';
+                else
+                    outString += '⬛';
+            }
 
             console.log(count);
 
@@ -449,7 +457,9 @@ bot.on('message', msg => {
                 break;
             }
 
-            if (outString == "🟩🟩🟩🟩🟩")
+            const allEqual = arr => arr.every( v => v === arr[0] );
+
+            if (allEqual(checkArray) && checkArray[0] == 2)
             {
                 msg.channel.send("You win! That one was too easy, huh.");
 
