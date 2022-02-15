@@ -397,45 +397,41 @@ bot.on('message', msg => {
 
             
             var count = [...currentWord].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
-            console.log(count);
 
             var outString = "";
             var checkArray = [0, 0, 0, 0, 0];
 
             for (let i = 0; i < guess.length; i++)
             {
-                console.log(guess[i]);
-                console.log(currentWord[i]);
+   
 
                 if (checkArray[i] == 0)
                 {
-                    console.log("hit");
+                    
 
                     if (guess[i] == currentWord[i])
                     {
-                        console.log("on");
+                        
                         checkArray[i] = 2;
                         count[guess[i]] = count[guess[i]] - 1;
                     }
                 }
             }
 
-            console.log(outString);
+            
 
             for (let i = 0; i < guess.length; i++)
             {
 
-                console.log(guess[i]);
-                console.log(currentWord[i]);
 
                 if (checkArray[i] == 0)
                 {
-                    console.log("hit");
+                    
 
                     if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
                     {
 
-                        console.log("on");
+                        
 
                         count[guess[i]] = count[guess[i]] - 1;
                         checkArray[i] = 1;
@@ -454,7 +450,7 @@ bot.on('message', msg => {
                     outString += '⬛';
             }
 
-            console.log(count);
+    
 
             guessesLeft -= 1;
 
