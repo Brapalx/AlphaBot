@@ -27,7 +27,13 @@ var clownerID;
 var clownNext = false;
 
 var pokeArray = []
+
+
+// wordle stuff
 var wordArray = []
+var sessionActive = false;
+var guessesLeft = 6;
+var currentWord = "none";
 
 const google = new Scraper({
     puppeteer: {
@@ -73,7 +79,7 @@ bot.on('ready', () => {
     
         stringArray.forEach( str => {
     
-                wordArray.push(str);
+                wordArray.push(str.toLowerCase());
     
         })
     })
@@ -336,6 +342,17 @@ bot.on('message', msg => {
             console.log(wordArray.length);
 
             msg.channel.send(word);
+            break;
+
+        case 'guess':
+
+            if(!args[1]) return msg.reply('Please define a second argument.');
+            
+            var result = [...args[1]].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
+            console.log(result);
+
+            console.log(result.indexOf('a'));
+
             break;
 
         case 'w':
