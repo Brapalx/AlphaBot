@@ -386,6 +386,7 @@ bot.on('message', msg => {
                 if (guess[i] == currentWord[i])
                 {
                     outString += "🟩";
+                    count[guess[i]] = count[guess[i]] - 1;
                 }
                 else if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
                 {
