@@ -395,6 +395,8 @@ bot.on('message', msg => {
                 }
                 else
                     outString += "⬛";
+
+                console.log(count);
             }
 
             guessesLeft -= 1;
