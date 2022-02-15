@@ -379,25 +379,34 @@ bot.on('message', msg => {
             var count = [...currentWord].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
             console.log(count);
 
-            var outString = "";
+            var outString = "⬛⬛⬛⬛⬛";
 
             for (let i = 0; i < guess.length; ++i)
             {
-                if (guess[i] == currentWord[i])
+                if (outString[i] = '⬛')
                 {
-                    outString += "🟩";
-                    count[guess[i]] = count[guess[i]] - 1;
+                    if (guess[i] == currentWord[i])
+                    {
+                        outString[i] = "🟩";
+                        count[guess[i]] = count[guess[i]] - 1;
+                    }
                 }
-                else if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
-                {
-                    outString += "🟨";
-                    count[guess[i]] = count[guess[i]] - 1;
-                }
-                else
-                    outString += "⬛";
-
-                console.log(count);
             }
+
+            for (let i = 0; i < guess.length; ++i)
+            {
+                if (outString[i] = '⬛')
+                {
+                    if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
+                    {
+                        outString[i] = "🟨";
+                        count[guess[i]] = count[guess[i]] - 1;
+                    }
+                }
+            }
+
+
+            console.log(count);
 
             guessesLeft -= 1;
 
