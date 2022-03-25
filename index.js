@@ -833,6 +833,33 @@ bot.on('message', msg => {
 
             break;
 
+        case 'bad2':
+
+            var htmldata="";
+            var imgString="";
+            request('https://randomtweet.com/bad2sentence', function (error, response, body) {
+                htmldata=body;
+                    
+    
+                let imgIndexStart = htmldata.indexOf("https://pbs.twimg.com");
+                imgString = htmldata.substring(imgIndexStart - 21, htmldata.size);
+    
+                let imgIndexEnd = imgString.indexOf(">");
+    
+                imgString = imgString.substring(0, imgIndexEnd);
+                //imgString = imgString.replace(/\s+/g, '');
+                //console.log(imgIndexStart);
+                //console.log(imgIndexEnd);
+                console.log(imgString);
+                    
+    
+                //msg.channel.send(imgString);
+    
+            });
+    
+    
+            break;
+
         case 'pokedex':
             if(!args[1]) return msg.reply('Not a valid pokemon.');
     
