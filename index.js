@@ -850,7 +850,7 @@ bot.on('message', msg => {
 
         case 'bad2':
 
-            T.get('search/tweets', { q: 'banana since:2011-07-11', count: 1 }, function(err, data, response) {
+            T.get('search/tweets', { q: 'from:bad2sentence', count: 1 }, function(err, data, response) {
                 console.log( data.statuses[0].text );
                 });
             
