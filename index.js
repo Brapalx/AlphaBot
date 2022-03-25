@@ -851,10 +851,6 @@ bot.on('message', msg => {
         case 'bad2':
 
             T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, tweets, response) {
-                if(error){
-                    console.log(error);
-                    return;
-                    }
                 tweets.forEach(tweet => {
                     console.log(tweet.full_text.trim());            
                     });
