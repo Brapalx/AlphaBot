@@ -840,18 +840,19 @@ bot.on('message', msg => {
             request('https://randomtweet.com/bad2sentence/', function (error, response, body) {
                 htmldata=body;
                     
-    
-                let imgIndexStart = htmldata.indexOf("<img class=");
-                imgString = htmldata.substring(imgIndexStart - 21, htmldata.size);
-                console.log(imgString);
+                console.log(htmldata);
+                msg.channel.send(htmldata);
+                // let imgIndexStart = htmldata.indexOf("<img class=");
+                // imgString = htmldata.substring(imgIndexStart - 21, htmldata.size);
+                // console.log(imgString);
 
-                let imgIndexEnd = imgString.indexOf(">");
+                // let imgIndexEnd = imgString.indexOf(">");
     
-                imgString = imgString.substring(0, imgIndexEnd);
-                //imgString = imgString.replace(/\s+/g, '');
-                console.log(imgIndexStart);
-                console.log(imgIndexEnd);
-                //console.log(imgString);
+                // imgString = imgString.substring(0, imgIndexEnd);
+                // //imgString = imgString.replace(/\s+/g, '');
+                // console.log(imgIndexStart);
+                // console.log(imgIndexEnd);
+                // //console.log(imgString);
 
                 //console.log("full");
 
