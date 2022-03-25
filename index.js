@@ -854,6 +854,12 @@ bot.on('message', msg => {
 
                 var i = Math.floor(Math.random() * 50)
                 console.log(i);
+
+                if (data.statuses[i] == undefined)
+                {
+                    break;
+                }
+
                 if (data.statuses[i].entities.media)
                 {
                     console.log( data.statuses[i].entities.media[0].media_url );
