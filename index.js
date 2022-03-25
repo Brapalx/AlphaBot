@@ -851,10 +851,7 @@ bot.on('message', msg => {
         case 'bad2':
 
             T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {
-                //console.log( data );
-                fs.writeFile('tweet.txt', data, function (err) {
-                    if (err) return console.log(err);
-                })
+                console.log( data );
                 });
             
     
