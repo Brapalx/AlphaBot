@@ -850,9 +850,9 @@ bot.on('message', msg => {
 
         case 'bad2':
 
-            T.get('search/tweets', { q: 'from:bad2sentence filter:twimg', count: 100 }, function(err, data, response) {
+            T.get('search/tweets', { q: 'from:bad2sentence filter:twimg', count: 50 }, function(err, data, response) {
 
-                var i = Math.floor(Math.random() * 100)
+                var i = Math.floor(Math.random() * 50)
                 
 
 
@@ -874,7 +874,7 @@ bot.on('message', msg => {
                     }
                     else
                     {
-                        
+                        msg.channel.send("Didn't hit an img from this user");
                     }
 
                 
