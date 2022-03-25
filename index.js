@@ -887,9 +887,9 @@ bot.on('message', msg => {
 
             case 'bad1':
 
-                T.get('search/tweets', { q: 'from:PossumEveryHour', count: 50 }, function(err, data, response) {
+                T.get('search/tweets', { q: 'from:PossumEveryHour', count: 100 }, function(err, data, response) {
     
-                    var i = Math.floor(Math.random() * 50)
+                    var i = Math.floor(Math.random() * 100)
                     
     
     
@@ -921,6 +921,43 @@ bot.on('message', msg => {
                 
         
                 break;
+
+                case 'possum':
+
+                    T.get('search/tweets', { q: 'from:PossumEveryHour', count: 100 }, function(err, data, response) {
+        
+                        var i = Math.floor(Math.random() * 100)
+                        
+        
+        
+                            if (data.statuses[i] != undefined)
+                            {
+                                
+            
+                                if (data.statuses[i].entities.media)
+                                {
+                                    console.log( data.statuses[i].entities.media[0].media_url );
+                                    msg.channel.send(data.statuses[i].entities.media[0].media_url);
+                      
+                                }
+                                else
+                                {
+                                    msg.channel.send("Didn't hit an img from this user");
+                                }
+        
+                            }
+                            else
+                            {
+                                msg.channel.send("Didn't hit an img from this user");
+                            }
+        
+                        
+                    
+                        //console.log( data.statuses[0] );
+                        });
+                    
+            
+                    break;
 
             
 
