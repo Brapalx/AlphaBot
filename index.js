@@ -850,10 +850,10 @@ bot.on('message', msg => {
 
         case 'bad2':
 
-            T.get('search/tweets', { q: 'from:bad2sentence', count: 100 }, function(err, data, response) {
+            T.get('search/tweets', { q: 'from:bad2sentence', count: 50 }, function(err, data, response) {
 
-                var i = Math.floor(Math.random() * 100)
-
+                var i = Math.floor(Math.random() * 50)
+                console.log(i);
                 if (data.statuses[i].entities.media)
                 {
                     console.log( data.statuses[i].entities.media[i].media_url );
