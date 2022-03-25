@@ -5,6 +5,16 @@ const cheerio = require('cheerio');
 const request = require('request');
 
 var Twit = require('twit')
+const twitinfo = require("./twitinfo.js");
+
+var T = new Twit({
+    consumer_key:         twitinfo.consumer_key,
+    consumer_secret:      twitinfo.consumer_secret,
+    access_token:         twitinfo.access_token,
+    access_token_secret:  twitinfo.access_token_secret,
+    timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+    strictSSL:            true,     // optional - requires SSL certificates to be valid.
+  })
 
 
 
@@ -840,34 +850,9 @@ bot.on('message', msg => {
 
         case 'bad2':
 
-            var htmldata="";
-            var imgString="";
-            request('https://randomtweet.com/bad2sentence/', function (error, response, body) {
-                htmldata=body;
-                    
-                console.log(htmldata);
-                //msg.channel.send(htmldata);
-                // let imgIndexStart = htmldata.indexOf("<img class=");
-                // imgString = htmldata.substring(imgIndexStart - 21, htmldata.size);
-                // console.log(imgString);
-
-                // let imgIndexEnd = imgString.indexOf(">");
-    
-                // imgString = imgString.substring(0, imgIndexEnd);
-                // //imgString = imgString.replace(/\s+/g, '');
-                // console.log(imgIndexStart);
-                // console.log(imgIndexEnd);
-                // //console.log(imgString);
-
-                //console.log("full");
-
-                //console.log(htmldata);
-                    
-    
-                //msg.channel.send(imgString);
-    
-            });
-    
+            T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {
+                console.log(data)
+              })
     
             break;
 
