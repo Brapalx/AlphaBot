@@ -850,9 +850,9 @@ bot.on('message', msg => {
 
         case 'bad2':
 
-            T.get('search/tweets', { q: 'from:bad2sentence', count: 50 }, function(err, data, response) {
+            T.get('search/tweets', { q: 'from:bad2sentence filter:twimg', count: 300 }, function(err, data, response) {
 
-                var i = Math.floor(Math.random() * 50)
+                var i = Math.floor(Math.random() * 300)
                 console.log(i);
 
                 if (data.statuses[i] != undefined)
