@@ -876,7 +876,6 @@ bot.on('message', msg => {
                     {
                         
                     }
-                }
 
                 
             
