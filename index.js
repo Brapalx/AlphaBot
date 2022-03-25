@@ -850,21 +850,32 @@ bot.on('message', msg => {
 
         case 'bad2':
 
-            T.get('search/tweets', { q: 'from:bad2sentence filter:twimg', count: 50 }, function(err, data, response) {
+            T.get('search/tweets', { q: 'from:bad2sentence filter:twimg', count: 100 }, function(err, data, response) {
 
-                var i = Math.floor(Math.random() * 50)
+                var i = Math.floor(Math.random() * 100)
                 console.log(i);
 
-                if (data.statuses[i] != undefined)
+                while (1)
                 {
-                    
-
-                if (data.statuses[i].entities.media)
-                {
-                    console.log( data.statuses[i].entities.media[0].media_url );
-                    msg.channel.send(data.statuses[i].entities.media[0].media_url);
+                    if (data.statuses[i] != undefined)
+                    {
+                        
+    
+                        if (data.statuses[i].entities.media)
+                        {
+                            console.log( data.statuses[i].entities.media[0].media_url );
+                            msg.channel.send(data.statuses[i].entities.media[0].media_url);
+                            break;
+                        }
+                        else
+                        {
+                            i = Math.floor(Math.random() * 100)
+                        }
+                    }
                 }
-            }
+
+                
+            
                 //console.log( data.statuses[0] );
                 });
             
