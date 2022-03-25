@@ -855,9 +855,6 @@ bot.on('message', msg => {
                 var i = Math.floor(Math.random() * 100)
                 
 
-                while (1)
-                {
-                    console.log(i);
 
                     if (data.statuses[i] != undefined)
                     {
@@ -871,12 +868,13 @@ bot.on('message', msg => {
                         }
                         else
                         {
-                            i = Math.floor(Math.random() * 100)
+                            msg.channel.send("Didn't hit an img from this user");
                         }
+
                     }
                     else
                     {
-                        i = Math.floor(Math.random() * 100)
+                        
                     }
                 }
 
