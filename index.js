@@ -855,6 +855,10 @@ bot.on('message', msg => {
                     console.log(tweet.full_text.trim());            
                     });
                 });
+            
+                T.post( 'statuses/update', { status: 'Kingbo for King' }, function( err, data, response ){
+                    console.log( data );
+                  } );
     
             break;
 
