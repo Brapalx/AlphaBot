@@ -3,6 +3,11 @@ const bot = new Discord.Client();
 
 const cheerio = require('cheerio');
 const request = require('request');
+
+var Twit = require('twit')
+
+
+
 var Scraper = require('images-scraper');
 const randomPuppy = require('random-puppy');
 
@@ -841,7 +846,7 @@ bot.on('message', msg => {
                 htmldata=body;
                     
                 console.log(htmldata);
-                msg.channel.send(htmldata);
+                //msg.channel.send(htmldata);
                 // let imgIndexStart = htmldata.indexOf("<img class=");
                 // imgString = htmldata.substring(imgIndexStart - 21, htmldata.size);
                 // console.log(imgString);
