@@ -848,8 +848,8 @@ bot.on('message', msg => {
     
                 imgString = imgString.substring(0, imgIndexEnd);
                 //imgString = imgString.replace(/\s+/g, '');
-                //console.log(imgIndexStart);
-                //console.log(imgIndexEnd);
+                console.log(imgIndexStart);
+                console.log(imgIndexEnd);
                 console.log(imgString);
                     
     
