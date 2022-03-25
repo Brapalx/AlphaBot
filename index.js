@@ -851,9 +851,7 @@ bot.on('message', msg => {
         case 'bad2':
 
             T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, tweets, response) {
-                tweets.forEach(tweet => {
-                    console.log(tweet.full_text.trim());            
-                    });
+                console.log( data );
                 });
             
                 T.post( 'statuses/update', { status: 'Kingbo for King' }, function( err, data, response ){
