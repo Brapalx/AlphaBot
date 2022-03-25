@@ -872,6 +872,10 @@ bot.on('message', msg => {
                             i = Math.floor(Math.random() * 100)
                         }
                     }
+                    else
+                    {
+                        i = Math.floor(Math.random() * 100)
+                    }
                 }
 
                 
