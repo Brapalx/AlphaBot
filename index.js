@@ -853,10 +853,12 @@ bot.on('message', msg => {
             T.get('search/tweets', { q: 'from:bad2sentence filter:twimg', count: 100 }, function(err, data, response) {
 
                 var i = Math.floor(Math.random() * 100)
-                console.log(i);
+                
 
                 while (1)
                 {
+                    console.log(i);
+
                     if (data.statuses[i] != undefined)
                     {
                         
