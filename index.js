@@ -854,7 +854,7 @@ bot.on('message', msg => {
 
                 if (data.statuses[0].entities.media)
                 {
-                    console.log( data.statuses[0].entities.media );
+                    console.log( data.statuses[0].entities.media[0].media_url );
                 }
 
                 //console.log( data.statuses[0] );
