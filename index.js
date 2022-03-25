@@ -864,7 +864,7 @@ bot.on('message', msg => {
                         {
                             console.log( data.statuses[i].entities.media[0].media_url );
                             msg.channel.send(data.statuses[i].entities.media[0].media_url);
-                            break;
+              
                         }
                         else
                         {
