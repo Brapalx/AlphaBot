@@ -851,7 +851,13 @@ bot.on('message', msg => {
         case 'bad2':
 
             T.get('search/tweets', { q: 'from:bad2sentence', count: 1 }, function(err, data, response) {
-                console.log( data.statuses[0] );
+
+                if (data.statuses[0].entities.media)
+                {
+                    console.log( data.statuses[0].entities.media.media_url );
+                }
+
+                //console.log( data.statuses[0] );
                 });
             
     
