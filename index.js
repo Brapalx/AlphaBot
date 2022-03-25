@@ -850,12 +850,14 @@ bot.on('message', msg => {
 
         case 'bad2':
 
-            T.get('search/tweets', { q: 'from:bad2sentence', count: 1 }, function(err, data, response) {
+            T.get('search/tweets', { q: 'from:bad2sentence', count: 100 }, function(err, data, response) {
 
-                if (data.statuses[0].entities.media)
+                var i = Math.floor(Math.random() * 100)
+
+                if (data.statuses[i].entities.media)
                 {
-                    console.log( data.statuses[0].entities.media[0].media_url );
-                    msg.channel.send(data.statuses[0].entities.media[0].media_url);
+                    console.log( data.statuses[i].entities.media[i].media_url );
+                    msg.channel.send(data.statuses[i].entities.media[i].media_url);
                 }
 
                 //console.log( data.statuses[0] );
