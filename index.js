@@ -852,7 +852,9 @@ bot.on('message', msg => {
 
             T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {
                 //console.log( data );
-                console.log( data.search_metadata.max_id );
+                fs.writeFile('tweet.txt', data, function (err) {
+                    if (err) return console.log(err);
+                })
                 });
             
     
