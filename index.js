@@ -8,10 +8,10 @@ var Twit = require('twit')
 const twitinfo = require("./twitinfo.js");
 
 var T = new Twit({
-    consumer_key:         twitinfo.consumer_key,
-    consumer_secret:      twitinfo.consumer_secret,
-    access_token:         twitinfo.access_token,
-    access_token_secret:  twitinfo.access_token_secret,
+    consumer_key:         twitinfo.con_key,
+    consumer_secret:      twitinfo.con_key_s,
+    access_token:         twitinfo.acc_key,
+    access_token_secret:  twitinfo.acc_key_s,
     timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
     strictSSL:            true,     // optional - requires SSL certificates to be valid.
   })
