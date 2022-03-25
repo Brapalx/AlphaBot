@@ -837,11 +837,11 @@ bot.on('message', msg => {
 
             var htmldata="";
             var imgString="";
-            request('https://randomtweet.com/bad2sentence', function (error, response, body) {
+            request('https://randomtweet.com/bad2sentence/', function (error, response, body) {
                 htmldata=body;
                     
     
-                let imgIndexStart = htmldata.indexOf("https://pbs.twimg.com");
+                let imgIndexStart = htmldata.indexOf("<img class=");
                 imgString = htmldata.substring(imgIndexStart - 21, htmldata.size);
                 console.log(imgString);
 
@@ -851,11 +851,11 @@ bot.on('message', msg => {
                 //imgString = imgString.replace(/\s+/g, '');
                 console.log(imgIndexStart);
                 console.log(imgIndexEnd);
-                console.log(imgString);
+                //console.log(imgString);
 
-                console.log("full");
+                //console.log("full");
 
-                console.log(htmldata);
+                //console.log(htmldata);
                     
     
                 //msg.channel.send(imgString);
