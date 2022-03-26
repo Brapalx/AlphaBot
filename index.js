@@ -921,7 +921,42 @@ bot.on('message', msg => {
                 
         
                 break;
+            case 'liz':
 
+                T.get('search/tweets', { q: 'from:HourlyLizards', count: 100 }, function(err, data, response) {
+    
+                    var i = Math.floor(Math.random() * 100)
+                    
+    
+    
+                        if (data.statuses[i] != undefined)
+                        {
+                            
+        
+                            if (data.statuses[i].entities.media)
+                            {
+                                console.log( data.statuses[i].entities.media[0].media_url );
+                                msg.channel.send(data.statuses[i].entities.media[0].media_url);
+                  
+                            }
+                            else
+                            {
+                                msg.channel.send("Didn't hit an img from this user");
+                            }
+    
+                        }
+                        else
+                        {
+                            msg.channel.send("Didn't hit an img from this user");
+                        }
+    
+                    
+                
+                    //console.log( data.statuses[0] );
+                    });
+                
+        
+                break;
                 case 'possum':
 
                     T.get('search/tweets', { q: 'from:PossumEveryHour', count: 100 }, function(err, data, response) {
