@@ -65,6 +65,13 @@ bot.on('ready', () => {
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
 
+    T.get('users/show', { screen_name: `IGNDeals`}, function (err, data, response) {
+        if (err) {
+            console.log(`User Fetch Error`);
+            console.log(err);
+        }
+        console.log(data);
+    });
 
     fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
     if (err) {
