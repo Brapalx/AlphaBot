@@ -61,6 +61,9 @@ function setCharAt(str,index,chr) {
     return str.substring(0,index) + chr + str.substring(index+1);
 }
 
+
+var igndata;
+
 bot.on('ready', () => {
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
@@ -71,6 +74,7 @@ bot.on('ready', () => {
             console.log(err);
         }
         console.log(data);
+        igndata = data;
     });
 
     fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
@@ -119,7 +123,7 @@ bot.on('message', msg => {
 
     console.log(msg.author.id);
 
-
+    msg.reply(igndata);
 
 
 
