@@ -85,8 +85,8 @@ stream.on('tweet', function(tweet) {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
 
-    let items = [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, forest_id, lizard_id];
-    let x = items.every((item)=>{ return item!=tweet.id_str; });
+    let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `forestwithout`, `HourlyLizards`];
+    let x = items.some((item)=>{ return item==tweet.tweet.user.screen_name; });
     if (x == true)
     {
         if (tweet.retweeted_status == undefined) 
