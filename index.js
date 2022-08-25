@@ -73,11 +73,11 @@ var brapalx_id = `1091874751`
 // 1022089486849765400 - possum every hour
 // 1091874751 - brapalx
 
-var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id] });
+var stream = T.stream('statuses/filter', { follow: [brapalx_id] });
 var twitterChannel = `1012186449166217329`;
 var pkmnChannel = `813218043177861171`;
 
-stream.on('tweet', function(tweet) {
+stream.on('tweet', tweet => {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
    
