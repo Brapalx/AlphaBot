@@ -61,6 +61,7 @@ function setCharAt(str,index,chr) {
     return str.substring(0,index) + chr + str.substring(index+1);
 }
 
+// 1521559842091057200 - pkmnleaks
 // 2479008908
 
 var stream = T.stream('statuses/filter', { follow: ['2479008908'] });
@@ -72,18 +73,19 @@ stream.on('tweet', tweet => {
     return false;
   });
 
+var stream2 = T.stream('statuses/filter', { follow: ['1521559842091057200'] });
+var targetChannel2 = `813218043177861171`;
+  
+  stream2.on('tweet', tweet => {
+      const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+      bot.channels.cache.get(targetChannel2).send(twitterMessage);
+      return false;
+    });
+
 
 bot.on('ready', () => {
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
-
-    T.get('users/show', { screen_name: `brapalx`}, function (err, data, response) {
-        if (err) {
-            console.log(`User Fetch Error`);
-            console.log(err);
-        }
-        console.log(data);
-    });
 
     fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
     if (err) {
