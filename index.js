@@ -80,8 +80,7 @@ var pkmnChannel = `813218043177861171`;
 stream.on('tweet', function(tweet) {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
-    if (tweet.retweeted_status == undefined)
-    {
+   
 
         if (tweet.user.id == pkmnleaks_id)
         {
@@ -91,7 +90,6 @@ stream.on('tweet', function(tweet) {
         {
             bot.channels.cache.get(twitterChannel).send(twitterMessage);
         }
-    }
   });
 
 bot.on('ready', () => {
