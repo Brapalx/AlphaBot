@@ -88,7 +88,7 @@ stream.on('tweet', function(tweet) {
     let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `HourlyLizards`];
     let x = items.some((item)=>{ return item==tweet.user.screen_name; });
 
-    console.log(x)
+    //console.log(x)
 
 
     if (x == true)
