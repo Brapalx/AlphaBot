@@ -63,8 +63,8 @@ function setCharAt(str,index,chr) {
 
 // 2479008908
 
-var stream = T.stream('statuses/filter', { follow: ['1091874751'] });
-var targetChannel = `680665992262844427`;
+var stream = T.stream('statuses/filter', { follow: ['2479008908'] });
+var targetChannel = `1012186449166217329`;
 
 stream.on('tweet', tweet => {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
@@ -288,7 +288,7 @@ bot.on('message', msg => {
             break;
 
         case 'forest':
-            T.get('users/show', { screen_name: `brapalx`}, function (err, data, response) {
+            T.get('users/show', { screen_name: `PKMNleak`}, function (err, data, response) {
                 if (err) {
                     console.log(`User Fetch Error`);
                     console.log(err);
