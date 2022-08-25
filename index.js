@@ -282,6 +282,16 @@ bot.on('message', msg => {
             });
             break;
 
+        case 'forest':
+            T.get('users/show', { screen_name: `forestwithout`}, function (err, data, response) {
+                if (err) {
+                    console.log(`User Fetch Error`);
+                    console.log(err);
+                }
+                msg.channel.send(data['id']);
+                });
+            break;
+
         case 'give':
             if(!args[1]) return msg.reply('Please define a second argument');
 
