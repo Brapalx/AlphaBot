@@ -63,18 +63,20 @@ function setCharAt(str,index,chr) {
 
 // 2479008908
 
-var stream = T.stream('statuses/filter', { follow: ['1163591081671430100'] })
+var stream = T.stream('statuses/filter', { follow: ['1163591081671430100'] });
 
-stream.on('tweet', function (tweet) {
-    console.log(tweet.text)
-})
+stream.on('tweet', tweet => {
+    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+    client.channels.get(dest).send(twitterMessage);
+    return false;
+  });
 
 
 bot.on('ready', () => {
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
 
-    T.get('users/show', { screen_name: `IGNDeals`}, function (err, data, response) {
+    T.get('users/show', { screen_name: `brapalx`}, function (err, data, response) {
         if (err) {
             console.log(`User Fetch Error`);
             console.log(err);
