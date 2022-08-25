@@ -64,12 +64,12 @@ function setCharAt(str,index,chr) {
 // twitter stuff
 
 var igndeals_id = `2479008908`
-var pkmnleaks_id = `1521559842091057200`
-var possum_id = `1022089486849765400`
-var gators_id = `1185212394634727400`
+var pkmnleaks_id = `1100882038847168513`
+var possum_id = `1022089486849765376`
+var gators_id = `1185212394634727424`
 var brapalx_id = `1091874751`
-var forest_id = `1163591081671430100`
-var lizard_id = `1456034401368752000`
+var forest_id = `1163591081671430144`
+var lizard_id = `1456034401368752129`
 // var forest_id =
 // 1521559842091057200 - pkmnleaks
 // 2479008908 - igndeals
