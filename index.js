@@ -62,7 +62,8 @@ function setCharAt(str,index,chr) {
 }
 
 // 1521559842091057200 - pkmnleaks
-// 2479008908
+// 2479008908 - igndeals
+// 1022089486849765400 - possum every hour
 
 var stream = T.stream('statuses/filter', { follow: ['2479008908'] });
 var targetChannel = `1012186449166217329`;
@@ -81,6 +82,15 @@ var targetChannel2 = `813218043177861171`;
       bot.channels.cache.get(targetChannel2).send(twitterMessage);
       return false;
     });
+
+var stream3 = T.stream('statuses/filter', { follow: ['1022089486849765400'] });
+var targetChannel3 = `1012186449166217329`;
+    
+stream3.on('tweet', tweet => {
+    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+    bot.channels.cache.get(targetChannel3).send(twitterMessage);
+    return false;
+      });
 
 
 bot.on('ready', () => {
