@@ -77,7 +77,7 @@ var lizard_id = `1456034401368752129`
 // 1091874751 - brapalx
 // 1163591081671430100 - forest
 
-var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, forest_id, lizard_id].join(',') });
+var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, lizard_id].join(',') });
 var twitterChannel = `1012186449166217329`;
 var pkmnChannel = `813218043177861171`;
 
@@ -85,7 +85,7 @@ stream.on('tweet', function(tweet) {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
 
-    let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `forestwithout`, `HourlyLizards`];
+    let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `HourlyLizards`];
     let x = items.some((item)=>{ return item==tweet.user.screen_name; });
 
     console.log(x)
