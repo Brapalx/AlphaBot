@@ -63,11 +63,12 @@ function setCharAt(str,index,chr) {
 
 // 2479008908
 
-var stream = T.stream('statuses/filter', { follow: ['1163591081671430100'] });
+var stream = T.stream('statuses/filter', { follow: ['1091874751'] });
+var targetChannel = 680665992262844427;
 
 stream.on('tweet', tweet => {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
-    client.channels.get(dest).send(twitterMessage);
+    client.channels.get(targetChannel).send(twitterMessage);
     return false;
   });
 
