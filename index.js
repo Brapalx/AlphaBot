@@ -84,8 +84,14 @@ var pkmnChannel = `813218043177861171`;
 stream.on('tweet', function(tweet) {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
-    if (tweet.retweeted_status == undefined) 
+
+    let items = [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, forest_id, lizard_id];
+    let x = items.every((item)=>{ return item!=tweet.id_str; });
+    
+    if (x == false)
     {
+        if (tweet.retweeted_status == undefined) 
+        {
 
         if (tweet.user.id == pkmnleaks_id)
         {
@@ -94,6 +100,7 @@ stream.on('tweet', function(tweet) {
         else
         {
             bot.channels.cache.get(twitterChannel).send(twitterMessage);
+        }
         }
     }
   });
