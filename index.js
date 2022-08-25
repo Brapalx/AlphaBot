@@ -87,7 +87,7 @@ stream.on('tweet', function(tweet) {
 
     let items = [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, forest_id, lizard_id];
     let x = items.every((item)=>{ return item!=tweet.id_str; });
-    
+    x = false
     if (x == false)
     {
         if (tweet.retweeted_status == undefined) 
