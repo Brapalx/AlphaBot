@@ -69,6 +69,7 @@ var possum_id = `1022089486849765400`
 var gators_id = `1185212394634727400`
 var brapalx_id = `1091874751`
 var forest_id = `1163591081671430100`
+var lizard_id = `1456034401368752000`
 // var forest_id =
 // 1521559842091057200 - pkmnleaks
 // 2479008908 - igndeals
@@ -76,7 +77,7 @@ var forest_id = `1163591081671430100`
 // 1091874751 - brapalx
 // 1163591081671430100 - forest
 
-var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, forest_id].join(',') });
+var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, forest_id, lizard_id].join(',') });
 var twitterChannel = `1012186449166217329`;
 var pkmnChannel = `813218043177861171`;
 
