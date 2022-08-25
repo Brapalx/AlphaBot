@@ -301,7 +301,7 @@ bot.on('message', msg => {
             });
             break;
 
-        case 'forest':a
+        case 'forest':
             T.get('users/show', { screen_name: `forestwithout`}, function (err, data, response) {
                 if (err) {
                     console.log(`User Fetch Error`);
