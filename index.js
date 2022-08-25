@@ -68,7 +68,7 @@ var targetChannel = 680665992262844427;
 
 stream.on('tweet', tweet => {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
-    bot.channels.get(targetChannel).send(twitterMessage);
+    bot.channels.cache.get(targetChannel).send(twitterMessage);
     return false;
   });
 
