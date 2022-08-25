@@ -67,12 +67,13 @@ var igndeals_id = `2479008908`
 var pkmnleaks_id = `1521559842091057200`
 var possum_id = `1022089486849765400`
 var gators_id = `1185212394634727400`
-
+var brapalx_id = `1091874751`
 // 1521559842091057200 - pkmnleaks
 // 2479008908 - igndeals
 // 1022089486849765400 - possum every hour
+// 1091874751 - brapalx
 
-var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id] });
+var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id] });
 var twitterChannel = `1012186449166217329`;
 var pkmnChannel = `813218043177861171`;
 
@@ -82,14 +83,13 @@ stream.on('tweet', function(tweet) {
     if (tweet.retweeted_status == undefined)
     {
 
-        if (tweet.user.id == igndeals_id || tweet.user.id == possum_id || tweet.user.id == gators_id)
-        {
-            bot.channels.cache.get(twitterChannel).send(twitterMessage);
-        }
-
         if (tweet.user.id == pkmnleaks_id)
         {
             bot.channels.cache.get(pkmnChannel).send(twitterMessage);
+        }
+        else
+        {
+            bot.channels.cache.get(twitterChannel).send(twitterMessage);
         }
     }
   });
@@ -300,7 +300,7 @@ bot.on('message', msg => {
             });
             break;
 
-        case 'forest':
+        case 'forest':a
             T.get('users/show', { screen_name: `brapalx`}, function (err, data, response) {
                 if (err) {
                     console.log(`User Fetch Error`);
