@@ -66,12 +66,13 @@ function setCharAt(str,index,chr) {
 var igndeals_id = `2479008908`
 var pkmnleaks_id = `1521559842091057200`
 var possum_id = `1022089486849765400`
+var gators_id = `1185212394634727400`
 
 // 1521559842091057200 - pkmnleaks
 // 2479008908 - igndeals
 // 1022089486849765400 - possum every hour
 
-var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id] });
+var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id] });
 var twitterChannel = `1012186449166217329`;
 var pkmnChannel = `813218043177861171`;
 
@@ -81,7 +82,7 @@ stream.on('tweet', function(tweet) {
     if (tweet.retweeted_status == undefined)
     {
 
-        if (tweet.user.id == igndeals_id || tweet.user.id == possum_id)
+        if (tweet.user.id == igndeals_id || tweet.user.id == possum_id || tweet.user.id == gators_id)
         {
             bot.channels.cache.get(twitterChannel).send(twitterMessage);
         }
