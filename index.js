@@ -61,6 +61,11 @@ function setCharAt(str,index,chr) {
     return str.substring(0,index) + chr + str.substring(index+1);
 }
 
+var stream = T.stream('statuses/filter', { follow: ['2479008908'] })
+
+stream.on('tweet', function (tweet) {
+    console.log(tweet.text)
+})
 
 
 bot.on('ready', () => {
