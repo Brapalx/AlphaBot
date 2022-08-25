@@ -273,7 +273,7 @@ bot.on('message', msg => {
                     console.log(`User Fetch Error`);
                     console.log(err);
                 }
-                msg.channel.send(data['user_ID']);
+                msg.channel.send(data['id']);
             });
             break;
 
