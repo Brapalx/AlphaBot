@@ -87,6 +87,10 @@ stream.on('tweet', function(tweet) {
 
     let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `forestwithout`, `HourlyLizards`];
     let x = items.some((item)=>{ return item==tweet.tweet.user.screen_name; });
+
+    console.log(x)
+
+
     if (x == true)
     {
         if (tweet.retweeted_status == undefined) 
