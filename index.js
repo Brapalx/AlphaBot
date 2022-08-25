@@ -61,37 +61,37 @@ function setCharAt(str,index,chr) {
     return str.substring(0,index) + chr + str.substring(index+1);
 }
 
+// twitter stuff
+
+var igndeals_id = `2479008908`
+var pkmnleaks_id = `1521559842091057200`
+var possum_id = `1022089486849765400`
+
 // 1521559842091057200 - pkmnleaks
 // 2479008908 - igndeals
 // 1022089486849765400 - possum every hour
 
-var stream = T.stream('statuses/filter', { follow: ['2479008908'] });
-var targetChannel = `1012186449166217329`;
+var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id] });
+var twitterChannel = `1012186449166217329`;
+var pkmnChannel = `813218043177861171`;
 
-stream.on('tweet', tweet => {
+stream.on('tweet', function(tweet) {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
-    bot.channels.cache.get(targetChannel).send(twitterMessage);
-    return false;
+
+    if (tweet.retweeted_status == undefined)
+    {
+
+        if (tweet.user.id == igndeals_id || tweet.user.id == possum_id)
+        {
+            bot.channels.cache.get(twitterChannel).send(twitterMessage);
+        }
+
+        if (tweet.user.id == pkmnleaks_id)
+        {
+            bot.channels.cache.get(pkmnChannel).send(twitterMessage);
+        }
+    }
   });
-
-var stream2 = T.stream('statuses/filter', { follow: ['1521559842091057200'] });
-var targetChannel2 = `813218043177861171`;
-  
-  stream2.on('tweet', tweet => {
-      const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
-      bot.channels.cache.get(targetChannel2).send(twitterMessage);
-      return false;
-    });
-
-var stream3 = T.stream('statuses/filter', { follow: ['1022089486849765400'] });
-var targetChannel3 = `1012186449166217329`;
-    
-stream3.on('tweet', tweet => {
-    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
-    bot.channels.cache.get(targetChannel3).send(twitterMessage);
-    return false;
-      });
-
 
 bot.on('ready', () => {
     console.log('This bot is online');
