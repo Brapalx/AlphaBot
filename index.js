@@ -62,7 +62,6 @@ function setCharAt(str,index,chr) {
 }
 
 
-var igndata;
 
 bot.on('ready', () => {
     console.log('This bot is online');
@@ -74,7 +73,6 @@ bot.on('ready', () => {
             console.log(err);
         }
         console.log(data);
-        igndata = data;
     });
 
     fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
@@ -122,8 +120,6 @@ bot.on('ready', () => {
 bot.on('message', msg => {
 
     console.log(msg.author.id);
-
-    msg.reply(igndata);
 
 
 
@@ -269,6 +265,16 @@ bot.on('message', msg => {
 
         case 'skeleton':
             image2rand(msg, "skeleton video game");
+            break;
+
+        case 'ign':
+            T.get('users/show', { screen_name: `IGNDeals`}, function (err, data, response) {
+                if (err) {
+                    console.log(`User Fetch Error`);
+                    console.log(err);
+                }
+                msg.channel.send(data);
+            });
             break;
 
         case 'give':
