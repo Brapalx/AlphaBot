@@ -1350,4 +1350,4 @@ function getImgFromSubreddit(message, subreddit){
     })
 }
 
-bot.login(token.token);
+bot.login(token);
