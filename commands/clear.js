@@ -9,8 +9,7 @@ module.exports = {
             .setDescription('Number of messages to delete')
             .setRequired(true)),
 	async execute(interaction) {
-		//await interaction.reply('Pong!');
-        await interaction.deleteReply();
         interaction.channel.bulkDelete(interaction.options.getInteger('number') + 1);
+        await interaction.reply('Done!');
 	},
 };
