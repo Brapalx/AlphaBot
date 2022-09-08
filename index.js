@@ -3,6 +3,7 @@ const path = require('node:path');
 const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Collection } = require('discord.js');
+const { clientId, guildId, token } = require('./config.json');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 bot.commands = new Collection();
 
@@ -39,8 +40,6 @@ var Scraper = require('images-scraper');
 const randomPuppy = require('random-puppy');
 
 const ytdl = require("ytdl-core");
-
-const token = require("./config.js");
 
 const PREFIX = '!'
 
