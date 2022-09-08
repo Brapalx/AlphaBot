@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
+const { Collection } = require('discord.js');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 bot.commands = new Collection();
 
