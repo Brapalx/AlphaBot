@@ -300,46 +300,9 @@ bot.on('message', msg => {
 
     switch (args[0])
     {
-        case 'clear':
-            if(!args[1]) return msg.reply('Please define a second argument');
-
-            var numString = parseInt(args[1])
-
-            if(numString != null)
-                msg.channel.bulkDelete(numString + 1);
-            else
-                msg.reply('Please enter a valid number.');
-
-            break;
-
-        case 'whelp':
-            msg.channel.send('it izz what it izz');
-            break;
 
         case 'beagle':
             image2rand(msg, "beagle");
-            break;
-
-        case 'bc':
-            image2rand(msg, "border collie");
-            break;
-
-        case 'cursed':
-            image2rand(msg, "cursed image");
-            break;
-
-        case 'skeleton':
-            image2rand(msg, "skeleton video game");
-            break;
-
-        case 'ign':
-            T.get('users/show', { screen_name: `IGNDeals`}, function (err, data, response) {
-                if (err) {
-                    console.log(`User Fetch Error`);
-                    console.log(err);
-                }
-                msg.channel.send(data['id']);
-            });
             break;
 
         case 'forest':
