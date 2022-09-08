@@ -1,7 +1,21 @@
-
+const fs = require('node:fs');
+const path = require('node:path');
 const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
+bot.commands = new Collection();
+
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.data.name, command);
+}
+
 
 const cheerio = require('cheerio');
 const request = require('request');
@@ -156,12 +170,15 @@ bot.on('ready', () => {
 bot.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
-	const { commandName } = interaction;
+	const command = interaction.client.commands.get(interaction.commandName);
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'beep') {
-		await interaction.reply('Boop!');
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 
