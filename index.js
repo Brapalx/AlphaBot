@@ -40,7 +40,7 @@ const randomPuppy = require('random-puppy');
 
 const ytdl = require("ytdl-core");
 
-const token = require("./token.js");
+const token = require("./config.js");
 
 const PREFIX = '!'
 
@@ -1351,4 +1351,4 @@ function getImgFromSubreddit(message, subreddit){
     })
 }
 
-bot.login(token);
+bot.login(token.token);
