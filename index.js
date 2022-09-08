@@ -153,15 +153,17 @@ bot.on('ready', () => {
 });
 
 
-const { SlashCommandBuilder } = require('discord.js');
+bot.on('interactionCreate', async interaction => {
+	if (!interaction.isChatInputCommand()) return;
 
-const data = new SlashCommandBuilder()
-	.setName('echo')
-	.setDescription('Replies with your input!')
-	.addStringOption(option =>
-		option.setName('input')
-			.setDescription('The input to echo back')
-			.setRequired(true));
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
+		await interaction.reply('Pong!');
+	} else if (commandName === 'beep') {
+		await interaction.reply('Boop!');
+	}
+});
 
 
 bot.on('message', msg => {
