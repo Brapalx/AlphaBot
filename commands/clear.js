@@ -11,5 +11,6 @@ module.exports = {
 	async execute(interaction) {
         interaction.channel.bulkDelete(interaction.options.getInteger('number') + 1);
         await interaction.reply('Done!');
+        await interaction.deleteReply();
 	},
 };
