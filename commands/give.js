@@ -31,8 +31,9 @@ function image2rand(interaction, word){
         const results = await google.scrape(word, 50);
         
         var rand = Math.floor(Math.random() * 50)
-
+        
         interaction.channel.send(results[rand].url);
+        interaction.channel.send(word);
     })();
 
 }
