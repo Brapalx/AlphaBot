@@ -12,6 +12,9 @@ for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
 	commands.push(command.data.toJSON());
+
+    console.log(clientId)
+    console.log(guildId)
 }
 
 const rest = new REST({ version: '10' }).setToken(token);
