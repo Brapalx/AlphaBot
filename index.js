@@ -47,7 +47,6 @@ const zackID = '104048942496358400'
 
 var servers = {};
 
-var fs = require('fs');
 var files = fs.readdirSync('./roulette/');
 var files2 = fs.readdirSync('./f_roulette/');
 
