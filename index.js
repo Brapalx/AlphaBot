@@ -1,6 +1,5 @@
 
 const Discord = require('discord.js')
-
 const { Client, GatewayIntentBits } = require('discord.js');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -619,250 +618,250 @@ bot.on('message', msg => {
 
             break;
 
-        case 'pokevs':
+        // case 'pokevs':
 
-            msg.channel.send(" 👊  __***POKEMON BATTLE***__  👊 ");
+        //     msg.channel.send(" 👊  __***POKEMON BATTLE***__  👊 ");
 
-            var fileString = "";
-            var fileString2 = "";
+        //     var fileString = "";
+        //     var fileString2 = "";
             
-            do {
+        //     do {
 
-            fileString = poke_files[Math.floor(Math.random() * poke_files.length)];
+        //     fileString = poke_files[Math.floor(Math.random() * poke_files.length)];
 
-            fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)];
-            }
-            while (fileString != fileString2)
-
-
-            var dirString = "./pokeimages/" + fileString;
-            var asterisk = "__***";
-            var trimString = fileString.slice(0, -4);
-            var editedString = asterisk.concat(trimString.toUpperCase(),"***__");
-
-            var attachString = "attachment://";
-            attachString = attachString.concat(fileString);
-
-            var linkString = "https://bulbapedia.bulbagarden.net/wiki/";
-            linkString = linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
-
-            var pokewins = 0;
-            var pokelosses = 0;
-
-            pokeArray.forEach(pokemon => {
-                if (pokemon.name === editedString)
-                {
-                    pokewins = pokemon.wins;
-                    pokelosses = pokemon.losses;
-                }
-            })
+        //     fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)];
+        //     }
+        //     while (fileString != fileString2)
 
 
-            const pokeEmbed = new Discord.MessageEmbed()
-                 .setTitle(editedString)
-                 .addFields(
-                     { name: "Wins:", value: pokewins.toString(), inline: true},
-                     { name: "Losses:", value: pokelosses.toString(), inline: true},
-                     { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
-                 )
-                 .attachFiles([dirString])
-                 .setImage(attachString)
+        //     var dirString = "./pokeimages/" + fileString;
+        //     var asterisk = "__***";
+        //     var trimString = fileString.slice(0, -4);
+        //     var editedString = asterisk.concat(trimString.toUpperCase(),"***__");
+
+        //     var attachString = "attachment://";
+        //     attachString = attachString.concat(fileString);
+
+        //     var linkString = "https://bulbapedia.bulbagarden.net/wiki/";
+        //     linkString = linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
+
+        //     var pokewins = 0;
+        //     var pokelosses = 0;
+
+        //     pokeArray.forEach(pokemon => {
+        //         if (pokemon.name === editedString)
+        //         {
+        //             pokewins = pokemon.wins;
+        //             pokelosses = pokemon.losses;
+        //         }
+        //     })
+
+
+        //     const pokeEmbed = new Discord.MessageEmbed()
+        //          .setTitle(editedString)
+        //          .addFields(
+        //              { name: "Wins:", value: pokewins.toString(), inline: true},
+        //              { name: "Losses:", value: pokelosses.toString(), inline: true},
+        //              { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
+        //          )
+        //          .attachFiles([dirString])
+        //          .setImage(attachString)
             
-            var pokeA = editedString;
+        //     var pokeA = editedString;
 
-           msg.channel.send(pokeEmbed);
+        //    msg.channel.send(pokeEmbed);
 
-            var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
-            var dirString2 = "./pokeimages/" + fileString2;
-            var asterisk = "__***";
-            var trimString2 = fileString2.slice(0, -4);
-            var editedString2 = asterisk.concat(trimString2.toUpperCase(),"***__");
+        //     var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
+        //     var dirString2 = "./pokeimages/" + fileString2;
+        //     var asterisk = "__***";
+        //     var trimString2 = fileString2.slice(0, -4);
+        //     var editedString2 = asterisk.concat(trimString2.toUpperCase(),"***__");
 
-            var attachString2 = "attachment://";
-            attachString2 = attachString2.concat(fileString2);
+        //     var attachString2 = "attachment://";
+        //     attachString2 = attachString2.concat(fileString2);
 
-            var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
-            linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
+        //     var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
+        //     linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
 
-            var pokewins2 = 0;
-            var pokelosses2 = 0;
+        //     var pokewins2 = 0;
+        //     var pokelosses2 = 0;
 
-            pokeArray.forEach(pokemon => {
-                if (pokemon.name === editedString2)
-                {
-                    pokewins2 = pokemon.wins;
-                    pokelosses2 = pokemon.losses;
-                }
-            })
+        //     pokeArray.forEach(pokemon => {
+        //         if (pokemon.name === editedString2)
+        //         {
+        //             pokewins2 = pokemon.wins;
+        //             pokelosses2 = pokemon.losses;
+        //         }
+        //     })
 
-            const pokeEmbed2 = new Discord.MessageEmbed()
-                 .setTitle(editedString2)
-                 .addFields(
-                    { name: "Wins:", value: pokewins2.toString(), inline: true},
-                    { name: "Losses:", value: pokelosses2.toString(), inline: true},
-                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
-                )
-                 .attachFiles([dirString2])
-                 .setImage(attachString2)
+        //     const pokeEmbed2 = new Discord.MessageEmbed()
+        //          .setTitle(editedString2)
+        //          .addFields(
+        //             { name: "Wins:", value: pokewins2.toString(), inline: true},
+        //             { name: "Losses:", value: pokelosses2.toString(), inline: true},
+        //             { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
+        //         )
+        //          .attachFiles([dirString2])
+        //          .setImage(attachString2)
 
-            var pokeB = editedString2;
+        //     var pokeB = editedString2;
             
-            msg.channel.send(pokeEmbed2);
+        //     msg.channel.send(pokeEmbed2);
             
-            const pokeEmbed3 = new Discord.MessageEmbed()
-                .setTitle("CAST YOUR VOTES __***HERE***__")
-                .setDescription(`🅰️:  ${pokeA}\n 🅱️:  ${pokeB}`)
+        //     const pokeEmbed3 = new Discord.MessageEmbed()
+        //         .setTitle("CAST YOUR VOTES __***HERE***__")
+        //         .setDescription(`🅰️:  ${pokeA}\n 🅱️:  ${pokeB}`)
 
                  
             
-                msg.channel.send(pokeEmbed3).then (sent3 => {
-                sent3.react('🅰️')
-                sent3.react('🅱️')
+        //         msg.channel.send(pokeEmbed3).then (sent3 => {
+        //         sent3.react('🅰️')
+        //         sent3.react('🅱️')
 
-                const filter = (reaction, user) => {
-                    return (reaction.emoji.name === '🅰️' || reaction.emoji.name === '🅱️') && !user.bot;
-                };
+        //         const filter = (reaction, user) => {
+        //             return (reaction.emoji.name === '🅰️' || reaction.emoji.name === '🅱️') && !user.bot;
+        //         };
 
-                const options = {
-                    max: 20,
-                    time: 20000
-                }
-
-
-                return sent3.awaitReactions(filter, options);
-            })
-            .then(collected => {
-                // Convert the collection to an array
-                let collectedArray = collected.array()
+        //         const options = {
+        //             max: 20,
+        //             time: 20000
+        //         }
 
 
-                let numA = 0;
-                let numB = 0;
+        //         return sent3.awaitReactions(filter, options);
+        //     })
+        //     .then(collected => {
+        //         // Convert the collection to an array
+        //         let collectedArray = collected.array()
 
-                collectedArray.forEach(reaction => {
 
-                    if (reaction.emoji.name == '🅰️')
-                    {
-                        numA = reaction.count - 1;
-                    }
+        //         let numA = 0;
+        //         let numB = 0;
 
-                    if (reaction.emoji.name == '🅱️')
-                    {
-                        numB = reaction.count - 1;
-                    }
-                })
+        //         collectedArray.forEach(reaction => {
 
-                let winnerName = "";
-                let loserName = "";
+        //             if (reaction.emoji.name == '🅰️')
+        //             {
+        //                 numA = reaction.count - 1;
+        //             }
 
-                if( numA > numB)
-                {
-                    winnerName = pokeA;
-                    loserName = pokeB;
-                }
-                else if (numB > numA)
-                {
-                    winnerName = pokeB;
-                    loserName = pokeA;
-                }
+        //             if (reaction.emoji.name == '🅱️')
+        //             {
+        //                 numB = reaction.count - 1;
+        //             }
+        //         })
 
-                let surveyResultsEmbed;
+        //         let winnerName = "";
+        //         let loserName = "";
 
-                if (numB == numA)
-                {
-                    surveyResultsEmbed = new Discord.MessageEmbed()
-                    .setTitle("IT'S A __***TIE***__")
+        //         if( numA > numB)
+        //         {
+        //             winnerName = pokeA;
+        //             loserName = pokeB;
+        //         }
+        //         else if (numB > numA)
+        //         {
+        //             winnerName = pokeB;
+        //             loserName = pokeA;
+        //         }
+
+        //         let surveyResultsEmbed;
+
+        //         if (numB == numA)
+        //         {
+        //             surveyResultsEmbed = new Discord.MessageEmbed()
+        //             .setTitle("IT'S A __***TIE***__")
             
-                }
-                else if ((numA + numB) == 1)
-                {
-                    surveyResultsEmbed = new Discord.MessageEmbed()
-                    .setTitle("NOT ENOUGH VOTES!")
-                }
-                else
-                {
-                    surveyResultsEmbed = new Discord.MessageEmbed()
-                    .setTitle(`${winnerName} WINS!`)
+        //         }
+        //         else if ((numA + numB) == 1)
+        //         {
+        //             surveyResultsEmbed = new Discord.MessageEmbed()
+        //             .setTitle("NOT ENOUGH VOTES!")
+        //         }
+        //         else
+        //         {
+        //             surveyResultsEmbed = new Discord.MessageEmbed()
+        //             .setTitle(`${winnerName} WINS!`)
 
-                    updateWinners(winnerName);
-                    updateLosers(loserName);
-                }
+        //             updateWinners(winnerName);
+        //             updateLosers(loserName);
+        //         }
         
         
-                msg.channel.send(surveyResultsEmbed);
-              })
+        //         msg.channel.send(surveyResultsEmbed);
+        //       })
 
 
-            break;
+        //     break;
 
-        case 'poketop':
+        // case 'poketop':
 
-              pokeArray.sort((a,b) => parseInt(b.wins) - parseInt(a.wins)); 
+        //       pokeArray.sort((a,b) => parseInt(b.wins) - parseInt(a.wins)); 
 
-              var concString = "";
-              var tString = "";
-              var i = 1;
+        //       var concString = "";
+        //       var tString = "";
+        //       var i = 1;
 
-              var j;
+        //       var j;
 
-              for (j = 0; j < 20; j++)
-              {
+        //       for (j = 0; j < 20; j++)
+        //       {
 
-                if(!pokeArray[j])
-                {
-                    break;
-                }
+        //         if(!pokeArray[j])
+        //         {
+        //             break;
+        //         }
 
-                if(pokeArray[j].wins > 0)
-                {
-                    tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].wins + "\n";
-                    concString = concString.concat(tString);
-                    i = i + 1;
-                }
-              }
+        //         if(pokeArray[j].wins > 0)
+        //         {
+        //             tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].wins + "\n";
+        //             concString = concString.concat(tString);
+        //             i = i + 1;
+        //         }
+        //       }
 
-              const pokeWLembed = new Discord.MessageEmbed()
-                .setTitle(" 🥵  __***POKEMON BATTLE WINNER RANKINGS***__  🥵 ")
-                .setDescription(concString);
+        //       const pokeWLembed = new Discord.MessageEmbed()
+        //         .setTitle(" 🥵  __***POKEMON BATTLE WINNER RANKINGS***__  🥵 ")
+        //         .setDescription(concString);
 
-              msg.channel.send(pokeWLembed);
+        //       msg.channel.send(pokeWLembed);
 
-            break;
+        //     break;
 
 
-        case 'pokebot':
+        // case 'pokebot':
 
-                pokeArray.sort((a,b) => parseInt(b.losses) - parseInt(a.losses)); 
+        //         pokeArray.sort((a,b) => parseInt(b.losses) - parseInt(a.losses)); 
   
-                var concString = "";
-                var tString = "";
-                var i = 1;
+        //         var concString = "";
+        //         var tString = "";
+        //         var i = 1;
   
-                var j;
+        //         var j;
   
-                for (j = 0; j < 20; j++)
-                {
+        //         for (j = 0; j < 20; j++)
+        //         {
   
-                  if(!pokeArray[j])
-                  {
-                      break;
-                  }
+        //           if(!pokeArray[j])
+        //           {
+        //               break;
+        //           }
   
-                  if(pokeArray[j].losses > 0)
-                  {
-                      tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].losses + "\n";
-                      concString = concString.concat(tString);
-                      i = i + 1;
-                  }
-                }
+        //           if(pokeArray[j].losses > 0)
+        //           {
+        //               tString = "#" + i.toString() + ":  " + pokeArray[j].name + "  -  " + pokeArray[j].losses + "\n";
+        //               concString = concString.concat(tString);
+        //               i = i + 1;
+        //           }
+        //         }
   
-                const pokeLembed = new Discord.MessageEmbed()
-                  .setTitle(" 🤢  __***POKEMON BATTLE LOSER RANKINGS***__  🤢 ")
-                  .setDescription(concString);
+        //         const pokeLembed = new Discord.MessageEmbed()
+        //           .setTitle(" 🤢  __***POKEMON BATTLE LOSER RANKINGS***__  🤢 ")
+        //           .setDescription(concString);
   
-                msg.channel.send(pokeLembed);
+        //         msg.channel.send(pokeLembed);
   
-              break;
+        //       break;
 
         case 'tater':
 
@@ -1063,61 +1062,61 @@ bot.on('message', msg => {
 
             
 
-        case 'pokedex':
-            if(!args[1]) return msg.reply('Not a valid pokemon.');
+        // case 'pokedex':
+        //     if(!args[1]) return msg.reply('Not a valid pokemon.');
     
-            var luName = "__***" + args[1].toUpperCase() + "***__";
+        //     var luName = "__***" + args[1].toUpperCase() + "***__";
 
-            let pokedexEmbed;
+        //     let pokedexEmbed;
 
                 
 
 
-            var found = false;
+        //     var found = false;
 
-            pokeArray.forEach( pokemon => {
+        //     pokeArray.forEach( pokemon => {
 
-            if (pokemon.name === luName)
-            {
+        //     if (pokemon.name === luName)
+        //     {
 
-                var fileString2 = args[1].toLowerCase();
-                var dirString2 = "./pokeimages/" + fileString2 + ".png";
+        //         var fileString2 = args[1].toLowerCase();
+        //         var dirString2 = "./pokeimages/" + fileString2 + ".png";
         
-                var attachString2 = "attachment://";
-                attachString2 = attachString2.concat(fileString2 + ".png");
+        //         var attachString2 = "attachment://";
+        //         attachString2 = attachString2.concat(fileString2 + ".png");
 
-                var trimString2 = fileString2;
-
-
-                var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
-                linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
+        //         var trimString2 = fileString2;
 
 
+        //         var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
+        //         linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
 
-                pokedexEmbed = new Discord.MessageEmbed()
-                 .setTitle(pokemon.name)
-                 .addFields(
-                    { name: "Wins:", value: pokemon.wins.toString(), inline: true},
-                    { name: "Losses:", value: pokemon.losses.toString(), inline: true},
-                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
-                 )
-                 .attachFiles([dirString2])
-                 .setImage(attachString2)
 
-                msg.channel.send(pokedexEmbed);
 
-                found = true;
-            }
-            })
+        //         pokedexEmbed = new Discord.MessageEmbed()
+        //          .setTitle(pokemon.name)
+        //          .addFields(
+        //             { name: "Wins:", value: pokemon.wins.toString(), inline: true},
+        //             { name: "Losses:", value: pokemon.losses.toString(), inline: true},
+        //             { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
+        //          )
+        //          .attachFiles([dirString2])
+        //          .setImage(attachString2)
 
-            if (!found)
-            {
-                pokedexEmbed = new Discord.MessageEmbed()
-                .setTitle("POKEMON  __***NOT***__  FOUND IN THE BATTLE RECORDS")
-                msg.channel.send(pokedexEmbed);
-            }
+        //         msg.channel.send(pokedexEmbed);
+
+        //         found = true;
+        //     }
+        //     })
+
+        //     if (!found)
+        //     {
+        //         pokedexEmbed = new Discord.MessageEmbed()
+        //         .setTitle("POKEMON  __***NOT***__  FOUND IN THE BATTLE RECORDS")
+        //         msg.channel.send(pokedexEmbed);
+        //     }
             
-            break;
+        //     break;
     }
 });
 
@@ -1200,18 +1199,18 @@ function updateLosers(loser){
     })
 }
 
-const helpEmbed = new Discord.MessageEmbed()
-    .setTitle('🐶  __***ALPHABOT COMMANDS***__  🐶')
-    .addField('**Utility Commands**','- **!clear** <number>: Clears a number of messages from the current channel.\n- **!give** <anything you want>: Basically an image search. Gives you a different result each time.\n- **!img** <anything you want>: Same as !give, but it always gives you the first result.\n- **!tater**: Gives you a random **NFT** (Neat Frickin Tater (tm)).')
-    .addField('**Special Image Search Commands**','- **!beagle**: To get a beagle.\n- **!bc**: To get a border collie.\n- **!cursed**: To get a random cursed image. Use at your own risk.\n- **!god**: Makes your day instantly better.\n- **!skeleton**: To get a random skeleton.\n- **!truck**: To get a random truck. Big trucks only.')
-    .addField('**Reddit Commands: These take a random post from a subreddit.**', '- **!anime**: r/anime_irl\n- **!aww**: r/aww\n- **!design**: r/shittydesigns\n- **!food**: r/foodporn\n- **!puppy**: r/puppy\n- **!stock**: r/cursedstockimages')
-    .addField('**Misc. Commands**','- **!donut**: Gives Shinobu a snack!\n- **!fact**: Tells the truth.\n- **!w**: rolls a random waifu.\n-**!whelp**: sometime things happen yknow')
-    .addField('**Clown Game Commands**','- **!clown @someone** : Target someone to be clowned the next time they send a message.\n - **!shield** : Use this to save yourself from being clowned. Be careful not to waste it,it will only work if you are the current target.')
-    .addField('**Pokemon Commands**','- **!pokevs** : Sends out a poll between two pokemon. Only one will remain.\n - **!poketop** : Shows the list of pokemon who have won the most battles.\n - **!pokebot** : Shows the list of pokemon who have lost the most battles.\n - **!pokedex <pokemon>** : Shows the battle stats of a pokemon. A pokemon must have fought at least  __***ONE***__  battle for it to show up!');
+// const helpEmbed = new Discord.MessageEmbed()
+//     .setTitle('🐶  __***ALPHABOT COMMANDS***__  🐶')
+//     .addField('**Utility Commands**','- **!clear** <number>: Clears a number of messages from the current channel.\n- **!give** <anything you want>: Basically an image search. Gives you a different result each time.\n- **!img** <anything you want>: Same as !give, but it always gives you the first result.\n- **!tater**: Gives you a random **NFT** (Neat Frickin Tater (tm)).')
+//     .addField('**Special Image Search Commands**','- **!beagle**: To get a beagle.\n- **!bc**: To get a border collie.\n- **!cursed**: To get a random cursed image. Use at your own risk.\n- **!god**: Makes your day instantly better.\n- **!skeleton**: To get a random skeleton.\n- **!truck**: To get a random truck. Big trucks only.')
+//     .addField('**Reddit Commands: These take a random post from a subreddit.**', '- **!anime**: r/anime_irl\n- **!aww**: r/aww\n- **!design**: r/shittydesigns\n- **!food**: r/foodporn\n- **!puppy**: r/puppy\n- **!stock**: r/cursedstockimages')
+//     .addField('**Misc. Commands**','- **!donut**: Gives Shinobu a snack!\n- **!fact**: Tells the truth.\n- **!w**: rolls a random waifu.\n-**!whelp**: sometime things happen yknow')
+//     .addField('**Clown Game Commands**','- **!clown @someone** : Target someone to be clowned the next time they send a message.\n - **!shield** : Use this to save yourself from being clowned. Be careful not to waste it,it will only work if you are the current target.')
+//     .addField('**Pokemon Commands**','- **!pokevs** : Sends out a poll between two pokemon. Only one will remain.\n - **!poketop** : Shows the list of pokemon who have won the most battles.\n - **!pokebot** : Shows the list of pokemon who have lost the most battles.\n - **!pokedex <pokemon>** : Shows the battle stats of a pokemon. A pokemon must have fought at least  __***ONE***__  battle for it to show up!');
 
-function help(message){
-    message.author.send(helpEmbed);
-}
+// function help(message){
+//     message.author.send(helpEmbed);
+// }
 
 function fact(message){
     
