@@ -10,6 +10,7 @@ module.exports = {
             .setRequired(true)),
 	async execute(interaction) {
 		//await interaction.reply('Pong!');
+        await interaction.deleteReply();
         interaction.channel.bulkDelete(interaction.options.getInteger('number') + 1);
 	},
 };
