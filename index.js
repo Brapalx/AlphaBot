@@ -163,6 +163,17 @@ bot.on('ready', () => {
     
         })
     })
+
+
+    T.get('users/show', { screen_name: `DiscussingFilm`}, function (err, data, response) {
+        if (err) {
+            console.log(`User Fetch Error`);
+            console.log(err);
+        }
+        console.log(data['id']);
+        });
+
+
 });
 
 
