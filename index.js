@@ -85,6 +85,7 @@ var gators_id = `1185212394634727424`
 var brapalx_id = `1091874751`
 var forest_id = `1163591081671430144`
 var lizard_id = `1456034401368752129`
+var film_id = '780460754910732300'
 // var forest_id =
 // 1521559842091057200 - pkmnleaks
 // 2479008908 - igndeals
@@ -95,12 +96,13 @@ var lizard_id = `1456034401368752129`
 var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, lizard_id].join(',') });
 var twitterChannel = `1012186449166217329`;
 var pkmnChannel = `813218043177861171`;
+var spencerChannel = '1018209852952154163'
 
 stream.on('tweet', function(tweet) {
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
 
-    let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `HourlyLizards`];
+    let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `HourlyLizards`, `DiscussingFilm`];
     let x = items.some((item)=>{ return item==tweet.user.screen_name; });
 
     //console.log(x)
@@ -114,6 +116,10 @@ stream.on('tweet', function(tweet) {
         if (tweet.user.id == pkmnleaks_id)
         {
             bot.channels.cache.get(pkmnChannel).send(twitterMessage);
+        }
+        else if (tweet.user.id == film_id)
+        {
+            bot.channels.cache.get(spencerChannel).send(twitterMessage);
         }
         else
         {
