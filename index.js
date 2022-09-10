@@ -93,7 +93,7 @@ var film_id = `780460754910732300`
 // 1091874751 - brapalx
 // 1163591081671430100 - forest
 
-var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, lizard_id].join(',') });
+var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, lizard_id, film_id].join(',') });
 var twitterChannel = `1012186449166217329`;
 var pkmnChannel = `813218043177861171`;
 var spencerChannel = `1018209852952154163`;
