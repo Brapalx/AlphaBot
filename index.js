@@ -113,11 +113,7 @@ stream.on('tweet', function(tweet) {
         if (tweet.retweeted_status == undefined) 
         {
 
-        if (tweet.user.id == pkmnleaks_id)
-        {
-            bot.channels.cache.get(pkmnChannel).send(twitterMessage);
-        }
-        else if (tweet.user.id == film_id)
+        if (tweet.user.id == film_id)
         {
             bot.channels.cache.get(spencerChannel).send(twitterMessage);
         }
