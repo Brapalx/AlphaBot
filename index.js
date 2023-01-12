@@ -85,6 +85,9 @@ bot.on('ready', () => {
 });
 
 
+
+
+
 bot.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -877,3 +880,5 @@ function getImgFromSubreddit(message, subreddit){
 }
 
 bot.login(process.env.TOKEN);
+
+module.exports.pokeArray = pokeArray;
