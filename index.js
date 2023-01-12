@@ -1,9 +1,9 @@
+require('dotenv').config()
 const fs = require('node:fs');
 const path = require('node:path');
 const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Collection } = require('discord.js');
-const { clientId, guildId, token } = require('./config.json');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 bot.commands = new Collection();
 
@@ -18,22 +18,8 @@ for (const file of commandFiles) {
 	bot.commands.set(command.data.name, command);
 }
 
-
 const cheerio = require('cheerio');
 const request = require('request');
-
-var Twit = require('twit')
-const twitinfo = require("./twitinfo.js");
-
-var T = new Twit({
-    consumer_key:         twitinfo.con_key,
-    consumer_secret:      twitinfo.con_key_s,
-    access_token:         twitinfo.acc_key,
-    access_token_secret:  twitinfo.acc_key_s,
-    timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
-    strictSSL:            true,     // optional - requires SSL certificates to be valid.
-  })
-
 
 
 var Scraper = require('images-scraper');
@@ -59,71 +45,16 @@ var clownNext = false;
 var pokeArray = []
 
 
-// wordle stuff
-var wordArray = []
-var sessionActive = false;
-var guessesLeft = 6;
-var currentWord = "nones";
-
 const google = new Scraper({
     puppeteer: {
         headless: true
     }
 })
 
-function setCharAt(str,index,chr) {
-    if(index > str.length-1) return str;
-    return str.substring(0,index) + chr + str.substring(index+1);
-}
-
-// twitter stuff
-
-var igndeals_id = `2479008908`
-var pkmnleaks_id = `1100882038847168513`
-var possum_id = `1022089486849765376`
-var gators_id = `1185212394634727424`
-var brapalx_id = `1091874751`
-var forest_id = `1163591081671430144`
-var lizard_id = `1456034401368752129`
-var film_id = `780460754910732300`
-// var forest_id =
-// 1521559842091057200 - pkmnleaks
-// 2479008908 - igndeals
-// 1022089486849765400 - possum every hour
-// 1091874751 - brapalx
-// 1163591081671430100 - forest
-
-var stream = T.stream('statuses/filter', { follow: [igndeals_id, pkmnleaks_id, possum_id, gators_id, brapalx_id, lizard_id, film_id].join(',') });
-var twitterChannel = `1012186449166217329`;
-var pkmnChannel = `813218043177861171`;
-var spencerChannel = `1018209852952154163`;
-
-stream.on('tweet', function(tweet) {
-    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
 
-    let items = [`IGNDeals`, `PKMNleaks`, `PossumEveryHour`, `GatorsDaily`, `brapalx`, `HourlyLizards`, `DiscussingFilm`];
-    let x = items.some((item)=>{ return item==tweet.user.screen_name; });
-
-    //console.log(x)
 
 
-    if (x == true)
-    {
-        if (tweet.retweeted_status == undefined) 
-        {
-
-        if (tweet.user.id == film_id)
-        {
-            bot.channels.cache.get(spencerChannel).send(twitterMessage);
-        }
-        else
-        {
-            //bot.channels.cache.get(twitterChannel).send(twitterMessage);
-        }
-        }
-    }
-  });
 
 bot.on('ready', () => {
     console.log('This bot is online');
@@ -150,31 +81,6 @@ bot.on('ready', () => {
 
         })
     })
-
-    fs.readFile('words.txt', 'utf8' , (err, data) => {
-    if (err) {
-        console.error(err)
-        return
-        }
-    
-        let stringArray = data.split(/\r?\n/);
-    
-        stringArray.forEach( str => {
-    
-                wordArray.push(str.toLowerCase());
-    
-        })
-    })
-
-
-    T.get('users/show', { screen_name: `DiscussingFilm`}, function (err, data, response) {
-        if (err) {
-            console.log(`User Fetch Error`);
-            console.log(err);
-        }
-        console.log(data['id']);
-        });
-
 
 });
 
@@ -970,4 +876,4 @@ function getImgFromSubreddit(message, subreddit){
     })
 }
 
-bot.login(token);
+bot.login(process.env.TOKEN);
