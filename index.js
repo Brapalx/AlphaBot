@@ -222,16 +222,6 @@ bot.on('message', msg => {
         clownNext = false;
     }
 
-    if(msg.author.id === '85614143951892480')
-    {
-        var rand = Math.random();
-
-        if (rand <= 0.05)
-            msg.channel.send('oh shut up, cuck bot');
-        
-        return;
-    }
-
     var args_t = msg.content.split(" ");
 
    // erases messages from a user with a word in it
@@ -243,56 +233,6 @@ bot.on('message', msg => {
             msg.channel.bulkDelete(1);
     }
    */
-    
-    if(!msg.content.startsWith(PREFIX))
-    {
-        if (args_t.length > 2)
-            {
-                var i;
-                var res = new String("");
-                for(i = 0; i < args_t.length; ++i)
-                {
-                    res = res.concat(args_t[i]);
-                    res = res.concat(" ");
-                }
-
-                console.log(res);
-
-                if(res.includes("alpha bot"))
-                {
-                    if(res.includes("ily") || res.includes("love you"))
-                    {
-                        if(msg.author == zackID)
-                        {
-                            msg.reply('Awww ily 2 <3')
-                        }
-                        else
-                        {
-                            msg.reply('Ew, fuck off')
-                        }
-                    }
-                    else
-                    {
-                        msg.reply('Fuck you.')
-                    }
-
-                    
-                }
-
-                return;
-
-            }
-
-        if (args_t.length == 1 && msg.author.id != 708145208000249937)
-        {
-            if(args_t[0].includes("rara") || args_t[0].includes("RARA"))
-                msg.channel.send('ARARARARARARA')
-
-            
-        }
-
-        return;
-    };
 
     let args = msg.content.substring(PREFIX.length).split(" ");
 
@@ -305,6 +245,15 @@ bot.on('message', msg => {
             image2rand(msg, "beagle");
             break;
 
+            case 'w':
+                var fileString = files[Math.floor(Math.random() * files.length)]
+                var dirString = "./roulette/" + fileString;
+                var randomAttachment = new Discord.MessageAttachment(dirString);
+                msg.channel.send(randomAttachment).then( sent => {
+                    sent.react('❤️');
+                });
+                break;
+
         case 'forest':
             T.get('users/show', { screen_name: `HourlyLizards`}, function (err, data, response) {
                 if (err) {
@@ -315,47 +264,10 @@ bot.on('message', msg => {
                 });
             break;
 
-        case 'give':
-            if(!args[1]) return msg.reply('Please define a second argument');
-
-            if (args.length > 2)
-            {
-                var i;
-                var res = new String("");
-                for(i = 1; i < args.length; ++i)
-                {
-                    res = res.concat(args[i]);
-                    res = res.concat(" ");
-                }
-
-                image2rand(msg, res);
-                console.log(res);
-            }
-            else
-                image2rand(msg, args[1]);
-
-            break;
-
         case 'donut':
            
             const attachment = new Discord.MessageAttachment('./shinobu.gif');
             msg.reply('You gave Shinobu a donut!',attachment);
-            break;
-
-        case 'truck':
-            image2rand(msg, "truck");
-            break;
-
-        case 'testimage':
-            image2(msg, "dog", false);
-            break;
-
-        case 'god':
-            image2rand(msg, "adam sandler");
-            break;
-
-        case 'puppy':
-            pup(msg);
             break;
 
         case 'anime':
@@ -364,10 +276,6 @@ bot.on('message', msg => {
 
         case 'food':
             getImgFromSubreddit(msg, 'FoodPorn');
-            break;
-
-        case 'design':
-            getImgFromSubreddit(msg, 'CrappyDesign');
             break;
 
         case 'stock':
@@ -382,10 +290,6 @@ bot.on('message', msg => {
             if(!args[1]) return msg.reply('Please define a second argument');
 
             clown(msg);
-            break;
-
-        case 'help':
-            help(msg);
             break;
 
         case 'img':
@@ -409,188 +313,14 @@ bot.on('message', msg => {
 
             break;
         
-        case 'wordle':
-
-            if (sessionActive)
-            {
-                msg.channel.send("Wordle session already active! Use !guess <word> to play!");
-                break;
-            }
-
-            var word = wordArray[Math.floor(Math.random() * wordArray.length)];
-
-            console.log(word);
-
-            currentWord = word.toLowerCase();
-            sessionActive = true;
-            guessesLeft = 6;
-
-            msg.channel.send("Wordle session started! Use !guess <word> to play!");
-            break;
-
-        case 'guess':
-
-            if(!args[1]) return msg.reply('Please define a second argument.');
-
-            if (sessionActive == false)
-            {
-                msg.channel.send("Wordle session not active! Use !wordle to play!");
-                break;
-            }
-
-            
-
-
-            var guess = args[1].toLowerCase();
-
-            var found = false;
-
-            for (let i = 0; i < wordArray.length; i++)
-            {
-                if (wordArray[i].toLowerCase() == guess)
-                    found = true;
-            }
-
-            if (found == false)
-            {
-                msg.channel.send("Not a valid word, bob.");
-                break;
-            }
-
-
-
-            if (guess.length != 5)
-            {
-                msg.channel.send("Wordle words are five characters long, dipshit.");
-                break;
-            }
-
-            
-            var count = [...currentWord].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
-
-            var outString = "";
-            var checkArray = [0, 0, 0, 0, 0];
-
-            for (let i = 0; i < guess.length; i++)
-            {
-   
-
-                if (checkArray[i] == 0)
-                {
-                    
-
-                    if (guess[i] == currentWord[i])
-                    {
-                        
-                        checkArray[i] = 2;
-                        count[guess[i]] = count[guess[i]] - 1;
-                    }
-                }
-            }
-
-            
-
-            for (let i = 0; i < guess.length; i++)
-            {
-
-
-                if (checkArray[i] == 0)
-                {
-                    
-
-                    if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
-                    {
-
-                        
-
-                        count[guess[i]] = count[guess[i]] - 1;
-                        checkArray[i] = 1;
-                    }
-                }
-
-            }
-
-            for (let i = 0; i < guess.length; i++)
-            {
-                if (checkArray[i] == 2)
-                    outString += '🟩';
-                else if (checkArray[i] == 1)
-                    outString += '🟨';
-                else
-                    outString += '⬛';
-            }
-
-    
-
-            guessesLeft -= 1;
-
-
-
-
-            msg.channel.send(outString);
-
-            if (guessesLeft <= 0)
-            {
-                msg.channel.send("You lost! You're a fucking loser!");
-                
-                var answer = "The word was: " + currentWord;
-                msg.channel.send(answer);
-                sessionActive = false;
-                break;
-            }
-
-            const allEqual = arr => arr.every( v => v === arr[0] );
-
-            if (allEqual(checkArray) && checkArray[0] == 2)
-            {
-                msg.channel.send("You win! That one was too easy, huh.");
-
-                sessionActive = false;
-
-                break;
-            }
-
-
-            var guessString = "You have " + guessesLeft.toString() + " guess(es) left!";
-
-            msg.channel.send(guessString);
-
-            break;
-
-        case 'w':
-            var fileString = files[Math.floor(Math.random() * files.length)]
-            var dirString = "./roulette/" + fileString;
-            var randomAttachment = new Discord.MessageAttachment(dirString);
-            msg.channel.send(randomAttachment).then( sent => {
-                sent.react('❤️');
-            });
-            break;
-
-        case 'triangle':   
-            const attachment2 = new Discord.MessageAttachment('./triangle.png');
-            msg.channel.send(attachment2);
-            break;
+ 
+       
 
         case 'f':
             var fileString = files2[Math.floor(Math.random() * files2.length)]
             var dirString = "./f_roulette/" + fileString;
             var randomAttachment2 = new Discord.MessageAttachment(dirString);
             msg.channel.send(randomAttachment2);
-            break;
-        
-        case 'test1':
-            var fileString = poke_files[Math.floor(Math.random() * poke_files.length)]
-            var dirString = "./pokeimages/" + fileString;
-            var randomAttachment3 = new Discord.MessageAttachment(dirString);
-            msg.channel.send(randomAttachment3).then( sent => {
-                sent.react('❤️');
-            });
-
-            var asterisk = "__***";
-            var editedString = asterisk.concat((fileString.slice(0, -4)).toUpperCase(),"***__");
-
-            msg.channel.send(editedString);
-
             break;
 
         case 'coin':
@@ -606,6 +336,33 @@ bot.on('message', msg => {
             }
 
             break;
+
+            case 'fact':
+
+                var htmldata="";
+                var imgString=""
+                request('http://randomfactgenerator.net/', function (error, response, body) {
+                    htmldata=body;
+                    
+    
+                    let imgIndexStart = htmldata.indexOf("<div id='z'");
+                    imgString = htmldata.substring(imgIndexStart + 12, htmldata.size);
+    
+                    let imgIndexEnd = imgString.indexOf("<br/>");
+    
+                    imgString = imgString.substring(0, imgIndexEnd);
+                    //imgString = imgString.replace(/\s+/g, '');
+                    //console.log(imgIndexStart);
+                    //console.log(imgIndexEnd);
+    
+                    
+    
+                    msg.channel.send(imgString);
+    
+                });
+    
+    
+                break;
 
         // case 'pokevs':
 
@@ -852,205 +609,7 @@ bot.on('message', msg => {
   
         //       break;
 
-        case 'tater':
-
-            var htmldata="";
-            var imgString=""
-            request('https://tater.info/nft/viewtater.php?uuid=rand', function (error, response, body) {
-                htmldata=body;
-                //console.log(htmldata);
-
-                let imgIndexStart = htmldata.indexOf("<img src=");
-                let imgIndexEnd = htmldata.indexOf("'></img");
-                imgString = htmldata.substring(imgIndexStart + 10, imgIndexEnd);
-                imgString = imgString.replace(/\s+/g, '');
-                //console.log(imgIndexStart);
-                //console.log(imgIndexEnd);
-                //console.log(imgString);
-
-                let imageUrl = "https://tater.info/nft/" + imgString;
-
-                msg.channel.send(imageUrl);
-
-            });
             
-            break;
-
-        case 'fact':
-
-            var htmldata="";
-            var imgString=""
-            request('http://randomfactgenerator.net/', function (error, response, body) {
-                htmldata=body;
-                
-
-                let imgIndexStart = htmldata.indexOf("<div id='z'");
-                imgString = htmldata.substring(imgIndexStart + 12, htmldata.size);
-
-                let imgIndexEnd = imgString.indexOf("<br/>");
-
-                imgString = imgString.substring(0, imgIndexEnd);
-                //imgString = imgString.replace(/\s+/g, '');
-                //console.log(imgIndexStart);
-                //console.log(imgIndexEnd);
-
-                
-
-                msg.channel.send(imgString);
-
-            });
-
-
-            break;
-
-        case 'bad2':
-
-            T.get('search/tweets', { q: 'from:bad2sentence', count: 50 }, function(err, data, response) {
-
-                var i = Math.floor(Math.random() * 50)
-                
-
-
-                    if (data.statuses[i] != undefined)
-                    {
-                        
-    
-                        if (data.statuses[i].entities.media)
-                        {
-                            console.log( data.statuses[i].entities.media[0].media_url );
-                            msg.channel.send(data.statuses[i].entities.media[0].media_url);
-              
-                        }
-                        else
-                        {
-                            msg.channel.send("Didn't hit an img from this user");
-                        }
-
-                    }
-                    else
-                    {
-                        msg.channel.send("Didn't hit an img from this user");
-                    }
-
-                
-            
-                //console.log( data.statuses[0] );
-                });
-            
-    
-            break;
-
-            case 'bad1':
-
-                T.get('search/tweets', { q: 'from:PossumEveryHour', count: 100 }, function(err, data, response) {
-    
-                    var i = Math.floor(Math.random() * 100)
-                    
-    
-    
-                        if (data.statuses[i] != undefined)
-                        {
-                            
-        
-                            if (data.statuses[i].entities.media)
-                            {
-                                console.log( data.statuses[i].entities.media[0].media_url );
-                                msg.channel.send(data.statuses[i].entities.media[0].media_url);
-                  
-                            }
-                            else
-                            {
-                                msg.channel.send("Didn't hit an img from this user");
-                            }
-    
-                        }
-                        else
-                        {
-                            msg.channel.send("Didn't hit an img from this user");
-                        }
-    
-                    
-                
-                    //console.log( data.statuses[0] );
-                    });
-                
-        
-                break;
-            case 'liz':
-
-                T.get('search/tweets', { q: 'from:HourlyLizards', count: 100 }, function(err, data, response) {
-    
-                    var i = Math.floor(Math.random() * 100)
-                    
-    
-    
-                        if (data.statuses[i] != undefined)
-                        {
-                            
-        
-                            if (data.statuses[i].entities.media)
-                            {
-                                console.log( data.statuses[i].entities.media[0].media_url );
-                                msg.channel.send(data.statuses[i].entities.media[0].media_url);
-                  
-                            }
-                            else
-                            {
-                                msg.channel.send("Didn't hit an img from this user");
-                            }
-    
-                        }
-                        else
-                        {
-                            msg.channel.send("Didn't hit an img from this user");
-                        }
-    
-                    
-                
-                    //console.log( data.statuses[0] );
-                    });
-                
-        
-                break;
-                case 'possum':
-
-                    T.get('search/tweets', { q: 'from:PossumEveryHour', count: 100 }, function(err, data, response) {
-        
-                        var i = Math.floor(Math.random() * 100)
-                        
-        
-        
-                            if (data.statuses[i] != undefined)
-                            {
-                                
-            
-                                if (data.statuses[i].entities.media)
-                                {
-                                    console.log( data.statuses[i].entities.media[0].media_url );
-                                    msg.channel.send(data.statuses[i].entities.media[0].media_url);
-                      
-                                }
-                                else
-                                {
-                                    msg.channel.send("Didn't hit an img from this user");
-                                }
-        
-                            }
-                            else
-                            {
-                                msg.channel.send("Didn't hit an img from this user");
-                            }
-        
-                        
-                    
-                        //console.log( data.statuses[0] );
-                        });
-                    
-            
-                    break;
-
-            
-
         // case 'pokedex':
         //     if(!args[1]) return msg.reply('Not a valid pokemon.');
     
@@ -1106,6 +665,156 @@ bot.on('message', msg => {
         //     }
             
         //     break;
+
+
+               // case 'wordle':
+
+        //     if (sessionActive)
+        //     {
+        //         msg.channel.send("Wordle session already active! Use !guess <word> to play!");
+        //         break;
+        //     }
+
+        //     var word = wordArray[Math.floor(Math.random() * wordArray.length)];
+
+        //     console.log(word);
+
+        //     currentWord = word.toLowerCase();
+        //     sessionActive = true;
+        //     guessesLeft = 6;
+
+        //     msg.channel.send("Wordle session started! Use !guess <word> to play!");
+        //     break;
+
+        // case 'guess':
+
+        //     if(!args[1]) return msg.reply('Please define a second argument.');
+
+        //     if (sessionActive == false)
+        //     {
+        //         msg.channel.send("Wordle session not active! Use !wordle to play!");
+        //         break;
+        //     }
+
+            
+
+
+        //     var guess = args[1].toLowerCase();
+
+        //     var found = false;
+
+        //     for (let i = 0; i < wordArray.length; i++)
+        //     {
+        //         if (wordArray[i].toLowerCase() == guess)
+        //             found = true;
+        //     }
+
+        //     if (found == false)
+        //     {
+        //         msg.channel.send("Not a valid word, bob.");
+        //         break;
+        //     }
+
+
+
+        //     if (guess.length != 5)
+        //     {
+        //         msg.channel.send("Wordle words are five characters long, dipshit.");
+        //         break;
+        //     }
+
+            
+        //     var count = [...currentWord].reduce((a, e) => { a[e] = a[e] ? a[e] + 1 : 1; return a }, {}); 
+
+        //     var outString = "";
+        //     var checkArray = [0, 0, 0, 0, 0];
+
+        //     for (let i = 0; i < guess.length; i++)
+        //     {
+   
+
+        //         if (checkArray[i] == 0)
+        //         {
+                    
+
+        //             if (guess[i] == currentWord[i])
+        //             {
+                        
+        //                 checkArray[i] = 2;
+        //                 count[guess[i]] = count[guess[i]] - 1;
+        //             }
+        //         }
+        //     }
+
+            
+
+        //     for (let i = 0; i < guess.length; i++)
+        //     {
+
+
+        //         if (checkArray[i] == 0)
+        //         {
+                    
+
+        //             if(currentWord.includes(guess[i]) && count[guess[i]] > 0)
+        //             {
+
+                        
+
+        //                 count[guess[i]] = count[guess[i]] - 1;
+        //                 checkArray[i] = 1;
+        //             }
+        //         }
+
+        //     }
+
+        //     for (let i = 0; i < guess.length; i++)
+        //     {
+        //         if (checkArray[i] == 2)
+        //             outString += '🟩';
+        //         else if (checkArray[i] == 1)
+        //             outString += '🟨';
+        //         else
+        //             outString += '⬛';
+        //     }
+
+    
+
+        //     guessesLeft -= 1;
+
+
+
+
+        //     msg.channel.send(outString);
+
+        //     if (guessesLeft <= 0)
+        //     {
+        //         msg.channel.send("You lost! You're a fucking loser!");
+                
+        //         var answer = "The word was: " + currentWord;
+        //         msg.channel.send(answer);
+        //         sessionActive = false;
+        //         break;
+        //     }
+
+        //     const allEqual = arr => arr.every( v => v === arr[0] );
+
+        //     if (allEqual(checkArray) && checkArray[0] == 2)
+        //     {
+        //         msg.channel.send("You win! That one was too easy, huh.");
+
+        //         sessionActive = false;
+
+        //         break;
+        //     }
+
+
+        //     var guessString = "You have " + guessesLeft.toString() + " guess(es) left!";
+
+        //     msg.channel.send(guessString);
+
+        //     break;
+
     }
 });
 
@@ -1188,26 +897,6 @@ function updateLosers(loser){
     })
 }
 
-// const helpEmbed = new Discord.MessageEmbed()
-//     .setTitle('🐶  __***ALPHABOT COMMANDS***__  🐶')
-//     .addField('**Utility Commands**','- **!clear** <number>: Clears a number of messages from the current channel.\n- **!give** <anything you want>: Basically an image search. Gives you a different result each time.\n- **!img** <anything you want>: Same as !give, but it always gives you the first result.\n- **!tater**: Gives you a random **NFT** (Neat Frickin Tater (tm)).')
-//     .addField('**Special Image Search Commands**','- **!beagle**: To get a beagle.\n- **!bc**: To get a border collie.\n- **!cursed**: To get a random cursed image. Use at your own risk.\n- **!god**: Makes your day instantly better.\n- **!skeleton**: To get a random skeleton.\n- **!truck**: To get a random truck. Big trucks only.')
-//     .addField('**Reddit Commands: These take a random post from a subreddit.**', '- **!anime**: r/anime_irl\n- **!aww**: r/aww\n- **!design**: r/shittydesigns\n- **!food**: r/foodporn\n- **!puppy**: r/puppy\n- **!stock**: r/cursedstockimages')
-//     .addField('**Misc. Commands**','- **!donut**: Gives Shinobu a snack!\n- **!fact**: Tells the truth.\n- **!w**: rolls a random waifu.\n-**!whelp**: sometime things happen yknow')
-//     .addField('**Clown Game Commands**','- **!clown @someone** : Target someone to be clowned the next time they send a message.\n - **!shield** : Use this to save yourself from being clowned. Be careful not to waste it,it will only work if you are the current target.')
-//     .addField('**Pokemon Commands**','- **!pokevs** : Sends out a poll between two pokemon. Only one will remain.\n - **!poketop** : Shows the list of pokemon who have won the most battles.\n - **!pokebot** : Shows the list of pokemon who have lost the most battles.\n - **!pokedex <pokemon>** : Shows the battle stats of a pokemon. A pokemon must have fought at least  __***ONE***__  battle for it to show up!');
-
-// function help(message){
-//     message.author.send(helpEmbed);
-// }
-
-function fact(message){
-    
-
-    message.channel.send( "guys it's omar");
-    
-
-}
 
 
 function clown(message){
@@ -1230,42 +919,6 @@ function clown(message){
 
     message.author.send('You have set ' + message.mentions.members.first().nickname + ' as your clown target.');
 
-}
-
-
-function image(message, word, firstImage){
- 
-    var options = {
-        url: "http://results.dogpile.com/serp?qc=images&q=" + word,
-        method: "GET",
-        headers: {
-            "Accept": "text/html",
-            "User-Agent": "Chrome"
-        }
-    };
- 
-    request(options, function(error, response, responseBody) {
-        if (error) {
-            return;
-        }
- 
-        $ = cheerio.load(responseBody);
-        var links = $(".image a.link");
-        var urls = new Array(links.length).fill(0).map((v, i) => links.eq(i).attr("href"));
-       
-        console.log(urls);
- 
-        if (!urls.length) {
-            message.channel.send('I ran out of daily searches :(');
-            return;
-        }
- 
-        // Send result
-        if(firstImage)
-            message.channel.send(urls[0]);
-        else
-            message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
-    });
 }
 
 function image2(message, word){
@@ -1293,15 +946,6 @@ function image2rand(message, word){
 
         message.channel.send(results[rand].url);
     })();
-
-}
-
-function pup(message){
-  
-    randomPuppy().then(url => {
-        console.log(url);
-        message.channel.send(url);
-    })
 
 }
 
