@@ -4,6 +4,7 @@ const path = require('node:path');
 const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Collection } = require('discord.js');
+const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 bot.commands = new Collection();
 
@@ -51,7 +52,16 @@ const google = new Scraper({
     }
 })
 
+const names = getAllPokemonNames().then( f =>{
 
+    f.forEach( poke => {
+
+        console.log(poke.pokemonName)
+
+    });
+});
+
+    
 
 
 
@@ -81,6 +91,8 @@ bot.on('ready', () => {
 
         })
     })
+
+    
 
 });
 

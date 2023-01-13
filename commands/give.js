@@ -28,11 +28,11 @@ function image2rand(interaction, word){
         return interaction.channel.send("Please enter an image name.");
 
     (async () => {
-        const results = await google.scrape(word, 50);
+        const results = await google.scrape(word, 2);
         
-        var rand = Math.floor(Math.random() * 50)
+        //var rand = Math.floor(Math.random() * 50)
         
-        interaction.channel.send(results[rand].url);
+        interaction.channel.send(results[0].url);
         var strrr = 'Searched for: ' + word;
         interaction.channel.send(strrr);
     })();

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, Events, AttachmentBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('node:fs');
+const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -52,19 +53,34 @@ module.exports = {
                 }
             })
 
+            var pokeA = editedString;
 
-            const pokeEmbed = new EmbedBuilder()
+            console.log(fileString.substring( 0, fileString.length - 4))
+
+            const poke = getPokemon(fileString.substring(0, fileString.length - 4)).then((f)=>
+     {
+        if(f) {
+          
+          let url1 = "https://www.serebii.net/art/th/" + f.idPokedex + ".png";
+          console.log(url1)
+
+          const pokeEmbed = new EmbedBuilder()
                  .setTitle(editedString)
                  .addFields(
                      { name: "Wins:", value: pokewins.toString(), inline: true},
                      { name: "Losses:", value: pokelosses.toString(), inline: true},
                      { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
                  )
-                 .setImage(attachString)
+                 .setImage(url=url1)
             
-            var pokeA = editedString;
-
-            await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
+        
+            //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
+            interaction.channel.send({ embeds: [pokeEmbed]});
+        }
+     }
+    )
+           //console.log(url1)  
+            
 
             var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
             var dirString2 = "./pokeimages/" + fileString2;
@@ -90,19 +106,31 @@ module.exports = {
                 }
             })
 
-            const pokeEmbed2 = new EmbedBuilder()
+            var pokeB = editedString2;
+
+            const poke2 = getPokemon(fileString2.substring(0, fileString2.length - 4)).then((f)=>
+     {
+        if(f) {
+          
+          let url2 = "https://www.serebii.net/art/th/" + f.idPokedex + ".png";
+          console.log(url2)
+
+          const pokeEmbed2 = new EmbedBuilder()
                  .setTitle(editedString2)
                  .addFields(
-                    { name: "Wins:", value: pokewins2.toString(), inline: true},
-                    { name: "Losses:", value: pokelosses2.toString(), inline: true},
-                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
-                )
-                 .setImage(attachString2)
+                     { name: "Wins:", value: pokewins.toString(), inline: true},
+                     { name: "Losses:", value: pokelosses.toString(), inline: true},
+                     { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
+                 )
+                 .setImage(url=url2)
+            
+        
+            //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
+            interaction.channel.send({ embeds: [pokeEmbed2]});
+        }
+     }
+    )
 
-            var pokeB = editedString2;
-            
-            await interaction.channel.send({ embeds: [pokeEmbed2], files: [fileB]});
-            
 
             const filter = (reaction, user) => {
                     return true;///&& !user.bot;
@@ -154,7 +182,7 @@ collector.on('collect', async i => {
         numB++;
     }
 
-    
+
 
     }
 
