@@ -14,7 +14,7 @@ module.exports = {
         var newCurr = 0;
 
         await conn.query(
-            `SELECT FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
+            `SELECT CURR FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
                 newCurr = result[0][0].CURR + 20;
             }).catch(err => console.log(err));
 
