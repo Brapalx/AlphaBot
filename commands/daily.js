@@ -11,19 +11,43 @@ module.exports = {
 
         const conn = await Index.connection;
 
-        var newCurr = 0;
+        var lastDaily = "";
 
         await conn.query(
-            `SELECT CURR FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
-                newCurr = result[0][0].CURR + 20;
+            `SELECT LDAILY FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
+                lastDaily = result[0][0].LDAILY;
             }).catch(err => console.log(err));
 
-        await conn.query(
-            `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
-          
 
-        console.log("gottem");
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1)  + '-' + today.getDate();
 
-		await interaction.reply('More Money!');
+        console.log(date);
+        console.log(lastDaily);
+
+
+        if (date != lastDaily)
+        {
+            var newCurr = 0;
+
+            await conn.query(
+                `SELECT CURR FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
+                    newCurr = result[0][0].CURR + 20;
+                }).catch(err => console.log(err));
+    
+            await conn.query(
+                `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
+              
+    
+            console.log("gottem");
+    
+            await interaction.reply('More Money!');
+        }
+        else
+        {
+            await interaction.reply('Already Claimed!');
+        }
+
+       
 	},
 };
