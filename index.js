@@ -15,14 +15,17 @@ var connection = mysql.createConnection({
   database : process.env.DB_NAME
 });
  
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
+// A simple SELECT query
+try {
+    const [results, fields] = await connection.query(
+      'SELECT * FROM `userTable`'
+    );
+  
+    console.log(results); // results contains rows returned by server
+    console.log(fields); // fields contains extra meta data about results, if available
+  } catch (err) {
+    console.log(err);
   }
- 
-  console.log('connected as id ' + connection.threadId);
-});
 
 
 const commandsPath = path.join(__dirname, 'commands');
