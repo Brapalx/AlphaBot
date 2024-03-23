@@ -8,6 +8,6 @@ module.exports = {
 
 		
 
-		await interaction.reply('Money!');
+		await interaction.reply('More Money!');
 	},
 };
