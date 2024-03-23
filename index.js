@@ -36,6 +36,18 @@ async function testDB() {
     }
 }
 
+async function addUser(member) {
+    try {
+        const conn = await connection;
+         await conn.query(
+            'INSERT INTO Users VALUES('${member.id}', 1, 0, 20, 0, 0, 0, '${member.user.username}')');
+      
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 
 
 const commandsPath = path.join(__dirname, 'commands');
@@ -138,6 +150,8 @@ bot.on('guildCreate', async (guild) => {
 
     res.forEach((member) => {
         console.log(member.user.username);
+
+        addUser(member);
     });
 
 });
