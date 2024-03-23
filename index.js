@@ -73,9 +73,11 @@ const names = getAllPokemonNames().then( f =>{
 
     f.forEach( poke => {
 
-        console.log(poke.pokemonName)
+        //console.log(poke.pokemonName)
 
     });
+
+    console.log('Got all Pokemon');
 });
 
     
