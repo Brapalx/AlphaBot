@@ -44,14 +44,6 @@ module.exports = {
                 won = result[0][0].WON;
             }).catch(err => console.log(err));
 
-
-        console.log(lvl);
-        console.log(XP);
-        console.log(curr);
-        console.log(clowned);
-        console.log(fooled);
-        console.log(won);
-
         const profEmbed = new EmbedBuilder()
             .setTitle(usr.username)
             .setColor(interaction.member.displayHexColor)
