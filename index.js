@@ -14,20 +14,11 @@ const connection = mysql.createConnection({
   user     : process.env.DB_USER,
   password : process.env.DB_PASS,
   database : process.env.DB_NAME
-});
- 
-// A simple SELECT query
-try {
-    const [results, fields] = connection.promise().query(
-      'SELECT * FROM `userTable`'
-    );
-  
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
-  } catch (err) {
-    console.log(err);
-  }
-
+}).then((conn) => {
+    conn.execute('SELECT * FROM Users')
+})
+.then(() => console.log('Pass'))
+.catch(err => console.log(err));
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
