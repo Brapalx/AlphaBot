@@ -61,8 +61,7 @@ module.exports = {
                 }).catch(err => console.log(err));
     
             await conn.query(
-                `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
-              
+                `UPDATE Users SET CURR = ${newCurr}, LDAILY = '${date}' WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
     
             console.log("gottem");
     
