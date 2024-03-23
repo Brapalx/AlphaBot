@@ -125,6 +125,7 @@ bot.on('ready', async (bot) => {
             name = name.substring(5, name.length - 5);
             //console.log(name);
 
+            console.log(tempArray[1]);
 
             const conn = await connection;
             await conn.query(
