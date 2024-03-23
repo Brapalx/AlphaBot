@@ -15,49 +15,57 @@ module.exports = {
 
             interaction.channel.send(" 👊  __***POKEMON BATTLE***__  👊 ");
 
-            var fileString = "";
-            var fileString2 = "";
             var poke_files = fs.readdirSync('./pokeimages/');
 
-            
+            const conn = await Index.connection;
+
+            var name1 = "";
+            var name2 = "";
+            var wins1 = 0;
+            var loss1 = 0;
+            var draws1 = 0;
+            var wins2 = 0;
+            var loss2 = 0;
+            var draws2 = 0;
+
             do {
 
-            fileString = poke_files[Math.floor(Math.random() * poke_files.length)];
+                await conn.query(
+                `SELECT * FROM Pokemon ORDER BY RAND() LIMIT 1`).then(result => {
+                    name1 = result[0][0].STRING;
+                    wins1 = result[0][0].WINS;
+                    loss1 = result[0][0].LOSSES;
+                    draws1 = result[0][0].DRAWS;
+                }).catch(err => console.log(err));
 
-            fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)];
+
+                await conn.query(
+                `SELECT * FROM Pokemon ORDER BY RAND() LIMIT 1`).then(result => {
+                    name2 = result[0][0].STRING;
+                    wins2 = result[0][0].WINS;
+                    loss2 = result[0][0].LOSSES;
+                    draws2 = result[0][0].DRAWS;
+                }).catch(err => console.log(err));
             }
-            while (fileString != fileString2)
+            while (name1 == name2)
 
+            var lowerName1 = name1.toLowerCase();
+            var fileString = lowerName1 + '.png';
+            
 
             var dirString = "./pokeimages/" + fileString;
             const fileA = new AttachmentBuilder(dirString);
-
-            var asterisk = "__***";
-            var trimString = fileString.slice(0, -4);
-            var editedString = asterisk.concat(trimString.toUpperCase(),"***__");
 
             var attachString = "attachment://";
             attachString = attachString.concat(fileString);
 
             var linkString = "https://bulbapedia.bulbagarden.net/wiki/";
-            linkString = linkString.concat(trimString.charAt(0).toUpperCase() + trimString.slice(1), "_(Pok%C3%A9mon)")
+            linkString = linkString.concat(lowerName1.charAt(0).toUpperCase() + lowerName1.slice(1), "_(Pok%C3%A9mon)")
 
-            var pokewins = 0;
-            var pokelosses = 0;
+  
+            console.log(lowerName1);
 
-            Index.pokeArray.forEach(pokemon => {
-                if (pokemon.name === editedString)
-                {
-                    pokewins = pokemon.wins;
-                    pokelosses = pokemon.losses;
-                }
-            })
-
-            var pokeA = editedString;
-
-            console.log(fileString.substring( 0, fileString.length - 4))
-
-            const poke = getPokemon(fileString.substring(0, fileString.length - 4)).then((f)=>
+            const poke = getPokemon(lowerName1).then((f)=>
      {
         if(f) {
           
@@ -65,10 +73,11 @@ module.exports = {
           console.log(url1)
 
           const pokeEmbed = new EmbedBuilder()
-                 .setTitle(editedString)
+                 .setTitle(name1)
                  .addFields(
-                     { name: "Wins:", value: pokewins.toString(), inline: true},
-                     { name: "Losses:", value: pokelosses.toString(), inline: true},
+                     { name: "Wins:", value: wins1.toString(), inline: true},
+                     { name: "Losses:", value: loss1.toString(), inline: true},
+                     { name: "Draws:", value: draws1.toString(), inline: true},
                      { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
                  )
                  .setImage(url=url1)
@@ -81,34 +90,18 @@ module.exports = {
     )
            //console.log(url1)  
             
-
-            var fileString2 = poke_files[Math.floor(Math.random() * poke_files.length)]
+            var lowerName2 = name2.toLowerCase();
+            var fileString2 = lowerName2 + '.png';
             var dirString2 = "./pokeimages/" + fileString2;
             const fileB = new AttachmentBuilder(dirString2);
-            var asterisk = "__***";
-            var trimString2 = fileString2.slice(0, -4);
-            var editedString2 = asterisk.concat(trimString2.toUpperCase(),"***__");
 
             var attachString2 = "attachment://";
             attachString2 = attachString2.concat(fileString2);
 
             var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
-            linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
+            linkString2 = linkString2.concat(lowerName2.charAt(0).toUpperCase() + lowerName2.slice(1), "_(Pok%C3%A9mon)")
 
-            var pokewins2 = 0;
-            var pokelosses2 = 0;
-
-            Index.pokeArray.forEach(pokemon => {
-                if (pokemon.name === editedString2)
-                {
-                    pokewins2 = pokemon.wins;
-                    pokelosses2 = pokemon.losses;
-                }
-            })
-
-            var pokeB = editedString2;
-
-            const poke2 = getPokemon(fileString2.substring(0, fileString2.length - 4)).then((f)=>
+            const poke2 = getPokemon(lowerName2).then((f)=>
      {
         if(f) {
           
@@ -116,11 +109,12 @@ module.exports = {
           console.log(url2)
 
           const pokeEmbed2 = new EmbedBuilder()
-                 .setTitle(editedString2)
+                 .setTitle(name2)
                  .addFields(
-                     { name: "Wins:", value: pokewins.toString(), inline: true},
-                     { name: "Losses:", value: pokelosses.toString(), inline: true},
-                     { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
+                    { name: "Wins:", value: wins2.toString(), inline: true},
+                    { name: "Losses:", value: loss2.toString(), inline: true},
+                    { name: "Draws:", value: draws2.toString(), inline: true},
+                    { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
                  )
                  .setImage(url=url2)
             
@@ -146,11 +140,11 @@ module.exports = {
                 .addComponents(
                     new ButtonBuilder()
                         .setCustomId('primary')
-                        .setLabel(pokeA.substring(5, pokeA.length - 5))
+                        .setLabel(name1)
                         .setStyle(ButtonStyle.Primary),
                         new ButtonBuilder()
                         .setCustomId('secondary')
-                        .setLabel(pokeB.substring(5, pokeB.length - 5))
+                        .setLabel(name2)
                         .setStyle(ButtonStyle.Primary)
                 );
 
@@ -171,24 +165,20 @@ collector.on('collect', async i => {
     if (!ids.includes(i.user)){
         ids.push(i.user)
 
+        if (i.customId === 'primary'){
 
-    if (i.customId === 'primary'){
-
-        numA++;
-        console.log("A");
-    }
-    else {
-        console.log("B")
-        numB++;
-    }
-
-
-
+            numA++;
+            console.log("A");
+        }
+        else {
+            console.log("B")
+            numB++;
+        }
     }
 
 });
 
-collector.on('end', collected => {
+collector.on('end', async (collected) => {
 
 
         let winnerName = "";
@@ -196,13 +186,29 @@ collector.on('end', collected => {
 
                 if( numA > numB)
                 {
-                    winnerName = pokeA;
-                    loserName = pokeB;
+                    winnerName = name1;
+                    loserName = name2;
+
+
+                    await conn.query(
+                        `UPDATE Pokemon SET WINS = ${wins1 + 1} WHERE STRING = '${winnerName}'`).catch(err => console.log(err));
+
+                    
+                    await conn.query(
+                        `UPDATE Pokemon SET LOSSES = ${loss2 + 1} WHERE STRING = '${loserName}'`).catch(err => console.log(err));
+
                 }
                 else if (numB > numA)
                 {
-                    winnerName = pokeB;
-                    loserName = pokeA;
+                    winnerName = name2;
+                    loserName = name1;
+
+                    await conn.query(
+                        `UPDATE Pokemon SET WINS = ${wins2 + 1} WHERE STRING = '${winnerName}'`).catch(err => console.log(err));
+
+                    
+                    await conn.query(
+                        `UPDATE Pokemon SET LOSSES = ${loss1 + 1} WHERE STRING = '${loserName}'`).catch(err => console.log(err));
                 }
 
                 let surveyResultsEmbed;
@@ -211,6 +217,13 @@ collector.on('end', collected => {
                 {
                     surveyResultsEmbed = new EmbedBuilder()
                     .setTitle(`IT'S A __***TIE***__ \n\ SCORE: ${numA} - ${numB}` )
+
+                    await conn.query(
+                        `UPDATE Pokemon SET DRAWS = ${draws1 + 1} WHERE STRING = '${name1}'`).catch(err => console.log(err));
+
+                    
+                    await conn.query(
+                        `UPDATE Pokemon SET DRAWS = ${draws2 + 1} WHERE STRING = '${name2}'`).catch(err => console.log(err));
             
                 }
                 else if ((numA + numB) == 1)
@@ -221,7 +234,7 @@ collector.on('end', collected => {
                 else
                 {
 
-                    if (winnerName === pokeA)
+                    if (winnerName === name1)
                     {
                         surveyResultsEmbed = new EmbedBuilder()
                     .setTitle(`${winnerName} WINS! \n\ SCORE: ${numA} - ${numB}` )
@@ -233,161 +246,16 @@ collector.on('end', collected => {
                     .setTitle(`${winnerName} WINS! \n\ SCORE: ${numB} - ${numA}` )
                     }
 
-
-    
-                    var found = false;
-
-    Index.pokeArray.forEach( pokemon => {
-
-        if (pokemon.name === winnerName)
-        {
-
-            var tempnum = parseInt(pokemon.wins) + 1;
-
-            pokemon.wins = tempnum.toString();
-            found = true;
-        }
-    })
-
-    if (!found)
-    {
-        var tempPokemon = {name: winnerName, wins: 1, losses: 0};
-        Index.pokeArray.push(tempPokemon);
-    }
-
-    var concatString = "";
-    var tempString = "";
-
-    Index.pokeArray.forEach( pokemon => {
-
-        tempString = pokemon.name + " " + pokemon.wins + " " + pokemon.losses + "\n";
-
-        concatString = concatString.concat(tempString);
-    })
-
-    concatString = concatString.slice(0, -1);
-
-    fs.writeFile('pokewinners.txt', concatString, function (err) {
-        if (err) return console.log(err);
-    })
-
-
-
-var found = false;
-
-Index.pokeArray.forEach( pokemon => {
-
-        if (pokemon.name === loserName)
-        {
-
-            var tempnum = parseInt(pokemon.losses) + 1;
-
-            pokemon.losses = tempnum.toString();
-            found = true;
-        }
-    })
-
-    if (!found)
-    {
-        var tempPokemon = {name: loserName, wins: 0, losses: 1};
-        Index.pokeArray.push(tempPokemon);
-    }
-
-    var concatString = "";
-    var tempString = "";
-
-    Index.pokeArray.forEach( pokemon => {
-
-        tempString = pokemon.name + " " + pokemon.wins + " " + pokemon.losses + "\n";
-
-        concatString = concatString.concat(tempString);
-    })
-
-    concatString = concatString.slice(0, -1);
-
-    fs.writeFile('pokewinners.txt', concatString, function (err) {
-        if (err) return console.log(err);
-    })
-
-
                 }
         
         
                 interaction.channel.send({ embeds: [surveyResultsEmbed]});
                 
 
-});
+    });
 
 
-            //const collector = MSG.createReactionCollector({filter, time:15000});
 
-            // collector.on('collect', (reaction, user) => {
-	        //         console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
-            //     });
-
-            // collector.on('end', collected => {
-	        //         console.log(`Collected ${collected.size} items`);
-
-            //         // Convert the collection to an array
-            // let collectedArray = Array.from(collected.values);
-
-
-            // let numA = 0;
-            // let numB = 0;
-
-            // collectedArray.forEach(reaction => {
-
-            //         if (reaction.emoji.name == '🅰️')
-            //         {
-            //             numA = reaction.count - 1;
-            //         }
-
-            //         if (reaction.emoji.name == '🅱️')
-            //         {
-            //             numB = reaction.count - 1;
-            //         }
-            //     })
-
-            //     let winnerName = "";
-            //     let loserName = "";
-
-            //     if( numA > numB)
-            //     {
-            //         winnerName = pokeA;
-            //         loserName = pokeB;
-            //     }
-            //     else if (numB > numA)
-            //     {
-            //         winnerName = pokeB;
-            //         loserName = pokeA;
-            //     }
-
-            //     let surveyResultsEmbed;
-
-            //     if (numB == numA)
-            //     {
-            //         surveyResultsEmbed = new EmbedBuilder()
-            //         .setTitle("IT'S A __***TIE***__")
-            
-            //     }
-            //     else if ((numA + numB) == 1)
-            //     {
-            //         surveyResultsEmbed = new EmbedBuilder()
-            //         .setTitle("NOT ENOUGH VOTES!")
-            //     }
-            //     else
-            //     {
-            //         surveyResultsEmbed = new EmbedBuilder()
-            //         .setTitle(`${winnerName} WINS!`)
-
-            //         //updateWinners(winnerName);
-            //         //updateLosers(loserName);
-            //     }
-        
-        
-            //     interaction.channel.send({ embeds: [surveyResultsEmbed]});
-                
-            // });
 
 
           await interaction.deleteReply();
