@@ -45,7 +45,7 @@ module.exports = {
 
         console.log(date);
 
-        lastDaily = lastDaily.substring(0, 9);
+        lastDaily = lastDaily.substring(0, 10);
 
 
         console.log(lastDaily);
