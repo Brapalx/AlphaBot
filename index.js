@@ -125,9 +125,14 @@ bot.on('ready', async (bot) => {
             name = name.substring(5, name.length - 5);
             //console.log(name);
 
+            var wins = parseInt(tempArray[1]);
+            var losses = parseInt(tempArray[2]);
+
+            console.log(wins);
+
             const conn = await connection;
             await conn.query(
-                `INSERT INTO Pokemon VALUES('${name}', ${parseInt(tempArray[1])}, ${parseInt(tempArray[2])}, 0)`).catch(err => console.log(err));
+                `INSERT INTO Pokemon VALUES('${name}', ${wins}, ${losses}, 0)`).catch(err => console.log(err));
 
 
         })
