@@ -66,7 +66,7 @@ module.exports = {
             
             
         //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
-        await interaction.channel.reply({ embeds: [profEmbed]});
+        await interaction.reply({ embeds: [profEmbed]});
     },
 
 };
