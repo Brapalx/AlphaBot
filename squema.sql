@@ -8,7 +8,8 @@ CREATE TABLE Users (
     CLOWNED int NOT NULL,
     FOOLED int NOT NULL,
     WON int NOT NULL,
-    USER varchar(100) NOT NULL
+    USER varchar(100) NOT NULL,
+    LDAILY DATE NOT NULL
 );
 
 CREATE TABLE Pokemon (
