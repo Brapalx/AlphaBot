@@ -15,11 +15,17 @@ const connection = mysql.createConnection({
   user     : process.env.DB_USER,
   password : process.env.DB_PASS,
   database : process.env.DB_NAME
-}).then((conn) => {
-    conn.execute('SELECT * FROM Users')
 })
-.then(() => console.log('Pass'))
-.catch(err => console.log(err));
+
+try {
+
+    const [rows, fields] = conn.execute('SELECT * FROM Users');
+  
+    console.log(rows); // in this query, results will be an array of arrays rather than an array of objects
+    console.log(fields); // fields are unchanged
+} catch (err) {
+    console.log(err);
+}
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
