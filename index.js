@@ -8,12 +8,12 @@ const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 bot.commands = new Collection();
 
-var mysql      = require('mysql');
+var mysql      = require('mysql2');
 var connection = mysql.createConnection({
-  host     : "localhost",
-  user     : "root",
-  password : "3008",
-  database: "userTable"
+  host     : 'localhost',
+  user     : 'root',
+  password : '3008',
+  database : 'userTable'
 });
  
 connection.connect(function(err) {
