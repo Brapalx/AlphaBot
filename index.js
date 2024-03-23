@@ -142,7 +142,7 @@ bot.on('guildCreate', async (guild) => {
         try {
             const conn = await connection;
              await conn.query(
-                `INSERT INTO Users VALUES( ${member.id}, 1, 0, 20, 0, 0, 0, ${member.user.username})`);
+                `INSERT INTO Users VALUES( ${member.id}, 1, 0, 20, 0, 0, 0, '${member.user.username})'`);
           
     
         } catch (err) {
