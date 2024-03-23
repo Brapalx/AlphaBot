@@ -6,7 +6,21 @@ module.exports = {
 		.setDescription('Gives you Money!'),
 	async execute(interaction) {
 
-		
+        const Index = require('../index.js')
+
+
+        const conn = await Index.connection;
+
+        var newCurr = 0;
+
+        await conn.query(
+            `SELECT FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
+                newCurr = result[0][0].CURR + 20;
+            }).catch(err => console.log(err));
+
+        await conn.query(
+            `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
+          
 
 		await interaction.reply('More Money!');
 	},
