@@ -47,7 +47,7 @@ module.exports = {
                     draws2 = result[0][0].DRAWS;
                 }).catch(err => console.log(err));
             }
-            while (name1 == name2)
+            while (name1 != name2)
 
             var lowerName1 = name1.toLowerCase();
             var fileString = lowerName1 + '.png';
