@@ -5,8 +5,7 @@ const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Collection } = require('discord.js');
 const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs');
-const bot = new Client({ intents: [GatewayIntentBits.Guilds, 
-GatewayIntentBits.GuildMembers] });
+const bot = new Client({ intents: [GatewayIntentBits.GuildMembers] });
 bot.commands = new Collection();
 
 const mysql = require('mysql2/promise')
