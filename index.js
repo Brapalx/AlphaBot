@@ -5,7 +5,8 @@ const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Collection } = require('discord.js');
 const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs');
-const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
+const bot = new Client({ intents: [GatewayIntentBits.Guilds, 
+GatewayIntentBits.GuildMembers] });
 bot.commands = new Collection();
 
 const mysql = require('mysql2/promise')
@@ -50,6 +51,7 @@ var Scraper = require('images-scraper');
 const randomPuppy = require('random-puppy');
 
 const ytdl = require("ytdl-core");
+const { memoryUsage } = require('node:process');
 
 const PREFIX = '!'
 
@@ -91,7 +93,7 @@ const names = getAllPokemonNames().then( f =>{
 
 
 
-bot.on('ready', () => {
+bot.on('ready', async (bot) => {
     //testDB();
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
@@ -118,7 +120,15 @@ bot.on('ready', () => {
         })
     })
 
-    
+    const guild = bot.guilds.cache.get("<guild_id>");
+
+    console.log("fetching users");
+
+    let res = await guild.members.fetch();
+
+    res.forEach((member) => {
+        console.log(member.user.username);
+    });
 
 });
 
