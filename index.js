@@ -104,39 +104,41 @@ const names = getAllPokemonNames().then( f =>{
 
 bot.on('ready', async (bot) => {
     //testDB();
-    console.log('This bot is online');
+    console.log('This bot is online', "color:green; font-size:20px;");
     bot.user.setActivity('Use !help to get info!');
 
-    fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
-    if (err) {
-          console.error(err)
-          return
-        }
+    // pokemon file reading depecrated
 
-        let stringArray = data.split(/\r?\n/);
+    // fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
+    // if (err) {
+    //       console.error(err)
+    //       return
+    //     }
 
-        var tempArray;
+    //     let stringArray = data.split(/\r?\n/);
 
-        stringArray.forEach( async (str) => {
+    //     var tempArray;
 
-            tempArray = str.split(' ');
+    //     stringArray.forEach( async (str) => {
 
-            var name = tempArray[0];
-            name = name.substring(5, name.length - 5);
-            //console.log(name);
+    //         tempArray = str.split(' ');
 
-            var wins = parseInt(tempArray[1]);
-            var losses = parseInt(tempArray[2]);
+    //         var name = tempArray[0];
+    //         name = name.substring(5, name.length - 5);
+    //         //console.log(name);
 
-            console.log(wins);
+    //         var wins = parseInt(tempArray[1]);
+    //         var losses = parseInt(tempArray[2]);
 
-            const conn = await connection;
-            await conn.query(
-                `INSERT INTO Pokemon VALUES('${name}', ${wins}, ${losses}, 0)`).catch(err => console.log(err));
+    //         console.log(wins);
+
+    //         const conn = await connection;
+    //         await conn.query(
+    //             `INSERT INTO Pokemon VALUES('${name}', ${wins}, ${losses}, 0)`).catch(err => console.log(err));
 
 
-        })
-    })
+    //     })
+    // })
 
 });
 
