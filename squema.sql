@@ -1,7 +1,7 @@
 CREATE DATABASE AlphaDB;
 
 CREATE TABLE Users (
-    ID int NOT NULL PRIMARY KEY,
+    ID varchar(100) NOT NULL PRIMARY KEY,
     LVL int NOT NULL,
     XP int NOT NULL,
     CURR int NOT NULL,
