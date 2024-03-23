@@ -207,7 +207,10 @@ bot.on('interactionCreate', async interaction => {
             await conn.query(
                 `UPDATE Users SET LVL = ${lvl} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
 
-            await interaction.member.id.send("You leveled up!!! ⭐");
+
+            const user = bot.users.cache.get(interaction.member.user.id);
+
+            user.send("You leveled up!!! ⭐");
         }
         else
         {
