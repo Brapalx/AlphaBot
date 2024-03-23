@@ -44,6 +44,10 @@ module.exports = {
 
 
         console.log(date);
+
+        lastDaily = lastDaily.substring(0, 9);
+
+
         console.log(lastDaily);
 
 
