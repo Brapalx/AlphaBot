@@ -47,7 +47,7 @@ module.exports = {
          .setTitle(param)
          .addFields(
             { name: "Wins:", value: wins1.toString(), inline: true},
-            { name: "Losses:", value: pokemon.loss1.toString(), inline: true},
+            { name: "Losses:", value: loss1.toString(), inline: true},
             { name: "Draws:", value: draws1.toString(), inline: true},
             { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
          )
