@@ -115,22 +115,21 @@ bot.on('ready', async (bot) => {
 
         let stringArray = data.split(/\r?\n/);
 
-        var tempObject;
         var tempArray;
 
-        stringArray.forEach( str => {
+        stringArray.forEach( async (str) => {
 
             tempArray = str.split(' ');
 
             var name = tempArray[0];
-
             name = name.substring(5, name.length - 5);
-            console.log(name);
+            //console.log(name);
 
 
-            tempObject = {name: tempArray[0], wins: tempArray[1], losses: tempArray[2]};
+            const conn = await connection;
+            await conn.query(
+                `INSERT INTO Pokemon VALUES( '${name}', ${tempArray[1]}, ${tempArray[2]}, 0`).catch(err => console.log(err));
 
-            pokeArray.push(tempObject)
 
         })
     })
