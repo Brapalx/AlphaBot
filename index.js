@@ -92,7 +92,7 @@ const names = getAllPokemonNames().then( f =>{
 
 
 bot.on('ready', () => {
-    testDB();
+    //testDB();
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
 
@@ -920,3 +920,4 @@ function getImgFromSubreddit(message, subreddit){
 bot.login(process.env.TOKEN);
 
 module.exports.pokeArray = pokeArray;
+module.exports.connection = connection;
