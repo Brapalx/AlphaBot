@@ -7,42 +7,36 @@ module.exports = {
 		.setDescription('Shows the pokemon with most losses!'),
 	async execute(interaction) {
 
-        const Index = require('../index.js')
+    const Index = require('../index.js')
 
-        await interaction.reply('Sorting...');
+    await interaction.reply('Sorting...');
+    
+    const conn = await Index.connection;
 
-        Index.pokeArray.sort((a,b) => parseInt(b.losses) - parseInt(a.losses)); 
-
-              var concString = "";
-              var tString = "";
-              var i = 1;
-
-              var j;
-
-              for (j = 0; j < 20; j++)
-              {
-
-                if(!Index.pokeArray[j])
-                {
-                    break;
-                }
-
-                if(Index.pokeArray[j].losses > 0)
-                {
-                    tString = "#" + i.toString() + ":  " + Index.pokeArray[j].name + "  -  " + Index.pokeArray[j].losses + "\n";
-                    concString = concString.concat(tString);
-                    i = i + 1;
-                }
-              }
-
-              const pokeWLembed = new EmbedBuilder()
-                .setTitle(" 🤢  __***POKEMON BATTLE LOSER RANKINGS***__  🤢 ")
-                .setDescription(concString);
-
-              interaction.channel.send({ embeds: [pokeWLembed] });
+    const [rows, fields] = await conn.query(
+      `SELECT * FROM Pokemon ORDER BY LOSSES DESC LIMIT 20`).catch(err => console.log(err));
 
 
-        await interaction.deleteReply();
-		
+          var concString = "";
+          var tString = "";
+          var i = 1;
+
+          var j;
+
+          for (j = 0; j < 20; j++)
+          {
+              tString = "#" + i.toString() + ":  " + rows[j].STRING + "  -  " + rows[j].LOSSES + "\n";
+              concString = concString.concat(tString);
+              i = i + 1;
+          }
+
+          const pokeWLembed = new EmbedBuilder()
+            .setTitle(" 🤮  __***POKEMON BATTLE LOSER RANKINGS***__  🤮 ")
+            .setDescription(concString);
+
+          interaction.channel.send({ embeds: [pokeWLembed] });
+
+
+      await interaction.deleteReply();
 	},
 };
