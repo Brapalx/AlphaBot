@@ -8,8 +8,9 @@ const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 bot.commands = new Collection();
 
-const mysql = require('mysql2/promise');
-var connection = mysql.createConnection({
+import mysql from 'mysql2/promise'
+
+const connection = await mysql.createConnection({
   user     : process.env.DB_USER,
   password : process.env.DB_PASS,
   database : process.env.DB_NAME
