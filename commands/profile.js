@@ -54,6 +54,7 @@ module.exports = {
 
         const profEmbed = new EmbedBuilder()
             .setTitle(usr.username)
+            .setColor(interaction.member.displayHexColor)
             .addFields(
                 { name: "LVL: ", value: lvl.toString(), inline: true},
                 { name: "XP: ", value: XP.toString(), inline: true},
