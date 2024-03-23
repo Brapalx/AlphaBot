@@ -10,7 +10,7 @@ bot.commands = new Collection();
 
 const mysql = require('mysql2/promise')
 
-const connection = await mysql.createConnection({
+const connection = mysql.createConnection({
   user     : process.env.DB_USER,
   password : process.env.DB_PASS,
   database : process.env.DB_NAME
@@ -18,7 +18,7 @@ const connection = await mysql.createConnection({
  
 // A simple SELECT query
 try {
-    const [results, fields] = await connection.query(
+    const [results, fields] = connection.query(
       'SELECT * FROM `userTable`'
     );
   
