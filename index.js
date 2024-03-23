@@ -77,7 +77,7 @@ var clownID;
 var clownerID;
 var clownNext = false;
 
-var pokeArray = []
+//var pokeArray = []
 
 
 const google = new Scraper({
@@ -86,16 +86,16 @@ const google = new Scraper({
     }
 })
 
-const names = getAllPokemonNames().then( f =>{
+// const names = getAllPokemonNames().then( f =>{
 
-    f.forEach( poke => {
+//     f.forEach( poke => {
 
-        //console.log(poke.pokemonName)
+//         //console.log(poke.pokemonName)
 
-    });
+//     });
 
-    console.log('Got all Pokemon');
-});
+//     console.log('Got all Pokemon');
+// });
 
     
 
@@ -1013,5 +1013,5 @@ function getImgFromSubreddit(message, subreddit){
 
 bot.login(process.env.TOKEN);
 
-module.exports.pokeArray = pokeArray;
+//module.exports.pokeArray = pokeArray;
 module.exports.connection = connection;
