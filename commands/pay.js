@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('pay')
-		.setDescription('Gives you Money!')
+		.setDescription('Give corgis to someone!')
         .addUserOption(option =>
             option.setName('user')
             .setDescription('User to pay')
@@ -49,6 +49,7 @@ module.exports = {
             await conn.query(
                 `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
 
+            await interaction.reply(`You gave ${usr.username} ${amount} corgi(s)! 💰`);
         }
     },
 
