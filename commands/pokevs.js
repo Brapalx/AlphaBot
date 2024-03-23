@@ -114,7 +114,7 @@ module.exports = {
                     { name: "Wins:", value: wins2.toString(), inline: true},
                     { name: "Losses:", value: loss2.toString(), inline: true},
                     { name: "Draws:", value: draws2.toString(), inline: true},
-                    { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
+                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
                  )
                  .setImage(url=url2)
             

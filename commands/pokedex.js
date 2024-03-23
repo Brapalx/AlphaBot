@@ -15,55 +15,47 @@ module.exports = {
 
         await interaction.reply('Searching...');
 
-        
+        const conn = await Index.connection;
         var param = interaction.options.getString('pokemon').toUpperCase();
 
-        var luName = "__***" + param + "***__";
 
         let pokedexEmbed;
+        var wins1 = 0;
+        var loss1 = 0;
+        var draws1 = 0;
 
-        var found = false;
+        await conn.query(
+            `SELECT * FROM Pokemon WHERE STRING = '${param}'`).then(result => {
+                wins1 = result[0][0].WINS;
+                loss1 = result[0][0].LOSSES;
+                draws1 = result[0][0].DRAWS;
+            }).catch(err => console.log(err));
 
-        Index.pokeArray.forEach( pokemon => {
+        var fileString2 = param.toLowerCase();
+        var dirString2 = "./pokeimages/" + fileString2 + ".png";
 
-            if (pokemon.name === luName)
-            {
+        const file = new AttachmentBuilder(dirString2);
 
-                var fileString2 = param.toLowerCase();
-                var dirString2 = "./pokeimages/" + fileString2 + ".png";
+        var attachString2 = "attachment://";
+        attachString2 = attachString2.concat(fileString2 + ".png");
 
-                const file = new AttachmentBuilder(dirString2);
+
+        var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
+        linkString2 = linkString2.concat(fileString2.charAt(0).toUpperCase() + fileString2.slice(1), "_(Pok%C3%A9mon)")
         
-                var attachString2 = "attachment://";
-                attachString2 = attachString2.concat(fileString2 + ".png");
+        pokedexEmbed = new EmbedBuilder()
+         .setTitle(param)
+         .addFields(
+            { name: "Wins:", value: wins1.toString(), inline: true},
+            { name: "Losses:", value: pokemon.loss1.toString(), inline: true},
+            { name: "Draws:", value: draws1.toString(), inline: true},
+            { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
+         )
+         .setImage(attachString2)
 
-                var trimString2 = fileString2;
+        interaction.channel.send({ embeds: [pokedexEmbed], files: [file]});
 
 
-                var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
-                linkString2 = linkString2.concat(trimString2.charAt(0).toUpperCase() + trimString2.slice(1), "_(Pok%C3%A9mon)")
-                
-                pokedexEmbed = new EmbedBuilder()
-                 .setTitle(pokemon.name)
-                 .addFields(
-                    { name: "Wins:", value: pokemon.wins.toString(), inline: true},
-                    { name: "Losses:", value: pokemon.losses.toString(), inline: true},
-                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
-                 )
-                 .setImage(attachString2)
-
-                interaction.channel.send({ embeds: [pokedexEmbed], files: [file]});
-
-                found = true;
-            }
-            })
-
-            if (!found)
-            {
-                pokedexEmbed = new EmbedBuilder()
-                .setTitle("POKEMON  __***NOT***__  FOUND IN THE BATTLE RECORDS")
-                interaction.channel.send({ embeds: [pokedexEmbed] });
-            }
 
 
         await interaction.deleteReply();
