@@ -5,7 +5,7 @@ module.exports = {
 		.setName('daily')
 		.setDescription('Gives you Money!')
         .addUserOption(option =>
-            opiton.setName('user')
+            option.setName('user')
             .setDescription('User to pay')
             .setRequired(true))
         .addIntegerOption( option =>
