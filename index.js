@@ -17,15 +17,19 @@ const connection = mysql.createConnection({
   database : process.env.DB_NAME
 })
 
-try {
-
-    const [rows, fields] = connection.execute('SELECT * FROM Users');
-  
-    console.log(rows); // in this query, results will be an array of arrays rather than an array of objects
-    console.log(fields); // fields are unchanged
-} catch (err) {
-    console.log(err);
+async function testDB() {
+    try {
+        const conn = await connection;
+        const [rows, fields] = await conn.execute('SELECT * FROM Users');
+      
+        console.log(rows); // in this query, results will be an array of arrays rather than an array of objects
+        console.log(fields); // fields are unchanged
+    } catch (err) {
+        console.log(err);
+    }
 }
+
+
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -88,6 +92,7 @@ const names = getAllPokemonNames().then( f =>{
 
 
 bot.on('ready', () => {
+    testDB();
     console.log('This bot is online');
     bot.user.setActivity('Use !help to get info!');
 
