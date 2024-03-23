@@ -104,7 +104,7 @@ const names = getAllPokemonNames().then( f =>{
 
 bot.on('ready', async (bot) => {
     //testDB();
-    console.log('This bot is online', "color:green; font-size:20px;");
+    console.log("%c AlphaBot is Online", "color:green; font-size:20px;");
     bot.user.setActivity('Use !help to get info!');
 
     // pokemon file reading depecrated
