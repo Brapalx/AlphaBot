@@ -124,7 +124,7 @@ bot.on('ready', async (bot) => {
 
             var name = tempArray[0];
 
-            name = name.substring(5, name.length() - 5);
+            name = name.substring(5, name.length - 5);
             console.log(name);
 
 
