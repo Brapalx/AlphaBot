@@ -17,7 +17,8 @@ module.exports = {
           `SELECT * FROM Pokemon ORDER BY WINS DESC LIMIT 10`).catch(err => console.log(err));
 
 
-        console.log(rows);
+        console.log(rows[0].STRING);
+        console.log(rows[1].STRING);
 
 
         // Index.pokeArray.sort((a,b) => parseInt(b.wins) - parseInt(a.wins)); 
