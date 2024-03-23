@@ -38,6 +38,8 @@ async function testDB() {
 }
 
 const startCurr = 69;
+const XPIncrease = 10;
+const maxXP = 100;
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -177,6 +179,42 @@ bot.on('interactionCreate', async interaction => {
 
 	try {
 		await command.execute(interaction);
+
+        // get xp for using a command
+        var XP = 0;
+        const conn = await connection;
+
+        await conn.query(
+            `SELECT XP FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
+                XP = result[0][0].XP + XPIncrease;
+            }).catch(err => console.log(err));
+
+        // check for level up
+        if  (XP >= maxXP)
+        {
+            XP = XP - maxXP;
+            var lvl = 0;
+
+            await conn.query(
+                `UPDATE Users SET XP = ${XP} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
+
+
+            await conn.query(
+                `SELECT LVL FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
+                    lvl = result[0][0].LVL + 1;
+            }).catch(err => console.log(err));
+                
+            await conn.query(
+                `UPDATE Users SET LVL = ${lvl} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
+
+            await interaction.channel.send("You leveled up!!! ⭐");
+        }
+        else
+        {
+            await conn.query(
+                `UPDATE Users SET XP = ${XP} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
+        }
+
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
