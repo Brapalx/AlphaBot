@@ -10,9 +10,10 @@ bot.commands = new Collection();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'brapalx',
-  password : '3008'
+  host     : "localhost",
+  user     : "brapalx",
+  password : "3008",
+  database: "userTable"
 });
  
 connection.connect(function(err) {
