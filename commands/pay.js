@@ -50,7 +50,7 @@ module.exports = {
                 `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
 
 
-            await usr.id.send(`${usr.username} sent you ${amount} corgi(s)!!! 🔥🔥`);
+            //await usr.send(`${usr.username} sent you ${amount} corgi(s)!!! 🔥🔥`);
 
             await interaction.reply(`You gave ${usr.username} ${amount} corgi(s)! 💰`);
         }

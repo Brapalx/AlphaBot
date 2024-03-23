@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('balance')
-		.setDescription('Gives you Money!'),
+		.setDescription('Check your balance!'),
 	async execute(interaction) {
 
         const Index = require('../index.js')
