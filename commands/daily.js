@@ -22,6 +22,8 @@ module.exports = {
             `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
           
 
+        console.log("gottem");
+
 		await interaction.reply('More Money!');
 	},
 };
