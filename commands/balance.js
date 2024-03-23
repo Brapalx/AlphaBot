@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('daily')
+		.setName('balance')
 		.setDescription('Gives you Money!'),
 	async execute(interaction) {
 
