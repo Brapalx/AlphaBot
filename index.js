@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 
 try {
 
-    const [rows, fields] = conn.execute('SELECT * FROM Users');
+    const [rows, fields] = connection.execute('SELECT * FROM Users');
   
     console.log(rows); // in this query, results will be an array of arrays rather than an array of objects
     console.log(fields); // fields are unchanged
