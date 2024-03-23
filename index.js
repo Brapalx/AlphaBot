@@ -207,7 +207,7 @@ bot.on('interactionCreate', async interaction => {
             await conn.query(
                 `UPDATE Users SET LVL = ${lvl} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
 
-            await interaction.channel.send("You leveled up!!! ⭐");
+            await interaction.member.id.send("You leveled up!!! ⭐");
         }
         else
         {

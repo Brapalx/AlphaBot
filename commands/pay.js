@@ -49,6 +49,9 @@ module.exports = {
             await conn.query(
                 `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
 
+
+            await usr.id.send(`${usr.username} sent you ${amount} corgi(s)!!! 🔥🔥`);
+
             await interaction.reply(`You gave ${usr.username} ${amount} corgi(s)! 💰`);
         }
     },
