@@ -52,7 +52,7 @@ module.exports = {
 
             //await usr.send(`${usr.username} sent you ${amount} corgi(s)!!! 🔥🔥`);
 
-            await interaction.reply(`You gave ${usr.username} ${amount} corgi(s)! 💰`);
+            await interaction.reply(`You gave ${usr.username} ${amount} corgi(s)! Their new balance is ${newAmount}!! 💰`);
         }
     },
 
