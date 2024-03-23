@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
  
 // A simple SELECT query
 try {
-    const [results, fields] = connection.query(
+    const [results, fields] = connection.promise().query(
       'SELECT * FROM `userTable`'
     );
   
