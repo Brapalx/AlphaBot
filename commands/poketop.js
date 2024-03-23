@@ -14,7 +14,7 @@ module.exports = {
         const conn = await Index.connection;
 
         const [rows, fields] = await conn.query(
-          `SELECT TOP 10 * FROM Pokemon ORDER BY WINS DESC`).catch(err => console.log(err));
+          `SELECT * FROM Pokemon ORDER BY WINS DESC LIMIT 10`).catch(err => console.log(err));
 
 
         console.log(rows);
