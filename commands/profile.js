@@ -55,12 +55,12 @@ module.exports = {
         const profEmbed = new EmbedBuilder()
             .setTitle(usr.username)
             .addFields(
-                { name: "LVL: ", value: lvl, inline: true},
-                { name: "XP: ", value: XP, inline: true},
-                { name: "Corgis: ", value: curr, inline: false},
-                { name: "Clowned: ", value: clowned, inline: false},
-                { name: "Got Clowned On: ", value: fooled, inline: true},
-                { name: "Games Won: ", value: won, inline: false},
+                { name: "LVL: ", value: lvl.toString(), inline: true},
+                { name: "XP: ", value: XP.toString(), inline: true},
+                { name: "Corgis: ", value: curr.toString(), inline: false},
+                { name: "Clowned: ", value: clowned.toString(), inline: false},
+                { name: "Got Clowned On: ", value: fooled.toString(), inline: true},
+                { name: "Games Won: ", value: won.toString(), inline: false},
             )
             .setThumbnail(usr.displayAvatarURL())
             
