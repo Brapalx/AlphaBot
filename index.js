@@ -37,7 +37,7 @@ async function testDB() {
     }
 }
 
-
+const startCurr = 69;
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -143,7 +143,7 @@ bot.on('guildCreate', async (guild) => {
         try {
             const conn = await connection;
              await conn.query(
-                `INSERT INTO Users VALUES( '${member.id}', 1, 0, 20, 0, 0, 0, '${member.user.username}')`);
+                `INSERT INTO Users VALUES( '${member.id}', 1, 0, ${startCurr}, 0, 0, 0, '${member.user.username}', '2000-01-01')`);
           
     
         } catch (err) {
@@ -152,6 +152,20 @@ bot.on('guildCreate', async (guild) => {
     });
 
 });
+
+
+bot.on('guildMemberAdd', async (member) => {
+    //testDB();
+
+    console.log("new member");
+
+
+    const conn = await connection;
+    await conn.query(
+        `INSERT INTO Users VALUES( '${member.id}', 1, 0, ${startCurr}, 0, 0, 0, '${member.user.username}', '2000-01-01')`).catch(err => console.log(err));
+
+});
+
 
 
 bot.on('interactionCreate', async interaction => {
