@@ -28,9 +28,9 @@ function image2rand(interaction, word){
         return interaction.channel.send("Please enter an image name.");
 
     (async () => {
-        const results = await google.scrape(word, 2);
+        const results = await google.scrape(word, 10);
         
-        //var rand = Math.floor(Math.random() * 50)
+        var rand = Math.floor(Math.random() * 10)
         
         interaction.channel.send(results[0].url);
         var strrr = 'Searched for: ' + word;
