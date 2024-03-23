@@ -122,6 +122,12 @@ bot.on('ready', async (bot) => {
 
             tempArray = str.split(' ');
 
+            var name = tempArray[0];
+
+            name = name.substring(5, name.length() - 5);
+            console.log(name);
+
+
             tempObject = {name: tempArray[0], wins: tempArray[1], losses: tempArray[2]};
 
             pokeArray.push(tempObject)
