@@ -126,7 +126,11 @@ bot.on('ready', async (bot) => {
         })
     })
 
-    const guild = bot.guilds.cache.get("<guild_id>");
+});
+
+
+bot.on('guildCreate', async (guild) => {
+    //testDB();
 
     console.log("fetching users");
 
@@ -137,9 +141,6 @@ bot.on('ready', async (bot) => {
     });
 
 });
-
-
-
 
 
 bot.on('interactionCreate', async interaction => {
