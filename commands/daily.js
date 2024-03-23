@@ -20,7 +20,28 @@ module.exports = {
 
 
         var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1)  + '-' + today.getDate();
+
+
+        var date = today.getFullYear() + '-';
+        
+        if ((today.getMonth() + 1) < 10)
+        {
+            date = date + '0' +(today.getMonth() + 1) + '-';
+        }
+        else
+        {
+            date = date + (today.getMonth() + 1) + '-';
+        }
+
+        if (today.getDate() < 10)
+        {
+            date = date + '0' + today.getDate();
+        }
+        else
+        {
+            date = date + today.getDate();
+        }
+
 
         console.log(date);
         console.log(lastDaily);
