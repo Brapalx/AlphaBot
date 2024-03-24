@@ -8,6 +8,7 @@ module.exports = {
 
         const Index = require('../index.js')
 
+        const dailyExtra = 100;
 
         const conn = await Index.connection;
 
@@ -53,19 +54,12 @@ module.exports = {
 
         if (date != lastDaily)
         {
-            var newCurr = 0;
 
             await conn.query(
-                `SELECT CURR FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
-                    newCurr = result[0][0].CURR + 20;
-                }).catch(err => console.log(err));
+                `UPDATE Users SET CURR = CURR + ${dailyExtra}, LDAILY = '${date}' WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
     
-            await conn.query(
-                `UPDATE Users SET CURR = ${newCurr}, LDAILY = '${date}' WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
-    
-            console.log("gottem");
-    
-            await interaction.reply('More Money!');
+
+            await interaction.reply('Claimed!');
         }
         else
         {

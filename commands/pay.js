@@ -15,15 +15,12 @@ module.exports = {
 	async execute(interaction) {
 
         const Index = require('../index.js')
-
-
         const conn = await Index.connection;
 
         var curr = 0;
         var amount = interaction.options.getInteger('amount');
         var usr = interaction.options.getUser('user');
         var newAmount = 0;
-        var newCurr = 0;
 
         await conn.query(
             `SELECT CURR FROM Users WHERE ID = '${interaction.member.id}'`).then(result => {
@@ -36,18 +33,16 @@ module.exports = {
         }
         else
         {
-            newCurr = curr - amount;
-
             await conn.query(
                 `SELECT CURR FROM Users WHERE ID = '${usr.id}'`).then(result => {
                     newAmount = result[0][0].CURR + amount;
                 }).catch(err => console.log(err));
     
             await conn.query(
-                `UPDATE Users SET CURR = ${newAmount} WHERE ID = '${usr.id}'`).catch(err => console.log(err));
+                `UPDATE Users SET CURR = CURR + ${amount} WHERE ID = '${usr.id}'`).catch(err => console.log(err));
     
             await conn.query(
-                `UPDATE Users SET CURR = ${newCurr} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
+                `UPDATE Users SET CURR = CURR - ${amount} WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
 
 
             //await usr.send(`${usr.username} sent you ${amount} corgi(s)!!! 🔥🔥`);
