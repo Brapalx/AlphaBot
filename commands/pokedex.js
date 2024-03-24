@@ -25,7 +25,7 @@ module.exports = {
 
         names.forEach( name => {
 
-            if (name == param.toLowerCase())
+            if (name.pokemonName == param.toLowerCase())
                 found = true;
         })
 
