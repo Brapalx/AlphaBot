@@ -162,12 +162,7 @@ collector.on('end', async (collected) => {
                     loserName = name2;
 
 
-                    await conn.query(
-                        `UPDATE Pokemon SET WINS = ${wins1 + 1} WHERE STRING = '${winnerName}'`).catch(err => console.log(err));
-
                     
-                    await conn.query(
-                        `UPDATE Pokemon SET LOSSES = ${loss2 + 1} WHERE STRING = '${loserName}'`).catch(err => console.log(err));
 
                 }
                 else if (numB > numA)
@@ -175,17 +170,14 @@ collector.on('end', async (collected) => {
                     winnerName = name2;
                     loserName = name1;
 
-                    await conn.query(
-                        `UPDATE Pokemon SET WINS = ${wins2 + 1} WHERE STRING = '${winnerName}'`).catch(err => console.log(err));
-
-                    
-                    await conn.query(
-                        `UPDATE Pokemon SET LOSSES = ${loss1 + 1} WHERE STRING = '${loserName}'`).catch(err => console.log(err));
+       
                 }
 
                 let surveyResultsEmbed;
 
-                if (numB == numA)
+                var totalVotes = numA + numB;
+
+                if (numB == numA && totalVotes > 1)
                 {
                     surveyResultsEmbed = new EmbedBuilder()
                     .setTitle(`IT'S A __***TIE***__ \n\ SCORE: ${numA} - ${numB}` )
@@ -198,7 +190,7 @@ collector.on('end', async (collected) => {
                         `UPDATE Pokemon SET DRAWS = ${draws2 + 1} WHERE STRING = '${name2}'`).catch(err => console.log(err));
             
                 }
-                else if ((numA + numB) == 1)
+                else if (totalVotes <= 1)
                 {
                     surveyResultsEmbed = new EmbedBuilder()
                     .setTitle("NOT ENOUGH VOTES!")
@@ -211,11 +203,25 @@ collector.on('end', async (collected) => {
                         surveyResultsEmbed = new EmbedBuilder()
                     .setTitle(`${winnerName} WINS! \n\ SCORE: ${numA} - ${numB}` )
 
+                    await conn.query(
+                        `UPDATE Pokemon SET WINS = ${wins1 + 1} WHERE STRING = '${winnerName}'`).catch(err => console.log(err));
+
+                    
+                    await conn.query(
+                        `UPDATE Pokemon SET LOSSES = ${loss2 + 1} WHERE STRING = '${loserName}'`).catch(err => console.log(err));
+
                     }
                     else
                     {
                         surveyResultsEmbed = new EmbedBuilder()
                     .setTitle(`${winnerName} WINS! \n\ SCORE: ${numB} - ${numA}` )
+
+                    await conn.query(
+                        `UPDATE Pokemon SET WINS = ${wins2 + 1} WHERE STRING = '${winnerName}'`).catch(err => console.log(err));
+
+                    
+                    await conn.query(
+                        `UPDATE Pokemon SET LOSSES = ${loss1 + 1} WHERE STRING = '${loserName}'`).catch(err => console.log(err));
                     }
 
                 }
