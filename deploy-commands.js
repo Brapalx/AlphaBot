@@ -23,7 +23,3 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 rest.put(Routes.applicationCommands(process.env.CLIENTID), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
-
-rest.put(Routes.applicationCommands(process.env.GUILDID), { body: commands })
-	.then(() => console.log('Successfully registered application commands.'))
-	.catch(console.error);
