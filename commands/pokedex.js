@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
-const {Pokemon, PokemonArray, getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs')
+const {Pokemon, PokemonArray, PokemonNamesArray, getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,38 +19,58 @@ module.exports = {
         const conn = await Index.connection;
         var param = interaction.options.getString('pokemon').toUpperCase();
 
-        var wins1 = 0;
-        var loss1 = 0;
-        var draws1 = 0;
+        const names = await getAllPokemonNames();
 
-        await conn.query(
-            `SELECT * FROM Pokemon WHERE STRING = '${param}'`).then(result => {
-                wins1 = result[0][0].WINS;
-                loss1 = result[0][0].LOSSES;
-                draws1 = result[0][0].DRAWS;
-            }).catch(err => console.log(err));
+        var found = false;
 
+        names.forEach( name => {
 
-        const poke = getPokemon(param.toLowerCase()).then((f)=>
+            if (name == param.toLowerCase())
+                found = true;
+        })
+
+        if (found)
         {
-           if(f) {
-             
-   
-             const pokeEmbed2 = new EmbedBuilder()
-                    .setTitle(param)
-                    .addFields(
-                       { name: "Wins:", value: wins1.toString(), inline: true},
-                       { name: "Losses:", value: loss1.toString(), inline: true},
-                       { name: "Draws:", value: draws1.toString(), inline: true},
-                    )
-                    .setImage(url=f.image.default)
+            var wins1 = 0;
+            var loss1 = 0;
+            var draws1 = 0;
+    
+            await conn.query(
+                `SELECT * FROM Pokemon WHERE STRING = '${param}'`).then(result => {
+                    wins1 = result[0][0].WINS;
+                    loss1 = result[0][0].LOSSES;
+                    draws1 = result[0][0].DRAWS;
+                }).catch(err => console.log(err));
+    
+    
+            const poke = getPokemon(param.toLowerCase()).then((f)=>
+            {
+               if(f) {
+                 
+       
+                 const pokeEmbed2 = new EmbedBuilder()
+                        .setTitle(param)
+                        .addFields(
+                           { name: "Wins:", value: wins1.toString(), inline: true},
+                           { name: "Losses:", value: loss1.toString(), inline: true},
+                           { name: "Draws:", value: draws1.toString(), inline: true},
+                        )
+                        .setImage(url=f.image.default)
+                   
                
-           
-               //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
-               interaction.channel.send({ embeds: [pokeEmbed2]});
-           }
+                   //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
+                   interaction.channel.send({ embeds: [pokeEmbed2]});
+               }
+            }
+           )
         }
-       )
+        else
+        {
+            await interaction.reply("Not a valid pokemon.");
+        }
+
+
+
 
         await interaction.deleteReply();
 	},
