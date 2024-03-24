@@ -4,7 +4,7 @@ const path = require('node:path');
 const Discord = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Collection } = require('discord.js');
-const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs');
+const {PokemonNamesArray, getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs');
 const bot = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
@@ -108,17 +108,17 @@ bot.on('ready', async (bot) => {
     bot.user.setActivity('Use !help to get info!');
 
 
-    const names=await getAllPokemonNames();
+    const names = await getAllPokemonNames();
 
     names.forEach(async (name) => {
 
-            
 
-            name = name.toUpperCase();
+
+            var str = name.pokemonName.toUpperCase();
 
              const conn = await connection;
              await conn.query(
-                 `INSERT INTO Pokemon VALUES('${name}', 0, 0, 0)`).catch(err => console.log(err));
+                 `INSERT INTO Pokemon VALUES('${str}', 0, 0, 0)`).catch(err => console.log(err));
     })
 
 
