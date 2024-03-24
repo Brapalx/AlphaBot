@@ -108,18 +108,18 @@ bot.on('ready', async (bot) => {
     bot.user.setActivity('Use !help to get info!');
 
 
-    const names = await getAllPokemonNames();
+    // const names = await getAllPokemonNames();
 
-    names.forEach(async (name) => {
+    // names.forEach(async (name) => {
 
 
 
-            var str = name.pokemonName.toUpperCase();
+    //         var str = name.pokemonName.toUpperCase();
 
-             const conn = await connection;
-             await conn.query(
-                 `INSERT INTO Pokemon VALUES('${str}', 0, 0, 0)`).catch(err => console.log(err));
-    })
+    //          const conn = await connection;
+    //          await conn.query(
+    //              `INSERT INTO Pokemon VALUES('${str}', 0, 0, 0)`).catch(err => console.log(err));
+    // })
 
 
     // pokemon file reading depecrated

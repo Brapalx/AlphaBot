@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, Events, AttachmentBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('node:fs');
-const {getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs')
+const {Pokemon, PokemonArray, getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,8 +14,6 @@ module.exports = {
         await interaction.reply('Loading...');
 
             interaction.channel.send(" 👊  __***POKEMON BATTLE***__  👊 ");
-
-            var poke_files = fs.readdirSync('./pokeimages/');
 
             const conn = await Index.connection;
 
@@ -50,27 +48,12 @@ module.exports = {
             while (name1 == name2)
 
             var lowerName1 = name1.toLowerCase();
-            var fileString = lowerName1 + '.png';
-            
-
-            var dirString = "./pokeimages/" + fileString;
-            const fileA = new AttachmentBuilder(dirString);
-
-            var attachString = "attachment://";
-            attachString = attachString.concat(fileString);
-
-            var linkString = "https://bulbapedia.bulbagarden.net/wiki/";
-            linkString = linkString.concat(lowerName1.charAt(0).toUpperCase() + lowerName1.slice(1), "_(Pok%C3%A9mon)")
-
-  
             console.log(lowerName1);
 
             const poke = getPokemon(lowerName1).then((f)=>
      {
         if(f) {
           
-          let url1 = "https://www.serebii.net/art/th/" + f.idPokedex + ".png";
-          console.log(url1)
 
           const pokeEmbed = new EmbedBuilder()
                  .setTitle(name1)
@@ -78,9 +61,8 @@ module.exports = {
                      { name: "Wins:", value: wins1.toString(), inline: true},
                      { name: "Losses:", value: loss1.toString(), inline: true},
                      { name: "Draws:", value: draws1.toString(), inline: true},
-                     { name: "More info:", value: "[Click here](" + linkString + ")", inline: true},
                  )
-                 .setImage(url=url1)
+                 .setImage(url=f.image.default)
             
         
             //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
@@ -88,25 +70,16 @@ module.exports = {
         }
      }
     )
-           //console.log(url1)  
+
             
             var lowerName2 = name2.toLowerCase();
-            var fileString2 = lowerName2 + '.png';
-            var dirString2 = "./pokeimages/" + fileString2;
-            const fileB = new AttachmentBuilder(dirString2);
 
-            var attachString2 = "attachment://";
-            attachString2 = attachString2.concat(fileString2);
-
-            var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
-            linkString2 = linkString2.concat(lowerName2.charAt(0).toUpperCase() + lowerName2.slice(1), "_(Pok%C3%A9mon)")
+            console.log(lowerName2)
 
             const poke2 = getPokemon(lowerName2).then((f)=>
      {
         if(f) {
           
-          let url2 = "https://www.serebii.net/art/th/" + f.idPokedex + ".png";
-          console.log(url2)
 
           const pokeEmbed2 = new EmbedBuilder()
                  .setTitle(name2)
@@ -114,9 +87,8 @@ module.exports = {
                     { name: "Wins:", value: wins2.toString(), inline: true},
                     { name: "Losses:", value: loss2.toString(), inline: true},
                     { name: "Draws:", value: draws2.toString(), inline: true},
-                    { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
                  )
-                 .setImage(url=url2)
+                 .setImage(url=f.image.default)
             
         
             //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
