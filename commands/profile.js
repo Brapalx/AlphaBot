@@ -55,7 +55,7 @@ module.exports = {
                 { name: "Got Clowned On: ", value: fooled.toString(), inline: true},
                 { name: "Games Won: ", value: won.toString(), inline: false},
             )
-            .setImage(usr.displayAvatarURL({dynamic: true}));
+            .setThumbnail(usr.displayAvatarURL({size: 480, dynamic: true}));
             
             
         //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
