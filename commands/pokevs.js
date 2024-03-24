@@ -124,7 +124,7 @@ module.exports = {
 
                 interaction.channel.send({ content: 'VOTE HERE: ONLY FIRST VOTE COUNTS!', components: [row] });
 
-                const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+                const collector = interaction.channel.createMessageComponentCollector({ filter, time: 25000 });
 
         let ids = [];
 
@@ -146,6 +146,7 @@ collector.on('collect', async i => {
             console.log("B")
             numB++;
         }
+        i.reply("Thanks for voting!");
     }
 
 });
