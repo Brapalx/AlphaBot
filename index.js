@@ -71,7 +71,7 @@ var servers = {};
 var files = fs.readdirSync('./roulette/');
 var files2 = fs.readdirSync('./f_roulette/');
 
-var poke_files = fs.readdirSync('./pokeimages/');
+//var poke_files = fs.readdirSync('./pokeimages/');
 
 var clownID;
 var clownerID;
