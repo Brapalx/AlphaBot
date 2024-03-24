@@ -14,12 +14,16 @@ for (const file of commandFiles) {
 	const command = require(filePath);
 	commands.push(command.data.toJSON());
 
-    console.log(process.env.CLIENTID)
-	console.log(process.env.GUILDID)
+    //console.log(process.env.CLIENTID)
+	//console.log(process.env.GUILDID)
 }
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 rest.put(Routes.applicationCommands(process.env.CLIENTID), { body: commands })
+	.then(() => console.log('Successfully registered application commands.'))
+	.catch(console.error);
+
+rest.put(Routes.applicationCommands(process.env.GUILDID), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
