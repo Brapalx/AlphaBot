@@ -59,7 +59,7 @@ module.exports = {
                 `UPDATE Users SET CURR = CURR + ${dailyExtra}, LDAILY = '${date}' WHERE ID = '${interaction.member.id}'`).catch(err => console.log(err));
     
 
-            await interaction.reply('Claimed!');
+            await interaction.reply(`Claimed ${dailyExtra} corgis!`);
         }
         else
         {
