@@ -107,6 +107,19 @@ bot.on('ready', async (bot) => {
     console.log("%c AlphaBot is Online", "color:green; font-size:20px;");
     bot.user.setActivity('Use !help to get info!');
 
+
+    const names=await getAllPokemonNames();
+
+    names.forEach(async (name) => {
+
+            name = name.toUpperCase();
+
+             const conn = await connection;
+             await conn.query(
+                 `INSERT INTO Pokemon VALUES('${name}', 0, 0, 0)`).catch(err => console.log(err));
+    })
+
+
     // pokemon file reading depecrated
 
     // fs.readFile('pokewinners.txt', 'utf8' , (err, data) => {
