@@ -112,6 +112,8 @@ bot.on('ready', async (bot) => {
 
     names.forEach(async (name) => {
 
+            
+
             name = name.toUpperCase();
 
              const conn = await connection;
