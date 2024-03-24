@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
+const {Pokemon, PokemonArray, getPokemon,getAllPokemon,getAllPokemonNames} = require('pkmonjs')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -18,8 +19,6 @@ module.exports = {
         const conn = await Index.connection;
         var param = interaction.options.getString('pokemon').toUpperCase();
 
-
-        let pokedexEmbed;
         var wins1 = 0;
         var loss1 = 0;
         var draws1 = 0;
@@ -31,32 +30,27 @@ module.exports = {
                 draws1 = result[0][0].DRAWS;
             }).catch(err => console.log(err));
 
-        var fileString2 = param.toLowerCase();
-        var dirString2 = "./pokeimages/" + fileString2 + ".png";
 
-        const file = new AttachmentBuilder(dirString2);
-
-        var attachString2 = "attachment://";
-        attachString2 = attachString2.concat(fileString2 + ".png");
-
-
-        var linkString2 = "https://bulbapedia.bulbagarden.net/wiki/";
-        linkString2 = linkString2.concat(fileString2.charAt(0).toUpperCase() + fileString2.slice(1), "_(Pok%C3%A9mon)")
-        
-        pokedexEmbed = new EmbedBuilder()
-         .setTitle(param)
-         .addFields(
-            { name: "Wins:", value: wins1.toString(), inline: true},
-            { name: "Losses:", value: loss1.toString(), inline: true},
-            { name: "Draws:", value: draws1.toString(), inline: true},
-            { name: "More info:", value: "[Click here](" + linkString2 + ")", inline: true},
-         )
-         .setImage(attachString2)
-
-        interaction.channel.send({ embeds: [pokedexEmbed], files: [file]});
-
-
-
+        const poke = getPokemon(param.toLowerCase()).then((f)=>
+        {
+           if(f) {
+             
+   
+             const pokeEmbed2 = new EmbedBuilder()
+                    .setTitle(param)
+                    .addFields(
+                       { name: "Wins:", value: wins1.toString(), inline: true},
+                       { name: "Losses:", value: loss1.toString(), inline: true},
+                       { name: "Draws:", value: draws1.toString(), inline: true},
+                    )
+                    .setImage(url=f.image.default)
+               
+           
+               //await interaction.channel.send({ embeds: [pokeEmbed], files: [fileA]});
+               interaction.channel.send({ embeds: [pokeEmbed2]});
+           }
+        }
+       )
 
         await interaction.deleteReply();
 	},

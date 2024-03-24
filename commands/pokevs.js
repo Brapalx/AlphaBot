@@ -146,7 +146,6 @@ collector.on('collect', async i => {
             console.log("B")
             numB++;
         }
-        i.reply("Thanks for voting!");
     }
 
 });
