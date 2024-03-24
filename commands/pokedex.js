@@ -66,7 +66,7 @@ module.exports = {
         }
         else
         {
-            await interaction.reply("Not a valid pokemon.");
+            interaction.channel.send('Not a valid Pokemon.');
         }
 
 
