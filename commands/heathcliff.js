@@ -28,7 +28,7 @@ module.exports = {
             //console.log(imgIndexEnd);
     
             console.log(imgString);      
-            msg.channel.send(imgString);
+            interaction.channel.send(imgString);
     
         });
 
