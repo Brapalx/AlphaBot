@@ -28,11 +28,11 @@ module.exports = {
             //console.log(imgIndexEnd);
     
             console.log(imgString);      
-            //msg.channel.send(imgString);
+            msg.channel.send(imgString);
     
         });
 
 
-		await interaction.reply(imgString);
+		await interaction.reply("Pong");
 	},
 };
