@@ -27,7 +27,8 @@ module.exports = {
         
         try {
             const completion = await openai.chat.completions.create({
-                messages: [{content: interaction.options.getString('prompt')}],
+                messages: [{role: "system", content: "You're a friendly chatbot."}, 
+                {role: "user", content: interaction.options.getString('prompt')}],
                 model:"gpt-3.5-turbo-1106"
             });
             console.log(completion.choices[0]);
