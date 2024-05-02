@@ -26,7 +26,7 @@ module.exports = {
         
         try {
             const completion = await openai.createCompletion({
-                model:"gpt-3.5-turbo-1106",
+                model:"gpt-3.5-turbo",
                 prompt: interaction.options.getString('prompt'),
                 temperature:0.7,
                 max_tokens:2048,
@@ -42,7 +42,7 @@ module.exports = {
 	            .setTitle(interaction.options.getString('prompt'))
 	            .setDescription(completion.data.choices[0].text)
 	            .setTimestamp()
-	            .setFooter({ text: 'Powered by GPT-3'});
+	            .setFooter({ text: 'Powered by GPT-3.5 Turbo'});
 
             interaction.channel.send({ embeds: [responseEmbed] });
             console.log(interaction.user.displayAvatarURL());
