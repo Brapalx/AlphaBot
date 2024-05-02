@@ -26,7 +26,7 @@ module.exports = {
         
         try {
             const completion = await openai.createCompletion({
-                model:"text-davinci-003",
+                model:"gpt-3.5-turbo-1106",
                 prompt: interaction.options.getString('prompt'),
                 temperature:0.7,
                 max_tokens:2048,
