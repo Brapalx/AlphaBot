@@ -15,20 +15,20 @@ module.exports = {
 
             htmldata=body;
 			
-			console.log(htmldata);
+			//console.log(htmldata);
                     
-            // let imgIndexStart = htmldata.indexOf("<div id='z'");
-            // imgString = htmldata.substring(imgIndexStart + 12, htmldata.size);
+            let imgIndexStart = htmldata.indexOf("og:image");
+            imgString = htmldata.substring(imgIndexStart + 19, htmldata.size);
     
-            // let imgIndexEnd = imgString.indexOf("<br/>");
+            let imgIndexEnd = imgString.indexOf("<meta");
     
-            // imgString = imgString.substring(0, imgIndexEnd);
-            // //imgString = imgString.replace(/\s+/g, '');
-            // //console.log(imgIndexStart);
-            // //console.log(imgIndexEnd);
+            imgString = imgString.substring(0, imgIndexEnd);
+            //imgString = imgString.replace(/\s+/g, '');
+            //console.log(imgIndexStart);
+            //console.log(imgIndexEnd);
     
-                    
-            // msg.channel.send(imgString);
+            console.log(imgString);      
+            //msg.channel.send(imgString);
     
         });
 
