@@ -20,7 +20,7 @@ module.exports = {
         const openai = new OpenAI({
           organization: process.env.OPENAI_ORG,
           project: process.env.OPENAI_PROJ,
-          api_key: process.env.OPENAI_KEY
+          apiKey: process.env.OPENAI_KEY
         })
 
         await interaction.reply('Thinking... 🤔');
