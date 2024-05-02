@@ -8,6 +8,7 @@ module.exports = {
 
 		//const Index = require('../index.js')
 
+        await interaction.reply('Fetching...');
 
 		var htmldata="";
         var imgString=""
@@ -33,6 +34,6 @@ module.exports = {
         });
 
 
-		await interaction.reply("Pong");
+		await interaction.deleteReply();
 	},
 };
