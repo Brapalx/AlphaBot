@@ -31,13 +31,13 @@ module.exports = {
                 {role: "user", content: interaction.options.getString('prompt')}],
                 model:"gpt-3.5-turbo-1106"
             });
-            console.log(completion.choices[0]);
+            console.log(completion.choices[0].message.content);
 
             const responseEmbed = new EmbedBuilder()
 	            .setColor(interaction.member.displayColor)
                 .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL()})
 	            .setTitle(interaction.options.getString('prompt'))
-	            .setDescription(completion.choices[0])
+	            .setDescription(completion.choices[0].message.content)
 	            .setTimestamp()
 	            .setFooter({ text: 'Powered by GPT-3.5 Turbo'});
 
